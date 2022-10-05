@@ -1,6 +1,4 @@
-# UmarAbidHotelManagement
-
-## Final year project
+# Hotel Management System
 
 ## Web App
 
@@ -13,3 +11,11 @@ To run this application,
 
 - navigate to webapp folder in the terminal `cd webapi`
 - run the following command `node index.js`
+
+## Application Structure
+
+[Detail here]
+
+## TODO:
+
+- Login and Registeration page
