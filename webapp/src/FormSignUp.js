@@ -2,6 +2,9 @@ import React from "react";
 import useForm from "./useForm";
 
 const FormSignUp = () => {
+  // extract the data from useForm
+  const { handleChange, values } = useForm();
+
   return (
     <div>
       {/* come back to put action and method */}
