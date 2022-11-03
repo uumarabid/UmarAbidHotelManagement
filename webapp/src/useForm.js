@@ -24,6 +24,7 @@ const useForm = () => {
     });
   };
 
+  // prevent refresh the page on submit
   const handleSubmit = (e) => {
     e.preventDefault();
   };
