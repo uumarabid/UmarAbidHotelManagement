@@ -2,13 +2,13 @@ import React from "react";
 import useForm from "./useForm";
 
 const FormSignUp = () => {
-  // extract the data from useForm
-  const { handleChange, values } = useForm();
+  // extract data from useForm
+  const { handleChange, values, handleSubmit } = useForm();
 
   return (
     <div>
       {/* come back to put action and method */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Create your account</legend>
           <label for="username">Username</label>
