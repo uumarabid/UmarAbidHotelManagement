@@ -23,6 +23,7 @@ const FormSignUp = () => {
             </Grid>
             <Grid item xs={8}>
               <TextField
+                type="text"
                 id="username"
                 name="username"
                 placeholder="Enter your username"
@@ -40,6 +41,7 @@ const FormSignUp = () => {
             </Grid>
             <Grid item xs={8}>
               <TextField
+                type="email"
                 id="email"
                 name="email"
                 placeholder="email"
@@ -55,6 +57,7 @@ const FormSignUp = () => {
             </Grid>
             <Grid item xs={8}>
               <TextField
+                type="password"
                 id="password"
                 name="password"
                 placeholder="Enter your password"
@@ -70,6 +73,7 @@ const FormSignUp = () => {
             </Grid>
             <Grid item xs={8}>
               <TextField
+                type="password"
                 id="password2"
                 name="password2"
                 placeholder="Confirm your password"
