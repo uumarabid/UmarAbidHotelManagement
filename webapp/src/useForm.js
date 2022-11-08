@@ -14,6 +14,9 @@ const useForm = (validateInfo) => {
   // useState with errors
   const [errors, setErrors] = useState({});
 
+  //state for submit is false for time being
+  const [submit, isSubmit] = useState(false);
+
   // updaet the values, use envent handler and add inside the input element
   const handleChange = (e) => {
     setvalues({
@@ -30,6 +33,9 @@ const useForm = (validateInfo) => {
 
     // display error values
     setErrors(validateInfo(values));
+
+    // once is submited then it becomes true
+    isSubmit(true);
   };
 
   return { handleChange, values, handleSubmit, errors };

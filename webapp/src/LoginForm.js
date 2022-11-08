@@ -1,15 +1,9 @@
 import React from "react";
-import useForm from "./useForm"; //hook
-import validateInfo from "./validateInfo"; // import function
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper } from "@mui/material";
 
-// destructing in FormSignUp function
-const FormSignUp = ({ submitForm }) => {
-  // extract data from useForm
-  const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validateInfo);
+export const LoginForm = () => {
   const theme = createTheme();
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -17,7 +11,7 @@ const FormSignUp = ({ submitForm }) => {
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           {/* come back to put action and method */}
 
-          <form onSubmit={handleSubmit}>
+          <form>
             <legend>
               <h2>Create your account</h2>
             </legend>
@@ -31,28 +25,16 @@ const FormSignUp = ({ submitForm }) => {
                   id="username"
                   name="username"
                   placeholder="Enter your username"
-                  value={values.username}
-                  onChange={handleChange}
                   label="username"
                   variant="outlined"
                 />
-                {errors.username && <p>{errors.username}</p>}
               </Grid>
+
               <Grid item xs={4}>
                 <label for="email">Email</label>
               </Grid>
               <Grid item xs={8}>
-                <TextField
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  label="Email"
-                  variant="outlined"
-                />
-                {errors.email && <p>{errors.email}</p>}
+                <TextField type="email" id="email" name="email" placeholder="email" label="Email" variant="outlined" />
               </Grid>
 
               <Grid item xs={4}>
@@ -65,12 +47,9 @@ const FormSignUp = ({ submitForm }) => {
                   id="password"
                   name="password"
                   placeholder="Enter your password"
-                  value={values.password}
-                  onChange={handleChange}
                   label="Password"
                   variant="outlined"
                 />
-                {errors.password && <p>{errors.password}</p>}
               </Grid>
 
               <Grid item xs={4}>
@@ -82,17 +61,14 @@ const FormSignUp = ({ submitForm }) => {
                   id="password2"
                   name="password2"
                   placeholder="Confirm your password"
-                  value={values.password2}
-                  onChange={handleChange}
                   label="Confirm password"
                   variant="outlined"
                 />
-                {errors.password2 && <p>{errors.password2}</p>}
               </Grid>
 
               <Grid item xs={12}>
                 <Button type="submit" variant="contained">
-                  Sign up
+                  Sign in
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -108,4 +84,4 @@ const FormSignUp = ({ submitForm }) => {
   );
 };
 
-export default FormSignUp;
+export default LoginForm;
