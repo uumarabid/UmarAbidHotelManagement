@@ -1,5 +1,5 @@
 // set conditions to display errors
-function validateInfo() {
+export default function validateInfo() {
   let errors = {};
 
   if (!values.username.trim()) {

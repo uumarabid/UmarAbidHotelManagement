@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const useForm = () => {
+const useForm = (validateInfo) => {
   //useState current position "values" new postion "setValues"
   const [values, setvalues] = useState({
     username: "",
@@ -17,7 +17,7 @@ const useForm = () => {
   // updaet the values, use envent handler and add inside the input element
   const handleChange = (e) => {
     setvalues({
-      //spreading the values first
+      //spread operator--spreading the values first
       ...values,
       // targetting the name of each input of the form on FormSignUp
       [e.target.name]: e.target.values,
@@ -27,9 +27,12 @@ const useForm = () => {
   // prevent refresh the page on submit
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // display error values
+    setErrors(validateInfo(values));
   };
 
-  return { handleChange, values, handleSubmit };
+  return { handleChange, values, handleSubmit, errors };
 };
 
 export default useForm;

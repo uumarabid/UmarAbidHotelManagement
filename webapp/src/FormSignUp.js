@@ -1,11 +1,12 @@
 import React from "react";
 import useForm from "./useForm";
+import validateInfo from "./validateInfo"; // import function
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline } from "@mui/material";
 
 const FormSignUp = () => {
   // extract data from useForm
-  const { handleChange, values, handleSubmit } = useForm();
+  const { handleChange, values, handleSubmit, errors } = useForm(validateInfo);
   const theme = createTheme();
 
   return (
@@ -71,7 +72,7 @@ const FormSignUp = () => {
                 placeholder="Confirm your password"
                 value={values.password2}
                 onChange={handleChange}
-                label="Password"
+                label="Confirm password"
                 variant="outlined"
               />
             </Grid>
