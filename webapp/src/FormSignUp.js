@@ -32,6 +32,7 @@ const FormSignUp = () => {
                 variant="outlined"
               />
             </Grid>
+            {errors.username && <p>{errors.username}</p>}
             <Grid item xs={4}>
               <label for="email">Email</label>
             </Grid>
