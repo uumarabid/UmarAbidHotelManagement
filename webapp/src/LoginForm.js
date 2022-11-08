@@ -1,6 +1,6 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Button, TextField, Container, Grid, CssBaseline, Paper, FormControlLabel, Checkbox } from "@mui/material";
+import { Button, TextField, Container, Grid, CssBaseline, Paper, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 
 export const LoginForm = () => {
   const theme = createTheme();
@@ -11,9 +11,9 @@ export const LoginForm = () => {
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           {/* come back to put action and method */}
 
-          <form>
+          <FormGroup>
             <legend>
-              <h2>Create your account</h2>
+              <h2>Welcome to login page</h2>
             </legend>
             <Grid container rowSpacing={1}>
               <Grid item xs={4}>
@@ -85,7 +85,7 @@ export const LoginForm = () => {
                 </span>
               </Grid> */}
             </Grid>
-          </form>
+          </FormGroup>
         </Paper>
       </Container>
     </ThemeProvider>

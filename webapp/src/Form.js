@@ -1,7 +1,7 @@
 import React from "react";
 import FormSignUp from "./FormSignUp";
 import { useState } from "react";
-import LoginForm from "./LoginForm.js";
+import LoginForm from "./LoginForm";
 
 export const Form = () => {
   const [submitted, isSubmitted] = useState(false);
