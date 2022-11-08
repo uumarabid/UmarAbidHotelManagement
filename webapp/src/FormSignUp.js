@@ -27,7 +27,7 @@ const FormSignUp = () => {
                 id="username"
                 name="username"
                 placeholder="Enter your username"
-                value={values.email}
+                value={values.username}
                 onChange={handleChange}
                 label="username"
                 variant="outlined"
