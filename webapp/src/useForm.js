@@ -1,8 +1,8 @@
 // custom hook
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const useForm = (validateInfo) => {
+const useForm = (callback, validateInfo) => {
   //useState current position "values" new postion "setValues"
   const [values, setvalues] = useState({
     username: "",
@@ -37,6 +37,13 @@ const useForm = (validateInfo) => {
     // once is submited then it becomes true
     isSubmit(true);
   };
+
+  //triger the error if not then submit request
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmit) {
+      callback();
+    }
+  }, [errors]);
 
   return { handleChange, values, handleSubmit, errors };
 };

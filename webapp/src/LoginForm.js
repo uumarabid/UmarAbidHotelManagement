@@ -1,6 +1,6 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Button, TextField, Container, Grid, CssBaseline, Paper } from "@mui/material";
+import { Button, TextField, Container, Grid, CssBaseline, Paper, FormControlLabel, Checkbox } from "@mui/material";
 
 export const LoginForm = () => {
   const theme = createTheme();
@@ -30,12 +30,12 @@ export const LoginForm = () => {
                 />
               </Grid>
 
-              <Grid item xs={4}>
+              {/* <Grid item xs={4}>
                 <label for="email">Email</label>
               </Grid>
               <Grid item xs={8}>
                 <TextField type="email" id="email" name="email" placeholder="email" label="Email" variant="outlined" />
-              </Grid>
+              </Grid> */}
 
               <Grid item xs={4}>
                 <label for="password">Password</label>
@@ -52,7 +52,7 @@ export const LoginForm = () => {
                 />
               </Grid>
 
-              <Grid item xs={4}>
+              {/* <Grid item xs={4}>
                 <label for="password2">Confirm password</label>
               </Grid>
               <Grid item xs={8}>
@@ -64,6 +64,14 @@ export const LoginForm = () => {
                   label="Confirm password"
                   variant="outlined"
                 />
+              </Grid> */}
+
+              <Grid item xs={12}>
+                <FormControlLabel control={<Checkbox defaultChecked />} label="Keep me login" />
+              </Grid>
+
+              <Grid item xs={12}>
+                <a href="#">Forgot password</a>
               </Grid>
 
               <Grid item xs={12}>
@@ -71,11 +79,11 @@ export const LoginForm = () => {
                   Sign in
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={12}>
+              {/* <Grid item xs={12} sm={12}>
                 <span>
                   Already have an account? Login <a href="#">here</a>
                 </span>
-              </Grid>
+              </Grid> */}
             </Grid>
           </form>
         </Paper>
