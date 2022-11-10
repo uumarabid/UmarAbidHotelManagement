@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 const useForm = (callback, validateInfo) => {
   //useState current position "values" new postion "setValues"
   const [values, setvalues] = useState({
+    fname: "",
+    lname: "",
     username: "",
     email: "",
     password: "",

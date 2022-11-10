@@ -13,7 +13,7 @@ const FormSignUp = ({ submitForm }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="sm">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           {/* come back to put action and method */}
 
@@ -22,13 +22,38 @@ const FormSignUp = ({ submitForm }) => {
               <h2>Create your account</h2>
             </legend>
             <Grid container rowSpacing={1}>
-              <Grid item xs={4}>
-                <label for="username">Username</label>
+              <Grid item xs={6}>
+                <TextField
+                  error={errors.fname ? "error" : ""}
+                  helperText={errors.fname}
+                  type="text"
+                  id="fname"
+                  name="fname"
+                  placeholder="Enter your first name"
+                  value={values.fname}
+                  onChange={handleChange}
+                  label="First name"
+                  variant="outlined"
+                />
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={6}>
+                <TextField
+                  error={errors.lname ? "error" : ""}
+                  helperText={errors.lname}
+                  type="text"
+                  id="lname"
+                  name="lname"
+                  placeholder="Enter your last name"
+                  value={values.lname}
+                  onChange={handleChange}
+                  label="Last name"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
                 <TextField
                   error={errors.username ? "error" : ""}
-                  helperText={errors.username && errors.username}
+                  helperText={errors.username}
                   type="text"
                   id="username"
                   name="username"
@@ -39,13 +64,10 @@ const FormSignUp = ({ submitForm }) => {
                   variant="outlined"
                 />
               </Grid>
-              <Grid item xs={4}>
-                <label for="email">Email</label>
-              </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={6}>
                 <TextField
                   error={errors.email ? "error" : ""}
-                  helperText={errors.email && errors.email}
+                  helperText={errors.email}
                   type="email"
                   id="email"
                   name="email"
@@ -57,14 +79,10 @@ const FormSignUp = ({ submitForm }) => {
                 />
               </Grid>
 
-              <Grid item xs={4}>
-                <label for="password">Password</label>
-              </Grid>
-
-              <Grid item xs={8}>
+              <Grid item xs={6}>
                 <TextField
                   error={errors.password ? "error" : ""}
-                  helperText={errors.password && errors.password}
+                  helperText={errors.password}
                   type="password"
                   id="password"
                   name="password"
@@ -76,10 +94,7 @@ const FormSignUp = ({ submitForm }) => {
                 />
               </Grid>
 
-              <Grid item xs={4}>
-                <label for="password2">Confirm password</label>
-              </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={6}>
                 <TextField
                   error={errors.password2 ? "error" : ""}
                   helperText={errors.password2}
