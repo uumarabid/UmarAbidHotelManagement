@@ -4,14 +4,14 @@ import { useState } from "react";
 import LoginForm from "./LoginForm";
 
 export const Form = () => {
-  const [submitted, isSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   function submitForm() {
-    isSubmitted(true);
+    setSubmitted(true);
   }
   return (
     <div>
-      {/* <FormSignUp /> */}
+      {/* FormSignUp  */}
       {!submitted ? <FormSignUp submitForm={submitForm} /> : <LoginForm />}
     </div>
   );

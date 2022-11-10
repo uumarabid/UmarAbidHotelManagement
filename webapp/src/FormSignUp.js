@@ -3,6 +3,7 @@ import useForm from "./useForm"; //hook
 import validateInfo from "./validateInfo"; // import function
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper } from "@mui/material";
+import { palette } from "@mui/system";
 
 // destructing in FormSignUp function
 const FormSignUp = ({ submitForm }) => {
@@ -97,7 +98,7 @@ const FormSignUp = ({ submitForm }) => {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <span>
-                  Already have an account? Login <a href="#">here</a>
+                  Already have an account? Login <a href="/login">here</a>
                 </span>
               </Grid>
             </Grid>

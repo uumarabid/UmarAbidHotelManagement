@@ -79,11 +79,11 @@ export const LoginForm = () => {
                   Sign in
                 </Button>
               </Grid>
-              {/* <Grid item xs={12} sm={12}>
+              <Grid item xs={12} sm={12}>
                 <span>
-                  Already have an account? Login <a href="#">here</a>
+                  Don't have an account? Register <a href="/signup">here</a>
                 </span>
-              </Grid> */}
+              </Grid>
             </Grid>
           </FormGroup>
         </Paper>

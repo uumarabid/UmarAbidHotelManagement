@@ -15,7 +15,7 @@ const useForm = (callback, validateInfo) => {
   const [errors, setErrors] = useState({});
 
   //state for submit is false for time being
-  const [submit, isSubmit] = useState(false);
+  const [submit, setSubmit] = useState(false);
 
   // updaet the values, use envent handler and add inside the input element
   const handleChange = (e) => {
@@ -23,7 +23,7 @@ const useForm = (callback, validateInfo) => {
       //spread operator--spreading the values first
       ...values,
       // targetting the name of each input of the form on FormSignUp
-      [e.target.name]: e.target.values,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -35,12 +35,12 @@ const useForm = (callback, validateInfo) => {
     setErrors(validateInfo(values));
 
     // once is submited then it becomes true
-    isSubmit(true);
+    setSubmit(true);
   };
 
   //triger the error if not then submit request
   useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmit) {
+    if (Object.keys(errors).length === 0 && submit) {
       callback();
     }
   }, [errors]);
