@@ -3,7 +3,6 @@ import useForm from "./useForm"; //hook
 import validateInfo from "./validateInfo"; // import function
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper } from "@mui/material";
-import { palette } from "@mui/system";
 
 // destructing in FormSignUp function
 const FormSignUp = ({ submitForm }) => {
@@ -28,6 +27,8 @@ const FormSignUp = ({ submitForm }) => {
               </Grid>
               <Grid item xs={8}>
                 <TextField
+                  error={errors.username ? "error" : ""}
+                  helperText={errors.username && errors.username}
                   type="text"
                   id="username"
                   name="username"
@@ -37,13 +38,14 @@ const FormSignUp = ({ submitForm }) => {
                   label="username"
                   variant="outlined"
                 />
-                {errors.username && <p>{errors.username}</p>}
               </Grid>
               <Grid item xs={4}>
                 <label for="email">Email</label>
               </Grid>
               <Grid item xs={8}>
                 <TextField
+                  error={errors.email ? "error" : ""}
+                  helperText={errors.email && errors.email}
                   type="email"
                   id="email"
                   name="email"
@@ -53,7 +55,6 @@ const FormSignUp = ({ submitForm }) => {
                   label="Email"
                   variant="outlined"
                 />
-                {errors.email && <p>{errors.email}</p>}
               </Grid>
 
               <Grid item xs={4}>
@@ -62,6 +63,8 @@ const FormSignUp = ({ submitForm }) => {
 
               <Grid item xs={8}>
                 <TextField
+                  error={errors.password ? "error" : ""}
+                  helperText={errors.password && errors.password}
                   type="password"
                   id="password"
                   name="password"
@@ -71,7 +74,6 @@ const FormSignUp = ({ submitForm }) => {
                   label="Password"
                   variant="outlined"
                 />
-                {errors.password && <p>{errors.password}</p>}
               </Grid>
 
               <Grid item xs={4}>
@@ -79,6 +81,8 @@ const FormSignUp = ({ submitForm }) => {
               </Grid>
               <Grid item xs={8}>
                 <TextField
+                  error={errors.password2 ? "error" : ""}
+                  helperText={errors.password2}
                   type="password"
                   id="password2"
                   name="password2"
@@ -88,7 +92,6 @@ const FormSignUp = ({ submitForm }) => {
                   label="Confirm password"
                   variant="outlined"
                 />
-                {errors.password2 && <p>{errors.password2}</p>}
               </Grid>
 
               <Grid item xs={12}>
