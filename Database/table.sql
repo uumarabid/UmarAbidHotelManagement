@@ -61,3 +61,10 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `extra_cost` FLOAT NULL,
   ` deposit` FLOAT NULL,
   PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`audit` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `employee_id` INT NULL,
+  `operation` VARCHAR(60) NULL,
+  `operation_date_time` DATETIME NULL,
+  PRIMARY KEY (`id`));
