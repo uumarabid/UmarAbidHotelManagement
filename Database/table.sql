@@ -38,3 +38,14 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `check_out_date` DATETIME NULL,
   `is_reserved` BIT NULL,
   PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`reservation` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `guests_id` INT NULL,
+  `rooms_id` INT NULL,
+  `reservation_check_in_date` DATETIME NULL,
+  `reservation_check_out_date` DATETIME NULL,
+  `total_cost` FLOAT NULL,
+  `extra_cost` FLOAT NULL,
+  `deposit` FLOAT NULL,
+  PRIMARY KEY (`id`));
