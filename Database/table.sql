@@ -17,3 +17,54 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `employee_id` VARCHAR(45) NULL,
   `is_admin` BIT NULL,
   PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`rooms` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `room_number` INT NULL,
+  `room_type` VARCHAR(45) NULL,
+  `floor_number` INT NULL,
+  `facilities` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`guests` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `first_name` VARCHAR(45) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `number_of_guests` INT NULL,
+  `address` VARCHAR(100) NULL,
+  `phone_number` VARCHAR(45) NULL,
+  `email` VARCHAR(60) NULL,
+  `check_in_date` DATETIME NULL,
+  `check_out_date` DATETIME NULL,
+  `is_reserved` BIT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`reservation` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `guests_id` INT NULL,
+  `rooms_id` INT NULL,
+  `reservation_check_in_date` DATETIME NULL,
+  `reservation_check_out_date` DATETIME NULL,
+  `total_cost` FLOAT NULL,
+  `extra_cost` FLOAT NULL,
+  `deposit` FLOAT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`booking` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `guest_id` INT NULL,
+  `rooms_id` INT NULL,
+  `reservation_id` INT NULL,
+  `check_in_date` DATETIME NULL,
+  `check_out_date` DATETIME NULL,
+  `total_cost` FLOAT NULL,
+  `extra_cost` FLOAT NULL,
+  ` deposit` FLOAT NULL,
+  PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`audit` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `employee_id` INT NULL,
+  `operation` VARCHAR(60) NULL,
+  `operation_date_time` DATETIME NULL,
+  PRIMARY KEY (`id`));
