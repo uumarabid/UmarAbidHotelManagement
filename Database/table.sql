@@ -49,3 +49,15 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `extra_cost` FLOAT NULL,
   `deposit` FLOAT NULL,
   PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`booking` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `guest_id` INT NULL,
+  `rooms_id` INT NULL,
+  `reservation_id` INT NULL,
+  `check_in_date` DATETIME NULL,
+  `check_out_date` DATETIME NULL,
+  `total_cost` FLOAT NULL,
+  `extra_cost` FLOAT NULL,
+  ` deposit` FLOAT NULL,
+  PRIMARY KEY (`id`));
