@@ -17,3 +17,11 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `employee_id` VARCHAR(45) NULL,
   `is_admin` BIT NULL,
   PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`rooms` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `room_number` INT NULL,
+  `room_type` VARCHAR(45) NULL,
+  `floor_number` INT NULL,
+  `facilities` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`));
