@@ -9,3 +9,11 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `personal_email` VARCHAR(45) NULL,
   `company_email` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+  
+  CREATE TABLE `hotelmanagement`.`user` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
+  `employee_id` VARCHAR(45) NULL,
+  `is_admin` BIT NULL,
+  PRIMARY KEY (`id`));
