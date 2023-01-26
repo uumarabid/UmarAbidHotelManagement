@@ -1,13 +1,11 @@
-const express = require("express");
-const { myTest } = require("./test");
+import routes from "./src/index.js";
+import express from "express";
 
-const app = express();
+const app = express().use(routes);
 const port = 3001;
 
 app.get("/", (req, res) => {
-  const employee = myTest();
-
-  res.send("Hello World!" + JSON.stringify(employee));
+  res.send("The application is running");
 });
 
 app.listen(port, () => {
