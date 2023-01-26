@@ -12,6 +12,7 @@ const myTest = async () => {
   connection.connect();
 
   // query the database
+  // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
   data = await connection.promise().query("SELECT * FROM employee");
 
   connection.end();
