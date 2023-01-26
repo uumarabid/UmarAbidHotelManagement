@@ -1,6 +1,6 @@
-const mysql = require("mysql2");
+import mysql from "mysql2";
 
-const myTest = () => {
+const myTest = async () => {
   // create the connection to database
   const connection = mysql.createConnection({
     host: "127.0.0.1",
@@ -12,18 +12,11 @@ const myTest = () => {
   connection.connect();
 
   // query the database
-  connection.query("SELECT * FROM employee", function (err, rows, fields) {
-    if (!err) {
-      console.log("The solution is: ", rows);
-    } else {
-      console.log("Error while performing Query.", err);
-    }
-    data = rows;
-  });
+  data = await connection.promise().query("SELECT * FROM employee");
 
   connection.end();
 
-  return data;
+  return data[0];
 };
 
-module.exports = { myTest };
+export default myTest;
