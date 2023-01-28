@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-const selectQuery = async (table, columns, condition) => {
+export const selectQuery = async (table, condition, columns) => {
   try {
     await connection.connect();
 
@@ -34,7 +34,7 @@ const selectQuery = async (table, columns, condition) => {
   }
 };
 
-const deleteQuery = async (table, condition) => {
+export const deleteQuery = async (table, condition) => {
   try {
     if (!condition) {
       throw new Error("Missing condition in delete query");
@@ -55,7 +55,7 @@ const deleteQuery = async (table, condition) => {
   }
 };
 
-const insertQuery = async (table, data) => {
+export const insertQuery = async (table, data) => {
   try {
     await connection.connect();
 
@@ -81,7 +81,7 @@ const insertQuery = async (table, data) => {
 // const condition = 'id = 1';
 
 // updateTable(data, table, condition);
-const updateQuery = async (data, table, condition) => {
+export const updateQuery = async (data, table, condition) => {
   try {
     if (!condition) {
       throw new Error("Missing condition in update query");

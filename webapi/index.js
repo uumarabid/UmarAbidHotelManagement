@@ -1,13 +1,13 @@
 import routes from "./src/index.js";
 import express from "express";
-import myTest from "./test.js";
+import env from "dotenv";
+
+env.config();
 
 const app = express().use(routes);
-const port = 3001;
 
+const port = 3001;
 app.get("/", async (req, res) => {
-  const test = await myTest();
-  console.log(test);
   res.send("The application is running");
 });
 

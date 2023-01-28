@@ -1,3 +1,5 @@
+import { selectQuery } from "../../utils/sql.js";
+
 // Create all methods here
 
 export const addUser = (req, res) => {
@@ -9,7 +11,8 @@ export const editUser = (req, res) => {
 };
 
 export const getUser = (req, res) => {
-  res.send("Required data is:....");
+  let user = selectQuery("user", { id: 1 });
+  res.send(user);
 };
 
 export const getAllUser = (req, res) => {
