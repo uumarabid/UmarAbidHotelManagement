@@ -1,18 +1,18 @@
 import mysql from "mysql2";
 
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: "127.0.0.1", //process.env.DB_HOST,
+  user: "admin", //process.env.DB_USER,
+  password: "123qwe123qwe", //process.env.DB_PASSWORD,
+  database: "hotelmanagement", //process.env.DB_NAME,
 });
 
 export const selectQuery = async (table, condition, columns) => {
   try {
     await connection.connect();
-
+    console.log(table, condition);
     let query = `SELECT `;
-    if (column) {
+    if (columns) {
       query += `${columns.join(", ")} FROM `;
     } else {
       query += `* FROM `;
@@ -24,9 +24,9 @@ export const selectQuery = async (table, condition, columns) => {
 
     // select data from table
     // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
-    [rows] = await connection.query(query);
+    let data = await connection.promise().query(query);
 
-    return rows;
+    return data[0];
   } catch (err) {
     console.error(err);
   } finally {

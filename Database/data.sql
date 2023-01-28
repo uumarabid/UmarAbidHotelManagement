@@ -3,12 +3,12 @@
 
 
 -- employees data
-INSERT INTO `hotelmanagement`.`employee` (`first_name`, `last_namel`, `adress`, `phone`, `personal_email`, `company_email`) VALUES ('admin', 'admin', 'house 21', '0789456125', 'admin@test.com', 'admin@hotel.com');
-INSERT INTO `hotelmanagement`.`employee` (`first_name`, `last_namel`, `adress`, `phone`, `personal_email`, `company_email`) VALUES ('umar', 'umar', 'house 88', '075648963', 'umar@test.com', 'umar@hotel.com');
+INSERT INTO `hotelmanagement`.`employees` (`first_name`, `last_namel`, `adress`, `phone`, `personal_email`, `company_email`) VALUES ('admin', 'admin', 'house 21', '0789456125', 'admin@test.com', 'admin@hotel.com');
+INSERT INTO `hotelmanagement`.`employees` (`first_name`, `last_namel`, `adress`, `phone`, `personal_email`, `company_email`) VALUES ('umar', 'umar', 'house 88', '075648963', 'umar@test.com', 'umar@hotel.com');
 
 -- User data
-INSERT INTO `hotelmanagement`.`user` (`user_name`, `password`, `employee_id`, `is_admin`) VALUES ('admin', 'admin', 1, 1);
-INSERT INTO `hotelmanagement`.`user` (`user_name`, `password`, `employee_id`, `is_admin`) VALUES ('umar', 'umar', 2, 0);
+INSERT INTO `hotelmanagement`.`users` (`user_name`, `password`, `employee_id`, `is_admin`) VALUES ('admin', 'admin', 1, 1);
+INSERT INTO `hotelmanagement`.`users` (`user_name`, `password`, `employee_id`, `is_admin`) VALUES ('umar', 'umar', 2, 0);
 
 
 -- Rooms data
