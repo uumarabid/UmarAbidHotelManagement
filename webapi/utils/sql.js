@@ -45,8 +45,7 @@ export const deleteQuery = async (table, condition) => {
     let query = `DELETE * FROM ${table} where ${condition}`;
 
     // delete entry from table
-    // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
-    let data = await connection.query(query);
+    let data = await connection.promise().query(query);
     return data;
   } catch (err) {
     console.error(err);
@@ -59,12 +58,13 @@ export const insertQuery = async (table, data) => {
   try {
     await connection.connect();
 
-    const keys = Object.keys(data);
-    const values = Object.values(data);
-    const sql = `INSERT INTO ${table} (${keys.join(", ")}) VALUES (${values.map(() => "?").join(", ")})`;
+    const columns = Object.keys(data);
+    const values = columns.map((column) => `"${data[column]}"`);
+    const placeholders = values.join(",");
+    const query = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders})`;
+    console.log(query);
     // insert entry into table
-    // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
-    await connection.query(query);
+    await connection.promise().execute(query);
   } catch (err) {
     console.error(err);
   } finally {
@@ -81,7 +81,7 @@ export const insertQuery = async (table, data) => {
 // const condition = 'id = 1';
 
 // updateTable(data, table, condition);
-export const updateQuery = async (data, table, condition) => {
+export const updateQuery = async (table, data, condition) => {
   try {
     if (!condition) {
       throw new Error("Missing condition in update query");
@@ -95,8 +95,7 @@ export const updateQuery = async (data, table, condition) => {
     const sql = `UPDATE ${table} SET ${set} WHERE ${condition}`;
 
     // insert entry into table
-    // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
-    await connection.query(query);
+    await connection.promise().execute(query);
   } catch (err) {
     console.error(err);
   } finally {

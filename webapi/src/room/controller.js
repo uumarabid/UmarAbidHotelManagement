@@ -1,17 +1,26 @@
 // Create all methods here
 
-import { selectQuery, deleteQuery } from "../../utils/sql.js";
+import { selectQuery, deleteQuery, insertQuery } from "../../utils/sql.js";
 
-export const addRoom = (req, res) => {
+export const addRoom = async (req, res) => {
+  let room = {
+    room_number: 107,
+    room_type: "standard",
+    floor_number: 1,
+    facilities: "",
+  };
+  await insertQuery("rooms", room);
+
   res.send("New room is added successfully.");
 };
 
-export const editRoom = (req, res) => {
+export const editRoom = async (req, res) => {
   res.send("Updated successfully.");
 };
 
 export const getRoom = async (req, res) => {
-  let room = await selectQuery("rooms", "id = 1");
+  console.log(req.body);
+  let room = await selectQuery("rooms", `id = 1`);
   res.send(room);
 };
 
@@ -21,6 +30,6 @@ export const getAllRoom = async (req, res) => {
 };
 
 export const deleteRoom = async (req, res) => {
-  await deleteQuery("rooms", "id = 1");
+  await deleteQuery("rooms", `id = ${req.id}`);
   res.send(true);
 };
