@@ -1,26 +1,44 @@
 // Create all methods here
 
-import { selectQuery, deleteQuery } from "../../utils/sql.js";
+import { selectQuery, deleteQuery, insertQuery, updateQuery } from "../../utils/sql.js";
 
-export const addEmployee = (req, res) => {
+export const addEmployee = async (req, res) => {
+  let employee = {
+    first_name: "Sikandar",
+    last_name: "Butt",
+    address: "House 123, Manchester",
+    phone: 123456789,
+    personal_email: "sikandar@test.com",
+    company_email: "sikandar@hotel.com",
+  };
+  await insertQuery("employees", employee);
   res.send("New Employee is added successfully.");
 };
 
-export const editEmployee = (req, res) => {
+export const editEmployee = async (req, res) => {
+  let employee = {
+    first_name: "Sikandaer",
+    last_name: "Butt sahab",
+    address: "House 123, Manchester",
+    phone: 123456789,
+    personal_email: "sikandar@test.com",
+    company_email: "sikandar@hotel.com",
+  };
+  await updateQuery("employees", employee, `id = 3`);
   res.send("Updated successfully.");
 };
 
 export const getEmployee = async (req, res) => {
-  let Employee = await selectQuery("Employees", "id = 1");
-  res.send(Employee);
+  let employee = await selectQuery("employees", `id = 1`);
+  res.send(employee);
 };
 
 export const getAllEmployee = async (req, res) => {
-  let Employees = await selectQuery("Employees");
-  res.send(Employees);
+  let employees = await selectQuery("employees");
+  res.send(employees);
 };
 
 export const deleteEmployee = async (req, res) => {
-  await deleteQuery("Employees", "id = 1");
+  await deleteQuery("employees", "id = 1");
   res.send(true);
 };

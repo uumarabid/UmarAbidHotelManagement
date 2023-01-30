@@ -1,12 +1,27 @@
-import { selectQuery } from "../../utils/sql.js";
+import { insertQuery, selectQuery, updateQuery } from "../../utils/sql.js";
 
 // Create all methods here
 
 export const addUser = async (req, res) => {
+  let user = {
+    user_name: "sikandar",
+    password: "sikandar",
+    employee_id: `employees.id`,
+    is_admin: "",
+  };
+
+  await insertQuery("users", user);
   res.send("New User is added successfully.");
 };
 
-export const editUser = (req, res) => {
+export const editUser = async (req, res) => {
+  let user = {
+    user_name: "sikandar",
+    password: "sikandarrrr",
+    employee_id: employees.id,
+    is_admin: 0,
+  };
+  await updateQuery("users", user, `id = 3`);
   res.send("Updated successfully.");
 };
 
