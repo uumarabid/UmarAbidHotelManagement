@@ -18,7 +18,7 @@ export const editUser = async (req, res) => {
   let user = {
     user_name: "sikandar",
     password: "sikandarrrr",
-    employee_id: employees.id,
+    employee_id: 2,
     is_admin: 0,
   };
   await updateQuery("users", user, `id = 3`);

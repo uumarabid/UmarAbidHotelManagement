@@ -37,9 +37,6 @@ export const getAllRoom = async (req, res) => {
 };
 
 export const deleteRoom = async (req, res) => {
-  let room = {
-    id: 1,
-  };
   await deleteQuery("rooms", `id = ${req.id}`);
   res.send(true);
 };
