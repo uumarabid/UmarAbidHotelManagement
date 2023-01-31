@@ -72,14 +72,6 @@ export const insertQuery = async (table, data) => {
   }
 };
 
-// example
-// const data = {
-//     name: 'John',
-//     age: 25
-// };
-// const table = 'users';
-// const condition = 'id = 1';
-
 // updateTable(data, table, condition);
 export const updateQuery = async (table, data, condition) => {
   try {
@@ -93,7 +85,7 @@ export const updateQuery = async (table, data, condition) => {
     const values = Object.values(data);
     const set = keys.map((key, index) => key + "=?").join(", ");
     const sql = `UPDATE ${table} SET ${set} WHERE ${condition}`;
-
+    console.log(sql);
     // insert entry into table
     await connection.promise().execute(query);
   } catch (err) {

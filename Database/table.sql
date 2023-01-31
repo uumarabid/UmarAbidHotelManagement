@@ -14,7 +14,7 @@ CREATE TABLE `hotelmanagement`.`employees` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
-  `employee_id` VARCHAR(45) NULL,
+  `employee_id` INT NULL,
   `is_admin` BIT NULL,
   PRIMARY KEY (`id`));
   

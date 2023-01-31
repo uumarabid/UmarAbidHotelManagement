@@ -6,7 +6,7 @@ export const addUser = async (req, res) => {
   let user = {
     user_name: "sikandar",
     password: "sikandar",
-    employee_id: `employees.id`,
+    employee_id: 3,
     is_admin: "",
   };
 
