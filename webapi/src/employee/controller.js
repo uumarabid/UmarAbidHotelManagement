@@ -3,15 +3,19 @@
 import { selectQuery, deleteQuery, insertQuery, updateQuery } from "../../utils/sql.js";
 
 export const addEmployee = async (req, res) => {
-  let employee = {
-    first_name: "Sikandar",
-    last_name: "Butt",
-    address: "House 123, Manchester",
-    phone: 123456789,
-    personal_email: "sikandar@test.com",
-    company_email: "sikandar@hotel.com",
-  };
-  await insertQuery("employees", employee);
+  console.log("inside add employee");
+  // let employee = {
+  //   first_name: "Sikandar",
+  //   last_name: "Butt",
+  //   address: "House 123, Manchester",
+  //   phone: 123456789,
+  //   personal_email: "sikandar@test.com",
+  //   company_email: "sikandar@hotel.com",
+  // };
+  let employee = req.params;
+  let employee1 = req.body;
+  console.log(employee, employee1);
+  // await insertQuery("employees", employee);
   res.send("New Employee is added successfully.");
 };
 

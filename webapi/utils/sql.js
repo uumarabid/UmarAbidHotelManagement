@@ -1,16 +1,16 @@
 import mysql from "mysql2";
 
-const connection = mysql.createConnection({
-  host: "127.0.0.1", //process.env.DB_HOST,
-  user: "admin", //process.env.DB_USER,
-  password: "123qwe123qwe", //process.env.DB_PASSWORD,
-  database: "hotelmanagement", //process.env.DB_NAME,
-});
-
 export const selectQuery = async (table, condition, columns) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", //process.env.DB_HOST,
+    user: "admin", //process.env.DB_USER,
+    password: "123qwe123qwe", //process.env.DB_PASSWORD,
+    database: "hotelmanagement", //process.env.DB_NAME,
+  });
+
   try {
     await connection.connect();
-    console.log(table, condition);
+
     let query = `SELECT `;
     if (columns) {
       query += `${columns.join(", ")} FROM `;
@@ -35,6 +35,13 @@ export const selectQuery = async (table, condition, columns) => {
 };
 
 export const deleteQuery = async (table, condition) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", //process.env.DB_HOST,
+    user: "admin", //process.env.DB_USER,
+    password: "123qwe123qwe", //process.env.DB_PASSWORD,
+    database: "hotelmanagement", //process.env.DB_NAME,
+  });
+
   try {
     if (!condition) {
       throw new Error("Missing condition in delete query");
@@ -55,6 +62,13 @@ export const deleteQuery = async (table, condition) => {
 };
 
 export const insertQuery = async (table, data) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", //process.env.DB_HOST,
+    user: "admin", //process.env.DB_USER,
+    password: "123qwe123qwe", //process.env.DB_PASSWORD,
+    database: "hotelmanagement", //process.env.DB_NAME,
+  });
+
   try {
     await connection.connect();
 
@@ -62,7 +76,6 @@ export const insertQuery = async (table, data) => {
     const values = columns.map((column) => `"${data[column]}"`);
     const placeholders = values.join(",");
     const query = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders})`;
-    console.log(query);
     // insert entry into table
     await connection.promise().execute(query);
   } catch (err) {
@@ -82,6 +95,13 @@ export const insertQuery = async (table, data) => {
 
 // updateTable(data, table, condition);
 export const updateQuery = async (table, data, condition) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", //process.env.DB_HOST,
+    user: "admin", //process.env.DB_USER,
+    password: "123qwe123qwe", //process.env.DB_PASSWORD,
+    database: "hotelmanagement", //process.env.DB_NAME,
+  });
+
   try {
     if (!condition) {
       throw new Error("Missing condition in update query");
@@ -94,7 +114,7 @@ export const updateQuery = async (table, data, condition) => {
     const set = keys.map((key, index) => key + ` = '${values[index]}' `).join(", ");
 
     const sql = `UPDATE ${table} SET ${set} WHERE ${condition}`;
-    console.log(sql);
+
     // insert entry into table
     await connection.promise().execute(sql);
   } catch (err) {
