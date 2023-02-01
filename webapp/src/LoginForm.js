@@ -72,7 +72,7 @@ export const LoginForm = () => {
               </Grid>
 
               <Grid item xs={12}>
-                <a href="#">Forgot password</a>
+                {/* <a href="#">Forgot password</a> */}
               </Grid>
 
               <Grid item xs={12}>
