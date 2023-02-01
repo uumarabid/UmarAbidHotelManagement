@@ -1,4 +1,5 @@
 import React from "react";
+
 import FormSignUp from "./FormSignUp";
 import { useState } from "react";
 import LoginForm from "./LoginForm";
@@ -10,10 +11,12 @@ export const Form = () => {
     setSubmitted(true);
   }
   return (
-    <div>
-      {/* FormSignUp  */}
-      {!submitted ? <FormSignUp submitForm={submitForm} /> : <LoginForm />}
-    </div>
+    <>
+      <div>
+        {/* FormSignUp  */}
+        {!submitted ? <FormSignUp submitForm={submitForm} /> : <LoginForm />}
+      </div>
+    </>
   );
 };
 

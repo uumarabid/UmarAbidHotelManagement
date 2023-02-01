@@ -5,6 +5,7 @@ import userRoute from "./user/index.js";
 import reservationRoute from "./reservation/index.js";
 import bookingRoute from "./booking/index.js";
 import auditRoute from "./audit/index.js";
+import employeeRoute from "./employee/index.js";
 
 //Routing
 const routes = Router()
@@ -12,6 +13,7 @@ const routes = Router()
   .use("/user", userRoute)
   .use("/reservation", reservationRoute)
   .use("/booking", bookingRoute)
-  .use("/audit", auditRoute);
+  .use("/audit", auditRoute)
+  .use("/employee", employeeRoute);
 
 export default routes;

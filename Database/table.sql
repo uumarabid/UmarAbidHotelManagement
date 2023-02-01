@@ -1,20 +1,20 @@
 CREATE DATABASE `hotelmanagement`;
 
-CREATE TABLE `hotelmanagement`.`employee` (
+CREATE TABLE `hotelmanagement`.`employees` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NULL,
-  `last_namel` VARCHAR(45) NULL,
-  `adress` VARCHAR(100) NULL,
+  `last_name` VARCHAR(45) NULL,
+  `address` VARCHAR(100) NULL,
   `phone` VARCHAR(45) NULL,
   `personal_email` VARCHAR(45) NULL,
   `company_email` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
   
-  CREATE TABLE `hotelmanagement`.`user` (
+  CREATE TABLE `hotelmanagement`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
-  `employee_id` VARCHAR(45) NULL,
+  `employee_id` INT NULL,
   `is_admin` BIT NULL,
   PRIMARY KEY (`id`));
   
@@ -39,7 +39,7 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `is_reserved` BIT NULL,
   PRIMARY KEY (`id`));
   
-  CREATE TABLE `hotelmanagement`.`reservation` (
+  CREATE TABLE `hotelmanagement`.`reservations` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `guests_id` INT NULL,
   `rooms_id` INT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `hotelmanagement`.`employee` (
   `deposit` FLOAT NULL,
   PRIMARY KEY (`id`));
   
-  CREATE TABLE `hotelmanagement`.`booking` (
+  CREATE TABLE `hotelmanagement`.`bookings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `guest_id` INT NULL,
   `rooms_id` INT NULL,
