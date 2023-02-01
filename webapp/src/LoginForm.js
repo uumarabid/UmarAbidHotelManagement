@@ -17,7 +17,14 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (!test) {
-      axios.post("http://localhost:3001/employee/add", testData).then((response) => {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          // 'Authorization': `Bearer ${answer.access_token}`,
+        },
+      };
+
+      axios.post("http://localhost:3001/employee/add", testData, config).then((response) => {
         console.log(response.data);
         setTest([response.data]);
       });
