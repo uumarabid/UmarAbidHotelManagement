@@ -1,32 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 
 export const LoginForm = () => {
   const theme = createTheme();
-  let testData = {
-    first_name: "Dan",
-    last_name: "abcd",
-    address: "House 8, Manchester",
-    phone: 123456789,
-    personal_email: "yasir@test.com",
-    company_email: "yasir@hotel.com",
-  };
-  const [test, setTest] = useState(null);
-
-  const onClick = () => {
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        // 'Authorization': `Bearer ${answer.access_token}`,
-      },
-    };
-    axios.post("http://localhost:3001/employee/add", testData, config).then((response) => {
-      console.log(response.data);
-      setTest([response.data]);
-    });
-  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -110,8 +87,6 @@ export const LoginForm = () => {
               </Grid>
             </Grid>
           </FormGroup>
-
-          <button onClick={onClick}> testing </button>
         </Paper>
       </Container>
     </ThemeProvider>
