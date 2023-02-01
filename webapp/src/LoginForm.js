@@ -7,7 +7,7 @@ export const LoginForm = () => {
   const theme = createTheme();
   let testData = {
     first_name: "Dan",
-    last_name: "nawaz",
+    last_name: "abcd",
     address: "House 8, Manchester",
     phone: 123456789,
     personal_email: "yasir@test.com",
@@ -15,21 +15,18 @@ export const LoginForm = () => {
   };
   const [test, setTest] = useState(null);
 
-  useEffect(() => {
-    if (!test) {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-          // 'Authorization': `Bearer ${answer.access_token}`,
-        },
-      };
-
-      axios.post("http://localhost:3001/employee/add", testData, config).then((response) => {
-        console.log(response.data);
-        setTest([response.data]);
-      });
-    }
-  }, [test]);
+  const onClick = () => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        // 'Authorization': `Bearer ${answer.access_token}`,
+      },
+    };
+    axios.post("http://localhost:3001/employee/add", testData, config).then((response) => {
+      console.log(response.data);
+      setTest([response.data]);
+    });
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -114,7 +111,7 @@ export const LoginForm = () => {
             </Grid>
           </FormGroup>
 
-          <div>{JSON.stringify(test)}</div>
+          <button onClick={onClick}> testing </button>
         </Paper>
       </Container>
     </ThemeProvider>

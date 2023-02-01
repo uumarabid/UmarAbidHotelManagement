@@ -10,7 +10,7 @@ To run this application,
 ## Web api
 
 - navigate to webapp folder in the terminal `cd webapi`
-- run the following command `node index.js`
+- run the following command `npm start`
 
 ## Application Structure
 
