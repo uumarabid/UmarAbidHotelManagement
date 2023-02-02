@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Footer from "./Footer";
 // import Form from "./Form";
-import FormSignUp from "./FormSignUp";
+import AddEmployee from "./AddEmployee";
 import LoginForm from "./LoginForm";
 import UpsertRooms from "./UpsertRooms";
 
@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginForm />} />
           <Route path="login" element={<LoginForm />} />
-          <Route path="signup" element={<FormSignUp />} />
+          <Route path="addEmployee" element={<AddEmployee />} />
           <Route path="upsertRoom" element={<UpsertRooms />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}

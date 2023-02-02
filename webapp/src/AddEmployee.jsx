@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper } from "@mui/material";
 
 // destructing in FormSignUp function
-const FormSignUp = ({ submitForm }) => {
+const AddEmployee = ({ submitForm }) => {
   // extract data from useForm
   const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validateInfo);
   const theme = createTheme();
@@ -156,4 +156,4 @@ const FormSignUp = ({ submitForm }) => {
   );
 };
 
-export default FormSignUp;
+export default AddEmployee;
