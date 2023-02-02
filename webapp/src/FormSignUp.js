@@ -19,7 +19,7 @@ const FormSignUp = ({ submitForm }) => {
 
           <form onSubmit={handleSubmit}>
             <legend>
-              <h2>Create your account</h2>
+              <h2>Add employee</h2>
             </legend>
             <Grid container rowSpacing={1}>
               <Grid item xs={6}>
@@ -52,15 +52,15 @@ const FormSignUp = ({ submitForm }) => {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  error={errors.username ? "error" : ""}
-                  helperText={errors.username}
-                  type="text"
-                  id="username"
-                  name="username"
-                  placeholder="Enter your username"
-                  value={values.username}
+                  error={errors.email ? "error" : ""}
+                  helperText={errors.email}
+                  type="email"
+                  id="personalEmail"
+                  name="personalEmail"
+                  placeholder="Enter personal email"
+                  value={values.personalEmail}
                   onChange={handleChange}
-                  label="username"
+                  label="Personal email"
                   variant="outlined"
                 />
               </Grid>
@@ -69,18 +69,31 @@ const FormSignUp = ({ submitForm }) => {
                   error={errors.email ? "error" : ""}
                   helperText={errors.email}
                   type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  value={values.email}
+                  id="companyEmail"
+                  name="companyEmail"
+                  placeholder="Enter company email"
+                  value={values.companyEmail}
                   onChange={handleChange}
-                  label="Email"
+                  label="Company email"
                   variant="outlined"
                 />
               </Grid>
 
               <Grid item xs={6}>
                 <TextField
+                  // error={errors.phone ? "error" : ""}
+                  // helperText={errors.phone}
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Enter phone number"
+                  // value={values.phone}
+                  onChange={handleChange}
+                  label="Phone"
+                  variant="outlined"
+                />
+
+                {/* <TextField
                   error={errors.password ? "error" : ""}
                   helperText={errors.password}
                   type="password"
@@ -91,11 +104,24 @@ const FormSignUp = ({ submitForm }) => {
                   onChange={handleChange}
                   label="Password"
                   variant="outlined"
-                />
+                /> */}
               </Grid>
 
               <Grid item xs={6}>
                 <TextField
+                  // error={errors.password2 ? "error" : ""}
+                  // helperText={errors.password2}
+                  type="address"
+                  id="address"
+                  name="address"
+                  placeholder="Enter address"
+                  // value={values}
+                  onChange={handleChange}
+                  label="Enter address"
+                  multiline
+                  variant="outlined"
+                />
+                {/* <TextField
                   error={errors.password2 ? "error" : ""}
                   helperText={errors.password2}
                   type="password"
@@ -106,12 +132,15 @@ const FormSignUp = ({ submitForm }) => {
                   onChange={handleChange}
                   label="Confirm password"
                   variant="outlined"
-                />
+                /> */}
               </Grid>
 
               <Grid item xs={12}>
+                <Button type="submit" variant="contained" sx={{ mr: 3 }}>
+                  Add employee
+                </Button>
                 <Button type="submit" variant="contained">
-                  Sign up
+                  Cancel
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12}>
