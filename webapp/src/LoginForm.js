@@ -82,7 +82,7 @@ export const LoginForm = () => {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <span>
-                  Don't have an account? Register <a href="/signup">here</a>
+                  Don't have an account? Register <a href="/AddUser">here</a>
                 </span>
               </Grid>
             </Grid>

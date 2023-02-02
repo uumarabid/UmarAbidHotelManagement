@@ -25,7 +25,7 @@ const MenuProps = {
 };
 
 // destructing in FormSignUp function
-const UpsertRooms = () => {
+const AddRoom = () => {
   const theme = createTheme();
 
   const [roomFacilities, setRoomFacilities] = useState([]);
@@ -137,4 +137,4 @@ const UpsertRooms = () => {
   );
 };
 
-export default UpsertRooms;
+export default AddRoom;

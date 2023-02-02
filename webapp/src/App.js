@@ -6,7 +6,8 @@ import Footer from "./Footer";
 // import Form from "./Form";
 import AddEmployee from "./AddEmployee";
 import LoginForm from "./LoginForm";
-import UpsertRooms from "./UpsertRooms";
+import AddRoom from "./AddRoom";
+import AddUser from "./AddUser";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path="/" element={<LoginForm />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="addEmployee" element={<AddEmployee />} />
-          <Route path="upsertRoom" element={<UpsertRooms />} />
+          <Route path="AddRoom" element={<AddRoom />} />
+          <Route path="AddUser" element={<AddUser />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
