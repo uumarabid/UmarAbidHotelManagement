@@ -6,7 +6,7 @@ import Footer from "./Footer";
 // import Form from "./Form";
 import FormSignUp from "./FormSignUp";
 import LoginForm from "./LoginForm";
-import Rooms from "./Rooms";
+import UpsertRooms from "./UpsertRooms";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<LoginForm />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="signup" element={<FormSignUp />} />
-          <Route path="room" element={<Rooms />} />
+          <Route path="upsertRoom" element={<UpsertRooms />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
