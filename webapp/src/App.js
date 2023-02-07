@@ -8,6 +8,7 @@ import AddEmployee from "./AddEmployee";
 import LoginForm from "./LoginForm";
 import AddRoom from "./AddRoom";
 import AddUser from "./AddUser";
+import Room from "./Room";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
           <Route path="/" element={<LoginForm />} />
           <Route path="login" element={<LoginForm />} />
           <Route path="addEmployee" element={<AddEmployee />} />
-          <Route path="AddRoom" element={<AddRoom />} />
-          <Route path="AddUser" element={<AddUser />} />
+          <Route path="addRoom" element={<AddRoom />} />
+          <Route path="addUser" element={<AddUser />} />
+          <Route path="room" element={<Room />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
