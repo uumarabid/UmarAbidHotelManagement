@@ -12,19 +12,20 @@ import {
   TableCell,
   TableBody,
   TableContainer,
+  Link,
 } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 
 // destructing in FormSignUp function
-const Room = () => {
+const User = () => {
   const theme = createTheme();
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
     //retrive and display data in table
-    axios.get("http://localhost:3001/room/getAll").then((response) => {
+    axios.get("http://localhost:3001/user/getAll").then((response) => {
       // console.log(response.data);
       setData(response.data);
     });
@@ -35,25 +36,36 @@ const Room = () => {
       <CssBaseline />
       <Container component="main" width="auto">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          {/* <Button type="submit" variant="contained">
+            <a href="/AddUser">Add user</a>
+          </Button> */}
+          <Button type="submit" variant="contained">
+            <Link href="/AddUser" underline="none" color="inherit">
+              {"Add user"}
+            </Link>
+            {/* <a href="/AddUser">Add user</a> */}
+          </Button>
           <TableContainer>
             <Table sx={{ minWidth: 550 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>id</TableCell>
-                  <TableCell>Room number</TableCell>
-                  <TableCell>Room type</TableCell>
-                  <TableCell>Floor number</TableCell>
-                  <TableCell>Facilities</TableCell>
+                  <TableCell>User name</TableCell>
+                  <TableCell>Password</TableCell>
+                  <TableCell>Employee id</TableCell>
+                  {/* Fix is_admin cell */}
+                  <TableCell>Is admin</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data.map((item, index) => (
                   <TableRow key={index}>
                     <TableCell>{item.id}</TableCell>
-                    <TableCell>{item.room_number}</TableCell>
-                    <TableCell>{item.room_type}</TableCell>
-                    <TableCell>{item.floor_number}</TableCell>
-                    <TableCell>{item.facilities}</TableCell>
+                    <TableCell>{item.user_name}</TableCell>
+                    <TableCell>{item.password}</TableCell>
+                    <TableCell>{item.employee_id}</TableCell>
+                    {/* come back to fix is admin */}
+                    <TableCell>{item.is_admi}</TableCell>
                     <TableCell>
                       <Button type="submit" variant="contained" sx={{ mr: 1 }}>
                         Edit
@@ -73,4 +85,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default User;

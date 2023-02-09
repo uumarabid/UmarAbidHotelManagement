@@ -9,6 +9,7 @@ import LoginForm from "./LoginForm";
 import AddRoom from "./AddRoom";
 import AddUser from "./AddUser";
 import Room from "./Room";
+import User from "./User";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="addRoom" element={<AddRoom />} />
           <Route path="addUser" element={<AddUser />} />
           <Route path="room" element={<Room />} />
+          <Route path="user" element={<User />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
