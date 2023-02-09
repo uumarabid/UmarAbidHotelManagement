@@ -45,8 +45,6 @@ const AddRoom = () => {
       <CssBaseline />
       <Container component="main" maxWidth="sm">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          {/* come back to put action and method */}
-
           <FormGroup>
             <legend>
               <h2>Add room</h2>

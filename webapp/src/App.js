@@ -10,6 +10,7 @@ import AddRoom from "./AddRoom";
 import AddUser from "./AddUser";
 import Room from "./Room";
 import User from "./User";
+import Employee from "./Employee";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="addUser" element={<AddUser />} />
           <Route path="room" element={<Room />} />
           <Route path="user" element={<User />} />
+          <Route path="employee" element={<Employee />} />
 
           {/* <Route path="*" element={<NoPage />} /> */}
         </Routes>
