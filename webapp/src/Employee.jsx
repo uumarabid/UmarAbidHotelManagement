@@ -14,6 +14,7 @@ import {
   TableContainer,
   Link,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -67,7 +68,7 @@ const Employee = () => {
                       <Button type="submit" variant="contained" sx={{ mr: 1 }}>
                         Edit
                       </Button>
-                      <Button type="submit" variant="contained">
+                      <Button type="submit" variant="contained" color="error" startIcon={<DeleteIcon />}>
                         Delete
                       </Button>
                     </TableCell>
