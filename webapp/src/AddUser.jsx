@@ -15,6 +15,7 @@ import {
   Select,
   FormControlLabel,
   Checkbox,
+  Link,
 } from "@mui/material";
 
 // destructing in FormSignUp function
@@ -28,8 +29,6 @@ const AddUser = ({ submitForm }) => {
       <CssBaseline />
       <Container component="main" maxWidth="sm">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          {/* come back to put action and method */}
-
           <form onSubmit={handleSubmit}>
             <legend>
               <h2>Add User</h2>
@@ -114,19 +113,6 @@ const AddUser = ({ submitForm }) => {
                   label="Phone"
                   variant="outlined"
                 />
-
-                {/* <TextField
-                  error={errors.password ? "error" : ""}
-                  helperText={errors.password}
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  value={values.password}
-                  onChange={handleChange}
-                  label="Password"
-                  variant="outlined"
-                /> */}
               </Grid>
 
               <Grid item xs={6}>
@@ -141,18 +127,6 @@ const AddUser = ({ submitForm }) => {
                   multiline
                   variant="outlined"
                 />
-                {/* <TextField
-                  error={errors.password2 ? "error" : ""}
-                  helperText={errors.password2}
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  placeholder="Confirm your password"
-                  value={values.password2}
-                  onChange={handleChange}
-                  label="Confirm password"
-                  variant="outlined"
-                /> */}
               </Grid>
               <Grid item xs={6}>
                 <TextField
@@ -191,7 +165,9 @@ const AddUser = ({ submitForm }) => {
                   Add user
                 </Button>
                 <Button type="submit" variant="contained">
-                  Cancel
+                  <Link href="/user" underline="none" color="inherit">
+                    {"Cancel"}
+                  </Link>
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12}>

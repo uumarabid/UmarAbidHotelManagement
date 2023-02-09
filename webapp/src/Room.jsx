@@ -12,6 +12,7 @@ import {
   TableCell,
   TableBody,
   TableContainer,
+  Link,
 } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
@@ -35,6 +36,11 @@ const Room = () => {
       <CssBaseline />
       <Container component="main" width="auto">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Button type="submit" variant="contained">
+            <Link href="/AddRoom" underline="none" color="inherit">
+              {"Add room"}
+            </Link>
+          </Button>
           <TableContainer>
             <Table sx={{ minWidth: 550 }} aria-label="simple table">
               <TableHead>

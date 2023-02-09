@@ -35,14 +35,10 @@ const Employee = () => {
       <CssBaseline />
       <Container component="main" width="auto">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          {/* <Button type="submit" variant="contained">
-            <a href="/AddUser">Add user</a>
-          </Button> */}
           <Button type="submit" variant="contained">
             <Link href="/AddEmployee" underline="none" color="inherit">
               {"Add employee"}
             </Link>
-            {/* <a href="/AddUser">Add user</a> */}
           </Button>
           <TableContainer>
             <Table sx={{ minWidth: 550 }} aria-label="simple table">

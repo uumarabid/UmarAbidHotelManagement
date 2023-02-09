@@ -10,6 +10,7 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
 
 const facilities = ["Fridge", "Dinning table with chairs", "Locker", "TV", "Hair dryer"];
 
@@ -123,7 +124,9 @@ const AddRoom = () => {
                   Add room
                 </Button>
                 <Button type="submit" variant="contained">
-                  Cancel
+                  <Link href="/room" underline="none" color="inherit">
+                    {"Cancel"}
+                  </Link>
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12}></Grid>
