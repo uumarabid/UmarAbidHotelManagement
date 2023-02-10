@@ -69,7 +69,9 @@ const User = () => {
                     <TableCell>{item.is_admi}</TableCell>
                     <TableCell>
                       <Button type="submit" variant="contained" sx={{ mr: 1 }}>
-                        Edit
+                        <Link href="#" underline="none" color="inherit">
+                          {"Edit"}
+                        </Link>
                       </Button>
                       <Button type="submit" variant="contained" color="error" startIcon={<DeleteIcon />}>
                         Delete
