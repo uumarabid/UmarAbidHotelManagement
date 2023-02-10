@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -12,7 +11,8 @@ import FormGroup from "@mui/material/FormGroup";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
-import { Link } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Hotel } from "@mui/icons-material";
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(true);
@@ -41,45 +41,42 @@ export default function MenuAppBar() {
       <AppBar position="static">
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
+            <Hotel /> <Box sx={{ ml: 1 }}>Hotel Managment</Box>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Photos
-          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
 
           {auth && (
             <>
               <Button color="inherit">
-                <Link href="/employee" underline="none" color="inherit">
+                <Link to="/employee" className="App-navigation">
                   Employee
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link href="/user" underline="none" color="inherit">
+                <Link to="/user" className="App-navigation">
                   User
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link href="/room" underline="none" color="inherit">
+                <Link to="/room" className="App-navigation">
                   Room
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link href="/audit" underline="none" color="inherit">
+                <Link to="/audit" className="App-navigation">
                   Audit
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link href="/checkin" underline="none" color="inherit">
+                <Link to="/checkin" className="App-navigation">
                   Checkin
                 </Link>
               </Button>
               <Button color="inherit">
-                <Link href="/checkout" underline="none" color="inherit">
+                <Link to="/checkout" className="App-navigation">
                   Checkout
                 </Link>
               </Button>
-
               <div>
                 <IconButton
                   size="large"
