@@ -7,8 +7,10 @@ const useForm = (callback, validateInfo) => {
   const [values, setvalues] = useState({
     fname: "",
     lname: "",
-    email: "",
+    personalEmail: "",
+    companyEmail: "",
     phone: "",
+    address: "",
   });
 
   // useState with errors
@@ -41,7 +43,7 @@ const useForm = (callback, validateInfo) => {
   //triger the error if not then submit request
   useEffect(() => {
     if (Object.keys(errors).length === 0 && submit) {
-      callback();
+      callback(values);
     }
   }, [errors]);
 

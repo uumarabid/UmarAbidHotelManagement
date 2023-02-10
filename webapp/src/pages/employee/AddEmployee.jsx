@@ -1,5 +1,6 @@
 import React from "react";
 import useForm from "../login/useForm"; //hook
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import validateInfo from "./validateInfo"; // import function
 import { Button, TextField, Grid, Paper, Link } from "@mui/material";
@@ -7,12 +8,24 @@ import { Button, TextField, Grid, Paper, Link } from "@mui/material";
 // destructing in FormSignUp function
 const AddEmployee = () => {
   // extract data from useForm
-  const SubmitHandler = () => {
+  const SubmitHandler = (data) => {
     // call save funciton
-    useNavigate("/employee");
+    let request = {
+      first_name: values.fname,
+      last_name: values.lname,
+      address: values.address,
+      phone: values.phone,
+      personal_email: values.personalEmail,
+      company_email: values.companyEmail,
+    };
+    axios.post("http://localhost:3001/employee/add", request).then((response) => {
+      console.log(response.data);
+    });
+
+    // useNavigate("/employee");
   };
 
-  const { handleChange, values, handleSubmit, errors } = useForm(SubmitHandler(), validateInfo);
+  const { handleChange, values, handleSubmit, errors } = useForm(SubmitHandler, validateInfo);
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -31,7 +44,6 @@ const AddEmployee = () => {
               id="fname"
               name="fname"
               placeholder="Enter your first name"
-              value={values.fname}
               onChange={handleChange}
               label="First name"
               variant="outlined"
@@ -45,7 +57,6 @@ const AddEmployee = () => {
               id="lname"
               name="lname"
               placeholder="Enter your last name"
-              value={values.lname}
               onChange={handleChange}
               label="Last name"
               variant="outlined"
@@ -59,7 +70,6 @@ const AddEmployee = () => {
               id="personalEmail"
               name="personalEmail"
               placeholder="Enter personal email"
-              value={values.personalEmail}
               onChange={handleChange}
               label="Personal email"
               variant="outlined"
@@ -73,7 +83,6 @@ const AddEmployee = () => {
               id="companyEmail"
               name="companyEmail"
               placeholder="Enter company email"
-              value={values.companyEmail}
               onChange={handleChange}
               label="Company email"
               variant="outlined"
@@ -88,7 +97,7 @@ const AddEmployee = () => {
               id="phone"
               name="phone"
               placeholder="Enter phone number"
-              value={values.phone}
+              // value={values.phone}
               onChange={handleChange}
               label="Phone"
               variant="outlined"
@@ -110,7 +119,7 @@ const AddEmployee = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={SubmitHandler}>
+            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={() => SubmitHandler}>
               Save
             </Button>
             <Button type="submit" variant="contained">
