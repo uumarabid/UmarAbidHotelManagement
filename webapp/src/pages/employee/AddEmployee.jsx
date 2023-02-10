@@ -1,12 +1,18 @@
 import React from "react";
 import useForm from "../login/useForm"; //hook
+import { useNavigate } from "react-router-dom";
 import validateInfo from "./validateInfo"; // import function
 import { Button, TextField, Grid, Paper, Link } from "@mui/material";
 
 // destructing in FormSignUp function
-const AddEmployee = ({ submitForm }) => {
+const AddEmployee = () => {
   // extract data from useForm
-  const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validateInfo);
+  const SubmitHandler = () => {
+    // call save funciton
+    useNavigate("/employee");
+  };
+
+  const { handleChange, values, handleSubmit, errors } = useForm(SubmitHandler(), validateInfo);
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -17,9 +23,9 @@ const AddEmployee = ({ submitForm }) => {
           <h2>Add employee</h2>
         </legend>
         <Grid container rowSpacing={1}>
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <TextField
-              error={errors.fname ? "error" : ""}
+              error={errors.fname || false}
               helperText={errors.fname}
               type="text"
               id="fname"
@@ -31,9 +37,9 @@ const AddEmployee = ({ submitForm }) => {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <TextField
-              error={errors.lname ? "error" : ""}
+              error={errors.lname || false}
               helperText={errors.lname}
               type="text"
               id="lname"
@@ -45,10 +51,10 @@ const AddEmployee = ({ submitForm }) => {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <TextField
-              error={errors.email ? "error" : ""}
-              helperText={errors.email}
+              error={errors.personalEmail || false}
+              helperText={errors.personalEmail}
               type="email"
               id="personalEmail"
               name="personalEmail"
@@ -59,10 +65,10 @@ const AddEmployee = ({ submitForm }) => {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <TextField
-              error={errors.email ? "error" : ""}
-              helperText={errors.email}
+              error={errors.companyEmail || false}
+              helperText={errors.companyEmail}
               type="email"
               id="companyEmail"
               name="companyEmail"
@@ -74,25 +80,23 @@ const AddEmployee = ({ submitForm }) => {
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <TextField
-              // error={errors.phone ? "error" : ""}
-              // helperText={errors.phone}
+              error={errors.phone || false}
+              helperText={errors.phone}
               type="tel"
               id="phone"
               name="phone"
               placeholder="Enter phone number"
-              // value={values.phone}
+              value={values.phone}
               onChange={handleChange}
               label="Phone"
               variant="outlined"
             />
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={6} md={6} lg={6}>
             <TextField
-              // error={errors.password2 ? "error" : ""}
-              // helperText={errors.password2}
               type="address"
               id="address"
               name="address"
@@ -106,19 +110,14 @@ const AddEmployee = ({ submitForm }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" sx={{ mr: 3 }}>
-              Add employee
+            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={SubmitHandler}>
+              Save
             </Button>
             <Button type="submit" variant="contained">
               <Link href="/employee" underline="none" color="inherit">
-                {"Cancel"}
+                Cancel
               </Link>
             </Button>
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <span>
-              Already have an account? Login <a href="/login">here</a>
-            </span>
           </Grid>
         </Grid>
       </form>

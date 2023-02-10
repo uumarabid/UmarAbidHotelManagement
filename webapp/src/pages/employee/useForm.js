@@ -7,10 +7,8 @@ const useForm = (callback, validateInfo) => {
   const [values, setvalues] = useState({
     fname: "",
     lname: "",
-    username: "",
     email: "",
-    password: "",
-    password2: "",
+    phone: "",
   });
 
   // useState with errors
