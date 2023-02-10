@@ -11,11 +11,12 @@ import AddUser from "./AddUser";
 import Room from "./Room";
 import User from "./User";
 import Employee from "./Employee";
+import NavigationBar from "./components/NavigationBar";
 
 function App() {
   return (
     <div className="App">
-      {/* <Footer year={2023} /> */}
+      <NavigationBar />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginForm />} />
