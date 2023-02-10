@@ -48,6 +48,11 @@ export default function MenuAppBar() {
           {auth && (
             <>
               <Button color="inherit">
+                <Link to="/dashboard" className="App-navigation">
+                  Dashboard
+                </Link>
+              </Button>
+              <Button color="inherit">
                 <Link to="/employee" className="App-navigation">
                   Employee
                 </Link>

@@ -17,6 +17,7 @@ import Checkin from "./pages/checkin/index";
 import Audit from "./pages/audit/index";
 import Checkout from "./pages/checkout/index";
 import { Container, CssBaseline } from "@mui/material";
+import Profile from "./pages/profile";
 
 function App() {
   const theme = createTheme();
@@ -41,6 +42,7 @@ function App() {
               <Route path="/audit" element={<Audit />} />
               <Route path="/checkin" element={<Checkin />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </Container>
         </ThemeProvider>{" "}
