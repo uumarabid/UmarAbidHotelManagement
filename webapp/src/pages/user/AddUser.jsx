@@ -1,11 +1,25 @@
 import React from "react";
-import useForm from "./useForm"; //hook
+import useForm from "../login/useForm"; //hook
 import validateInfo from "./validateInfo"; // import function
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Button, TextField, Container, Grid, CssBaseline, Paper, Link } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Container,
+  Grid,
+  CssBaseline,
+  Paper,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  FormControlLabel,
+  Checkbox,
+  Link,
+} from "@mui/material";
 
 // destructing in FormSignUp function
-const AddEmployee = ({ submitForm }) => {
+const AddUser = ({ submitForm }) => {
   // extract data from useForm
   const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validateInfo);
   const theme = createTheme();
@@ -15,22 +29,36 @@ const AddEmployee = ({ submitForm }) => {
       <CssBaseline />
       <Container component="main" maxWidth="sm">
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          {/* come back to put action and method */}
-
           <form onSubmit={handleSubmit}>
             <legend>
-              <h2>Add employee</h2>
+              <h2>Add User</h2>
             </legend>
             <Grid container rowSpacing={1}>
               <Grid item xs={6}>
+                <FormControl sx={{ mb: 1, minWidth: 210 }}>
+                  <InputLabel id="employee-label">Employee</InputLabel>
+                  <Select
+                    labelId="employee-label"
+                    id="employee"
+                    value={[]}
+                    label="Room type"
+                    // onChange={handleChange}
+                  >
+                    <MenuItem value={10}>Standard</MenuItem>
+                    <MenuItem value={20}>Deluxe</MenuItem>
+                    <MenuItem value={30}>Suites</MenuItem>
+                    <MenuItem value={40}>Executive</MenuItem>
+                    <MenuItem value={50}>Luxury</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={6}>
                 <TextField
-                  error={errors.fname ? "error" : ""}
-                  helperText={errors.fname}
+                  disabled
                   type="text"
                   id="fname"
                   name="fname"
                   placeholder="Enter your first name"
-                  value={values.fname}
                   onChange={handleChange}
                   label="First name"
                   variant="outlined"
@@ -38,13 +66,11 @@ const AddEmployee = ({ submitForm }) => {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  error={errors.lname ? "error" : ""}
-                  helperText={errors.lname}
+                  disabled
                   type="text"
                   id="lname"
                   name="lname"
                   placeholder="Enter your last name"
-                  value={values.lname}
                   onChange={handleChange}
                   label="Last name"
                   variant="outlined"
@@ -52,13 +78,11 @@ const AddEmployee = ({ submitForm }) => {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  error={errors.email ? "error" : ""}
-                  helperText={errors.email}
+                  disabled
                   type="email"
                   id="personalEmail"
                   name="personalEmail"
                   placeholder="Enter personal email"
-                  value={values.personalEmail}
                   onChange={handleChange}
                   label="Personal email"
                   variant="outlined"
@@ -66,13 +90,12 @@ const AddEmployee = ({ submitForm }) => {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  error={errors.email ? "error" : ""}
+                  disabled
                   helperText={errors.email}
                   type="email"
                   id="companyEmail"
                   name="companyEmail"
                   placeholder="Enter company email"
-                  value={values.companyEmail}
                   onChange={handleChange}
                   label="Company email"
                   variant="outlined"
@@ -81,13 +104,11 @@ const AddEmployee = ({ submitForm }) => {
 
               <Grid item xs={6}>
                 <TextField
-                  // error={errors.phone ? "error" : ""}
-                  // helperText={errors.phone}
+                  disabled
                   type="tel"
                   id="phone"
                   name="phone"
                   placeholder="Enter phone number"
-                  // value={values.phone}
                   onChange={handleChange}
                   label="Phone"
                   variant="outlined"
@@ -96,26 +117,55 @@ const AddEmployee = ({ submitForm }) => {
 
               <Grid item xs={6}>
                 <TextField
-                  // error={errors.password2 ? "error" : ""}
-                  // helperText={errors.password2}
+                  disabled
                   type="address"
                   id="address"
                   name="address"
                   placeholder="Enter address"
-                  // value={values}
                   onChange={handleChange}
                   label="Enter address"
                   multiline
                   variant="outlined"
                 />
               </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  error={errors.username ? "error" : ""}
+                  helperText={errors.username}
+                  type="username"
+                  id="username"
+                  name="username"
+                  placeholder="Enter username"
+                  value={values.username}
+                  onChange={handleChange}
+                  label="Username"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  error={errors.password ? "error" : ""}
+                  helperText={errors.password}
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter your password"
+                  value={values.password}
+                  onChange={handleChange}
+                  label="Password"
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <FormControlLabel control={<Checkbox />} label="Is admin" />
+              </Grid>
 
               <Grid item xs={12}>
                 <Button type="submit" variant="contained" sx={{ mr: 3 }}>
-                  Add employee
+                  Add user
                 </Button>
                 <Button type="submit" variant="contained">
-                  <Link href="/employee" underline="none" color="inherit">
+                  <Link href="/user" underline="none" color="inherit">
                     {"Cancel"}
                   </Link>
                 </Button>
@@ -133,4 +183,4 @@ const AddEmployee = ({ submitForm }) => {
   );
 };
 
-export default AddEmployee;
+export default AddUser;
