@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Link } from "@mui/material";
+import { Link as RLink } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
@@ -47,10 +48,12 @@ const Employee = () => {
                 <TableCell>{item.personal_email}</TableCell>
                 <TableCell>{item.company_email}</TableCell>
                 <TableCell>
-                  <Button type="submit" variant="contained" sx={{ mr: 1 }}>
-                    Edit
+                  <Button variant="contained" sx={{ mr: 1 }}>
+                    <RLink to={`/addemployee/${item.id}`} className="App-navigation">
+                      Edit
+                    </RLink>
                   </Button>
-                  <Button type="submit" variant="contained" color="error" startIcon={<DeleteIcon />}>
+                  <Button variant="contained" color="error" startIcon={<DeleteIcon />}>
                     Delete
                   </Button>
                 </TableCell>

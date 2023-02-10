@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useForm from "../login/useForm"; //hook
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import validateInfo from "./validateInfo"; // import function
-import { Button, TextField, Grid, Paper, Link } from "@mui/material";
+import { Button, TextField, Grid, Paper } from "@mui/material";
+
+const defaultData = {
+  first_name: "",
+  last_name: "",
+  address: "",
+  phone: "",
+  personal_email: "",
+  company_email: "",
+};
 
 // destructing in FormSignUp function
 const AddEmployee = () => {
+  let navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState(defaultData);
+
+  useEffect(() => {
+    console.log(id);
+  }, []);
+
+  const CancelHandler = () => {
+    navigate("/employee");
+  };
+
   // extract data from useForm
-  const SubmitHandler = (data) => {
+  const SubmitHandler = () => {
     // call save funciton
-    let request = {
-      first_name: values.fname,
-      last_name: values.lname,
-      address: values.address,
-      phone: values.phone,
-      personal_email: values.personalEmail,
-      company_email: values.companyEmail,
-    };
-    axios.post("http://localhost:3001/employee/add", request).then((response) => {
+    axios.post("http://localhost:3001/employee/add", data).then((response) => {
       console.log(response.data);
     });
 
-    // useNavigate("/employee");
+    navigate("/employee");
   };
 
   const { handleChange, values, handleSubmit, errors } = useForm(SubmitHandler, validateInfo);
@@ -119,13 +132,11 @@ const AddEmployee = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={() => SubmitHandler}>
+            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={() => SubmitHandler()}>
               Save
             </Button>
-            <Button type="submit" variant="contained">
-              <Link href="/employee" underline="none" color="inherit">
-                Cancel
-              </Link>
+            <Button variant="contained" onClick={() => CancelHandler()}>
+              Cancel
             </Button>
           </Grid>
         </Grid>

@@ -33,9 +33,9 @@ function App() {
               <Route path="/" exact element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/addEmployee" element={<AddEmployee />} />
+              <Route path="/addEmployee/:id" element={<AddEmployee />} />
               <Route path="/addRoom" element={<AddRoom />} />
-              <Route path="/addUser" element={<AddUser />} />
+              <Route path="/addUser/:id" element={<AddUser />} />
               <Route path="/room" element={<Room />} />
               <Route path="/user" element={<User />} />
               <Route path="/employee" element={<Employee />} />
