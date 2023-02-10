@@ -2,10 +2,10 @@ import React from "react";
 import useForm from "./useForm"; //hook
 import validateInfo from "./validateInfo"; // import function
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Button, TextField, Container, Grid, CssBaseline, Paper } from "@mui/material";
+import { Button, TextField, Container, Grid, CssBaseline, Paper, Link } from "@mui/material";
 
 // destructing in FormSignUp function
-const FormSignUp = ({ submitForm }) => {
+const AddEmployee = ({ submitForm }) => {
   // extract data from useForm
   const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validateInfo);
   const theme = createTheme();
@@ -19,7 +19,7 @@ const FormSignUp = ({ submitForm }) => {
 
           <form onSubmit={handleSubmit}>
             <legend>
-              <h2>Create your account</h2>
+              <h2>Add employee</h2>
             </legend>
             <Grid container rowSpacing={1}>
               <Grid item xs={6}>
@@ -52,15 +52,15 @@ const FormSignUp = ({ submitForm }) => {
               </Grid>
               <Grid item xs={6}>
                 <TextField
-                  error={errors.username ? "error" : ""}
-                  helperText={errors.username}
-                  type="text"
-                  id="username"
-                  name="username"
-                  placeholder="Enter your username"
-                  value={values.username}
+                  error={errors.email ? "error" : ""}
+                  helperText={errors.email}
+                  type="email"
+                  id="personalEmail"
+                  name="personalEmail"
+                  placeholder="Enter personal email"
+                  value={values.personalEmail}
                   onChange={handleChange}
-                  label="username"
+                  label="Personal email"
                   variant="outlined"
                 />
               </Grid>
@@ -69,49 +69,55 @@ const FormSignUp = ({ submitForm }) => {
                   error={errors.email ? "error" : ""}
                   helperText={errors.email}
                   type="email"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  value={values.email}
+                  id="companyEmail"
+                  name="companyEmail"
+                  placeholder="Enter company email"
+                  value={values.companyEmail}
                   onChange={handleChange}
-                  label="Email"
+                  label="Company email"
                   variant="outlined"
                 />
               </Grid>
 
               <Grid item xs={6}>
                 <TextField
-                  error={errors.password ? "error" : ""}
-                  helperText={errors.password}
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  value={values.password}
+                  // error={errors.phone ? "error" : ""}
+                  // helperText={errors.phone}
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Enter phone number"
+                  // value={values.phone}
                   onChange={handleChange}
-                  label="Password"
+                  label="Phone"
                   variant="outlined"
                 />
               </Grid>
 
               <Grid item xs={6}>
                 <TextField
-                  error={errors.password2 ? "error" : ""}
-                  helperText={errors.password2}
-                  type="password"
-                  id="password2"
-                  name="password2"
-                  placeholder="Confirm your password"
-                  value={values.password2}
+                  // error={errors.password2 ? "error" : ""}
+                  // helperText={errors.password2}
+                  type="address"
+                  id="address"
+                  name="address"
+                  placeholder="Enter address"
+                  // value={values}
                   onChange={handleChange}
-                  label="Confirm password"
+                  label="Enter address"
+                  multiline
                   variant="outlined"
                 />
               </Grid>
 
               <Grid item xs={12}>
+                <Button type="submit" variant="contained" sx={{ mr: 3 }}>
+                  Add employee
+                </Button>
                 <Button type="submit" variant="contained">
-                  Sign up
+                  <Link href="/employee" underline="none" color="inherit">
+                    {"Cancel"}
+                  </Link>
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -127,4 +133,4 @@ const FormSignUp = ({ submitForm }) => {
   );
 };
 
-export default FormSignUp;
+export default AddEmployee;

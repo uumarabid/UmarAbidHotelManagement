@@ -33,5 +33,11 @@ export default function validateInfo(values) {
     errors.password2 = "Password do not match";
   }
 
+  // if (!values.phone) {
+  //   errors.phone = "Phone number is required";
+  // } else if (!/^([0-9]{3}-[0-9]{2}-[0-9]{3})/i.test(values.phone)) {
+  //   errors.email = "Phone number is invalid!";
+  // }
+
   return errors;
 }
