@@ -1,33 +1,39 @@
 // set conditions to display errors
-export default function validateInfo(values) {
+const validateInfo = (values) => {
   let errors = {};
+  let hasError = false;
 
-  if (!values.fname) {
-    errors.fname = "First name required";
+  if (!values.first_name) {
+    errors.first_name = "First name required";
+    hasError = true;
   }
-  if (!values.lname) {
-    errors.lname = "Last name required";
-  }
-
-  if (!values.personalEmail) {
-    errors.personalEmail = "Email required";
-    // complete this
-    // (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-  } else if (!/^/i.test(values.personalEmail)) {
-    errors.personalEmail = "Email address is invalid!";
+  if (!values.last_name) {
+    errors.last_name = "Last name required";
+    hasError = true;
   }
 
-  if (!values.companyEmail) {
-    errors.companyEmail = "Email required";
-    // complete this
-    // (/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-  } else if (!/^/i.test(values.companyEmail)) {
-    errors.companyEmail = "Email address is invalid!";
+  if (!values.personal_email) {
+    errors.personal_email = "Email required";
+    hasError = true;
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.personal_email)) {
+    errors.personal_email = "Email address is invalid!";
+    hasError = true;
+  }
+
+  if (!values.company_email) {
+    errors.company_email = "Email required";
+    hasError = true;
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.company_email)) {
+    errors.company_email = "Email address is invalid!";
+    hasError = true;
   }
 
   if (!values.phone) {
     errors.phone = "Phone number is required";
+    hasError = true;
   }
 
-  return errors;
-}
+  return { errors, hasError };
+};
+
+export default validateInfo;

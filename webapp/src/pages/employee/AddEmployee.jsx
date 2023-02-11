@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import useForm from "../login/useForm"; //hook
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import validateInfo from "./validateInfo"; // import function
 import { Button, TextField, Grid, Paper } from "@mui/material";
+import validateInfo from "./validateInfo";
 
 const defaultData = {
   first_name: "",
@@ -20,6 +19,7 @@ const AddEmployee = () => {
   const { id } = useParams();
 
   const [data, setData] = useState(defaultData);
+  const [formErrors, setFormErrors] = useState(defaultData);
 
   const handleChange = (e) => {
     setData({
@@ -27,6 +27,10 @@ const AddEmployee = () => {
       ...data,
       // targetting the name of each input of the form on FormSignUp
       [e.target.name]: e.target.value,
+    });
+    setFormErrors({
+      ...formErrors,
+      [e.target.name]: "",
     });
   };
 
@@ -47,31 +51,34 @@ const AddEmployee = () => {
 
   // extract data from useForm
   const SubmitHandler = () => {
-    // call save funciton
-    let operation = "add";
-    if (data.id) {
-      operation = "edit";
+    const { errors, hasError } = validateInfo(data);
+    setFormErrors(errors);
+
+    if (!hasError) {
+      // call save funciton
+      let operation = "add";
+      if (data.id) {
+        operation = "edit";
+      }
+
+      axios.post(`http://localhost:3001/employee/${operation}`, data).then((response) => {
+        console.log(response.data);
+      });
+
+      navigate("/employee");
     }
-
-    axios.post(`http://localhost:3001/employee/${operation}`, data).then((response) => {
-      console.log(response.data);
-    });
-
-    navigate("/employee");
   };
-
-  // const { handleChange, values, handleSubmit, errors } = useForm(SubmitHandler, validateInfo);
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <legend>
-        <h2>Add employee</h2>
+        <h2>Add/Edit Employee</h2>
       </legend>
       <Grid container rowSpacing={1}>
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            // error={errors.fname || false}
-            // helperText={errors.fname}
+            error={formErrors.first_name ? true : false}
+            helperText={formErrors.first_name}
             type="text"
             id="first_name"
             name="first_name"
@@ -84,8 +91,8 @@ const AddEmployee = () => {
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            // error={errors.lname || false}
-            // helperText={errors.lname}
+            error={formErrors.last_name ? true : false}
+            helperText={formErrors.last_name}
             type="text"
             id="last_name"
             name="last_name"
@@ -98,8 +105,8 @@ const AddEmployee = () => {
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            // error={errors.personalEmail || false}
-            // helperText={errors.personalEmail}
+            error={formErrors.personal_email ? true : false}
+            helperText={formErrors.personal_email}
             type="email"
             id="personal_email"
             name="personal_email"
@@ -112,8 +119,8 @@ const AddEmployee = () => {
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            // error={errors.companyEmail || false}
-            // helperText={errors.companyEmail}
+            error={formErrors.company_email ? true : false}
+            helperText={formErrors.company_email}
             type="email"
             id="company_email"
             name="company_email"
@@ -127,8 +134,8 @@ const AddEmployee = () => {
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            // error={errors.phone || false}
-            // helperText={errors.phone}
+            error={formErrors.phone ? true : false}
+            helperText={formErrors.phone}
             type="tel"
             id="phone"
             name="phone"
