@@ -49,7 +49,7 @@ export const deleteQuery = async (table, condition) => {
 
     await connection.connect();
 
-    let query = `DELETE * FROM ${table} where ${condition}`;
+    let query = `DELETE FROM ${table} where ${condition}`;
 
     // delete entry from table
     let data = await connection.promise().query(query);

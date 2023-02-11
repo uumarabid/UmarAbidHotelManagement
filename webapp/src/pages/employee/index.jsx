@@ -9,12 +9,21 @@ import { useEffect } from "react";
 const Employee = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  const loadEmployees = () => {
     //retrive and display data in table
     axios.get("http://localhost:3001/employee/getAll").then((response) => {
-      // console.log(response.data);
       setData(response.data);
     });
+  };
+
+  const deleteEmployee = (id) => {
+    axios.post("http://localhost:3001/employee/delete", { id }).then((response) => {
+      loadEmployees();
+    });
+  };
+
+  useEffect(() => {
+    loadEmployees();
   }, []);
 
   return (
@@ -53,7 +62,7 @@ const Employee = () => {
                       Edit
                     </RLink>
                   </Button>
-                  <Button variant="contained" color="error" startIcon={<DeleteIcon />}>
+                  <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEmployee(item.id)}>
                     Delete
                   </Button>
                 </TableCell>
