@@ -6,12 +6,14 @@ import reservationRoute from "./reservation/index.js";
 import bookingRoute from "./booking/index.js";
 import auditRoute from "./audit/index.js";
 import employeeRoute from "./employee/index.js";
+import guestRoute from "./guest/index.js";
 
 //Routing
 const routes = Router()
   .use("/room", roomRoute)
   .use("/user", userRoute)
   .use("/reservation", reservationRoute)
+  .use("/guest", guestRoute)
   .use("/booking", bookingRoute)
   .use("/audit", auditRoute)
   .use("/employee", employeeRoute);

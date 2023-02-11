@@ -16,6 +16,8 @@ import Footer from "./components/Footer";
 import Checkin from "./pages/checkin/index";
 import Audit from "./pages/audit/index";
 import Checkout from "./pages/checkout/index";
+import Reservation from "./pages/reservation/index";
+import Guest from "./pages/guest/index";
 import { Container, CssBaseline } from "@mui/material";
 import Profile from "./pages/profile";
 
@@ -35,12 +37,15 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/addEmployee/:id" element={<AddEmployee />} />
               <Route path="/addEmployee/" element={<AddEmployee />} />
+              <Route path="/addRoom/:id" element={<AddRoom />} />
               <Route path="/addRoom" element={<AddRoom />} />
               <Route path="/addUser/:id" element={<AddUser />} />
               <Route path="/addUser/" element={<AddUser />} />
               <Route path="/room" element={<Room />} />
               <Route path="/user" element={<User />} />
               <Route path="/employee" element={<Employee />} />
+              <Route path="/reservation" element={<Reservation />} />
+              <Route path="/guest" element={<Guest />} />
               <Route path="/audit" element={<Audit />} />
               <Route path="/checkin" element={<Checkin />} />
               <Route path="/checkout" element={<Checkout />} />

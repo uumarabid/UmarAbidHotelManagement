@@ -73,6 +73,16 @@ export default function MenuAppBar() {
                 </Link>
               </Button>
               <Button color="inherit">
+                <Link to="/reservation" className="App-navigation">
+                  Reservation
+                </Link>
+              </Button>
+              <Button color="inherit">
+                <Link to="/guest" className="App-navigation">
+                  Guest
+                </Link>
+              </Button>
+              <Button color="inherit">
                 <Link to="/checkin" className="App-navigation">
                   Checkin
                 </Link>
