@@ -1,4 +1,4 @@
-import { selectQuery, deleteQuery, insertQuery, updateQuery } from "../../utils/sql.js";
+import { selectQuery, deleteQuery, insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
 
 export const addReservation = async (req, res) => {
   let reservation = req.body;
@@ -19,7 +19,9 @@ export const getReservation = async (req, res) => {
 };
 
 export const getAllReservation = async (req, res) => {
-  let reservations = await selectQuery("reservations");
+  const query =
+    "SELECT r.*, CONCAT(g.first_name, ', ', g.last_name) as guest_name, ro.room_number from reservations r INNER JOIN guests g ON r.guests_id = g.id INNER JOIN rooms ro ON r.rooms_id = ro.id";
+  let reservations = await selectCustomQuery(query);
   res.send(reservations);
 };
 

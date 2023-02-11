@@ -1,37 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Link } from "@mui/material";
 import { Link as RLink } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
-import { useEffect } from "react";
 
 const Guest = () => {
   const [data, setData] = useState([]);
 
-  const loadReservations = () => {
+  const loadGuests = () => {
     //retrive and display data in table
-    axios.get("http://localhost:3001/reservation/getAll").then((response) => {
+    axios.get("http://localhost:3001/guest/getAll").then((response) => {
       setData(response.data);
     });
   };
 
-  const deleteReservation = (id) => {
-    axios.post("http://localhost:3001/reservation/delete", { id }).then((response) => {
-      loadReservations();
+  const deleteGuest = (id) => {
+    axios.post("http://localhost:3001/guest/delete", { id }).then((response) => {
+      loadGuests();
     });
   };
 
   useEffect(() => {
-    loadReservations();
+    loadGuests();
   }, []);
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <Button type="submit" variant="contained">
-        <Link href="/AddReservation" underline="none" color="inherit">
-          Add Reservation
-        </Link>
+        {/* <Link href="/AddGuest" underline="none" color="inherit">
+          Add Guest
+        </Link> */}
       </Button>
       <TableContainer>
         <Table sx={{ minWidth: 550 }} aria-label="simple table">
@@ -40,10 +39,11 @@ const Guest = () => {
               <TableCell>id</TableCell>
               <TableCell>First name</TableCell>
               <TableCell>Last name</TableCell>
-              <TableCell>Address</TableCell>
+              <TableCell># of Guests </TableCell>
               <TableCell>Phone</TableCell>
-              <TableCell>Personal email</TableCell>
-              <TableCell>Conpany email</TableCell>
+              <TableCell>Email</TableCell>
+              <TableCell>Check in</TableCell>
+              <TableCell>Check out</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -53,17 +53,18 @@ const Guest = () => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.first_name}</TableCell>
                 <TableCell>{item.last_name}</TableCell>
-                <TableCell>{item.address}</TableCell>
-                <TableCell>{item.phone}</TableCell>
-                <TableCell>{item.personal_email}</TableCell>
-                <TableCell>{item.company_email}</TableCell>
+                <TableCell>{item.number_of_guests}</TableCell>
+                <TableCell>{item.phone_number}</TableCell>
+                <TableCell>{item.email}</TableCell>
+                <TableCell>{item.check_in_date}</TableCell>
+                <TableCell>{item.check_out_date}</TableCell>
                 <TableCell>
                   <Button variant="contained" sx={{ mr: 1 }}>
-                    <RLink to={`/addreservation/${item.id}`} className="App-navigation">
+                    <RLink to={`/addguest/${item.id}`} className="App-navigation">
                       Edit
                     </RLink>
                   </Button>
-                  <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteReservation(item.id)}>
+                  <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteGuest(item.id)}>
                     Delete
                   </Button>
                 </TableCell>

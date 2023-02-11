@@ -20,6 +20,7 @@ import Reservation from "./pages/reservation/index";
 import Guest from "./pages/guest/index";
 import { Container, CssBaseline } from "@mui/material";
 import Profile from "./pages/profile";
+import AddReservation from "./pages/reservation/addReservation";
 
 function App() {
   const theme = createTheme();
@@ -41,6 +42,7 @@ function App() {
               <Route path="/addRoom" element={<AddRoom />} />
               <Route path="/addUser/:id" element={<AddUser />} />
               <Route path="/addUser/" element={<AddUser />} />
+              <Route path="/addReservation/" element={<AddReservation />} />
               <Route path="/room" element={<Room />} />
               <Route path="/user" element={<User />} />
               <Route path="/employee" element={<Employee />} />
