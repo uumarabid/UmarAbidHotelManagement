@@ -35,7 +35,7 @@ const User = () => {
               <TableCell>id</TableCell>
               <TableCell>User name</TableCell>
               <TableCell>Password</TableCell>
-              <TableCell>Employee id</TableCell>
+              <TableCell>Employee Name</TableCell>
               {/* Fix is_admin cell */}
               <TableCell>Is admin</TableCell>
             </TableRow>
@@ -46,9 +46,9 @@ const User = () => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.user_name}</TableCell>
                 <TableCell>{item.password}</TableCell>
-                <TableCell>{item.employee_id}</TableCell>
+                <TableCell>{item.employee_name}</TableCell>
                 {/* come back to fix is admin */}
-                <TableCell>{item.is_admi}</TableCell>
+                <TableCell>{item.is_admin.data[0]}</TableCell>
                 <TableCell>
                   <Button type="submit" variant="contained" sx={{ mr: 1 }}>
                     <Link href="#" underline="none" color="inherit">

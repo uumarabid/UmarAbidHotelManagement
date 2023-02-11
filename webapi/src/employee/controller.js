@@ -10,15 +10,6 @@ export const addEmployee = async (req, res) => {
 
 export const editEmployee = async (req, res) => {
   const employee = req.body;
-  // let employee = {
-  //   id: 0,
-  //   first_name: "Sikandaer",
-  //   last_name: "Butt sahab",
-  //   address: "House 123, Manchester",
-  //   phone: 123456789,
-  //   personal_email: "sikandar@test.com",
-  //   company_email: "sikandar@hotel.com",
-  // };
   await updateQuery("employees", employee, `id = ${employee.id}`);
   res.send("Updated successfully.");
 };

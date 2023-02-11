@@ -19,10 +19,7 @@ const AddEmployee = () => {
   let navigate = useNavigate();
   const { id } = useParams();
 
-  const [fName, setFName] = useState("");
-
   const [data, setData] = useState(defaultData);
-  const [test, setTest] = useState(1);
 
   const handleChange = (e) => {
     setData({
@@ -38,9 +35,7 @@ const AddEmployee = () => {
     if (id) {
       axios.get(`http://localhost:3001/employee/get?id=${id}`).then((response) => {
         if (response.data) {
-          const emp = response.data[0];
-          setData(emp);
-          setFName(emp.fName);
+          setData(response.data[0]);
         }
       });
     }

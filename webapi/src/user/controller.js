@@ -1,4 +1,4 @@
-import { deleteQuery, insertQuery, selectQuery, updateQuery } from "../../utils/sql.js";
+import { deleteQuery, insertQuery, selectCustomQuery, selectQuery, updateQuery } from "../../utils/sql.js";
 
 // Create all methods here
 
@@ -16,13 +16,6 @@ export const addUser = async (req, res) => {
 
 export const editUser = async (req, res) => {
   const user = req.body;
-  // let user = {
-  //   id: 0,
-  //   user_name: "sikandar",
-  //   password: "sikandarrrr",
-  //   employee_id: 2,
-  //   is_admin: 0,
-  // };
   await updateQuery("users", user, `id = ${user.id}`);
   res.send("Updated successfully.");
 };
@@ -34,7 +27,9 @@ export const getUser = async (req, res) => {
 };
 
 export const getAllUser = async (req, res) => {
-  let users = await selectQuery("users");
+  const query = `SELECT u.*, CONCAT(e.first_name, ', ', e.last_name) as employee_name 
+                  FROM users u INNER JOIN employees e ON u.employee_id = e.id`;
+  let users = await selectCustomQuery(query);
   res.send(users);
 };
 

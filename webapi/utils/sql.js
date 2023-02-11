@@ -34,6 +34,29 @@ export const selectQuery = async (table, condition, columns) => {
   }
 };
 
+export const selectCustomQuery = async (query) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", //process.env.DB_HOST,
+    user: "admin", //process.env.DB_USER,
+    password: "123qwe123qwe", //process.env.DB_PASSWORD,
+    database: "hotelmanagement", //process.env.DB_NAME,
+  });
+
+  try {
+    await connection.connect();
+
+    // select data from table
+    // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
+    let data = await connection.promise().query(query);
+
+    return data[0];
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await connection.end();
+  }
+};
+
 export const deleteQuery = async (table, condition) => {
   const connection = mysql.createConnection({
     host: "127.0.0.1", //process.env.DB_HOST,

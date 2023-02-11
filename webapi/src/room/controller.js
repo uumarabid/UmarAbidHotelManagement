@@ -16,13 +16,6 @@ export const addRoom = async (req, res) => {
 
 export const editRoom = async (req, res) => {
   const room = req.body;
-  // let room = {
-  //   id: 0,
-  //   room_number: 107,
-  //   room_type: "standard",
-  //   floor_number: 1,
-  //   facilities: "",
-  // };
   await updateQuery("rooms", room, `id = ${room.id}`);
   res.send("Updated successfully.");
 };

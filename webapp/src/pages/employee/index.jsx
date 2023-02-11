@@ -44,6 +44,7 @@ const Employee = () => {
               <TableCell>Phone</TableCell>
               <TableCell>Personal email</TableCell>
               <TableCell>Conpany email</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
