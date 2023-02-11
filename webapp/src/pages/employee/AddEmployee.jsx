@@ -21,7 +21,10 @@ const AddEmployee = () => {
   const [data, setData] = useState(defaultData);
 
   useEffect(() => {
-    console.log(id);
+    axios.get(`http://localhost:3001/employee/get?id=${id}`).then((response) => {
+      console.log(response.data);
+      setData(response.data);
+    });
   }, []);
 
   const CancelHandler = () => {
@@ -31,7 +34,7 @@ const AddEmployee = () => {
   // extract data from useForm
   const SubmitHandler = () => {
     // call save funciton
-    axios.post("http://localhost:3001/employee/add", data).then((response) => {
+    axios.post("http://localhost:3001/employee", data).then((response) => {
       console.log(response.data);
     });
 

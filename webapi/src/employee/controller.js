@@ -9,20 +9,23 @@ export const addEmployee = async (req, res) => {
 };
 
 export const editEmployee = async (req, res) => {
-  let employee = {
-    first_name: "Sikandaer",
-    last_name: "Butt sahab",
-    address: "House 123, Manchester",
-    phone: 123456789,
-    personal_email: "sikandar@test.com",
-    company_email: "sikandar@hotel.com",
-  };
-  await updateQuery("employees", employee, `id = 3`);
+  const employee = req.body;
+  // let employee = {
+  //   id: 0,
+  //   first_name: "Sikandaer",
+  //   last_name: "Butt sahab",
+  //   address: "House 123, Manchester",
+  //   phone: 123456789,
+  //   personal_email: "sikandar@test.com",
+  //   company_email: "sikandar@hotel.com",
+  // };
+  await updateQuery("employees", employee, `id = ${employee.id}`);
   res.send("Updated successfully.");
 };
 
 export const getEmployee = async (req, res) => {
-  let employee = await selectQuery("employees", `id = 1`);
+  let { id } = req.query;
+  let employee = await selectQuery("employees", `id = ${id}`);
   res.send(employee);
 };
 
@@ -32,6 +35,7 @@ export const getAllEmployee = async (req, res) => {
 };
 
 export const deleteEmployee = async (req, res) => {
-  await deleteQuery("employees", "id = 1");
+  let { id } = req.body;
+  await deleteQuery("employees", `id = ${id}`);
   res.send(true);
 };

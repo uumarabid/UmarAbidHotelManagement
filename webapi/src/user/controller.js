@@ -1,4 +1,4 @@
-import { insertQuery, selectQuery, updateQuery } from "../../utils/sql.js";
+import { deleteQuery, insertQuery, selectQuery, updateQuery } from "../../utils/sql.js";
 
 // Create all methods here
 
@@ -15,18 +15,21 @@ export const addUser = async (req, res) => {
 };
 
 export const editUser = async (req, res) => {
-  let user = {
-    user_name: "sikandar",
-    password: "sikandarrrr",
-    employee_id: 2,
-    is_admin: 0,
-  };
-  await updateQuery("users", user, `id = 3`);
+  const user = req.body;
+  // let user = {
+  //   id: 0,
+  //   user_name: "sikandar",
+  //   password: "sikandarrrr",
+  //   employee_id: 2,
+  //   is_admin: 0,
+  // };
+  await updateQuery("users", user, `id = ${user.id}`);
   res.send("Updated successfully.");
 };
 
 export const getUser = async (req, res) => {
-  let user = await selectQuery("users", "id = 1");
+  let { id } = req.query;
+  let user = await selectQuery("users", `id = ${id}`);
   res.send(user);
 };
 
@@ -36,6 +39,7 @@ export const getAllUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  await deleteUser("users");
+  let { id } = req.body;
+  await deleteQuery("users", `id = ${id}`);
   res.send(true);
 };

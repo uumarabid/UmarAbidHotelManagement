@@ -15,19 +15,21 @@ export const addRoom = async (req, res) => {
 };
 
 export const editRoom = async (req, res) => {
-  let room = {
-    room_number: 107,
-    room_type: "standard",
-    floor_number: 1,
-    facilities: "",
-  };
-  await updateQuery("rooms", room, "id = 32");
+  const room = req.body;
+  // let room = {
+  //   id: 0,
+  //   room_number: 107,
+  //   room_type: "standard",
+  //   floor_number: 1,
+  //   facilities: "",
+  // };
+  await updateQuery("rooms", room, `id = ${room.id}`);
   res.send("Updated successfully.");
 };
 
 export const getRoom = async (req, res) => {
-  console.log(req.body);
-  let room = await selectQuery("rooms", `id = 1`);
+  let { id } = req.query;
+  let room = await selectQuery("rooms", `id = ${id}`);
   res.send(room);
 };
 
@@ -37,6 +39,7 @@ export const getAllRoom = async (req, res) => {
 };
 
 export const deleteRoom = async (req, res) => {
-  await deleteQuery("rooms", `id = ${req.id}`);
+  let { id } = req.body;
+  await deleteQuery("rooms", `id = ${id}`);
   res.send(true);
 };
