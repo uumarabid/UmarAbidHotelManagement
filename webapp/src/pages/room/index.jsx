@@ -5,6 +5,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
 
+const formatFacilities = (facilities) => {
+  const list = facilities.split(",");
+  return (
+    <ul>
+      {list.map((item) => {
+        return <li>{item}</li>;
+      })}
+    </ul>
+  );
+};
+
 // destructing in FormSignUp function
 const Room = () => {
   const [data, setData] = useState([]);
@@ -33,6 +44,7 @@ const Room = () => {
               <TableCell>Room type</TableCell>
               <TableCell>Floor number</TableCell>
               <TableCell>Facilities</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -42,7 +54,7 @@ const Room = () => {
                 <TableCell>{item.room_number}</TableCell>
                 <TableCell>{item.room_type}</TableCell>
                 <TableCell>{item.floor_number}</TableCell>
-                <TableCell>{item.facilities}</TableCell>
+                <TableCell>{formatFacilities(item.facilities)}</TableCell>
                 <TableCell>
                   <Button type="submit" variant="contained" sx={{ mr: 1 }}>
                     Edit

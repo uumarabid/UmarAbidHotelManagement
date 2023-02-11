@@ -38,6 +38,7 @@ const User = () => {
               <TableCell>Employee Name</TableCell>
               {/* Fix is_admin cell */}
               <TableCell>Is admin</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
