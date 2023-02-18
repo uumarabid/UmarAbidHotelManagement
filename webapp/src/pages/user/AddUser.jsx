@@ -1,5 +1,6 @@
-import React from "react";
-import useForm from "../login/useForm"; //hook
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+// import useForm from "../login/useForm"; //hook
 import validateInfo from "./validateInfo"; // import function
 import {
   Button,
@@ -14,15 +15,71 @@ import {
   Checkbox,
   Link,
 } from "@mui/material";
+import axios from "axios";
+
+const defaultData = {
+  user_name: "",
+  password: "",
+  employee_name: "",
+  is_admin: "",
+};
 
 // destructing in FormSignUp function
 const AddUser = ({ submitForm }) => {
-  // extract data from useForm
-  const { handleChange, values, handleSubmit, errors } = useForm(submitForm, validateInfo);
+  let navigate = useNavigate();
+  const { id } = useParams();
 
+  const [data, setData] = useState(defaultData);
+  const [formErrors, setFormErrors] = useState(defaultData);
+
+  const handleChange = (e) => {
+    setData({
+      //spread operator--spreading the values first
+      ...data,
+      // targetting the name of each input of the form on FormSignUp
+      [e.target.name]: e.target.value,
+    });
+    setFormErrors({
+      ...formErrors,
+      [e.target.name]: "",
+    });
+  };
+
+  useEffect(() => {
+    if (id) {
+      axios.get(`http://localhost:3001/user/get?id=${id}`).then((response) => {
+        if (response.data) {
+          setData(response.data[0]);
+        }
+      });
+    }
+  }, [id]);
+
+  const cancelHandelder = () => {
+    navigate("/user");
+  };
+
+  const SubmitHandler = () => {
+    const { errors, hasError } = validateInfo(data);
+    setFormErrors(errors);
+
+    if (!hasError) {
+      // call save funciton
+      let operation = "add";
+      if (data.id) {
+        operation = "edit";
+      }
+
+      axios.post(`http://localhost:3001/user/${operation}`, data).then((response) => {
+        console.log(response.data);
+      });
+
+      navigate("/employee");
+    }
+  };
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-      <form onSubmit={handleSubmit}>
+      <form>
         <legend>
           <h2>Add User</h2>
         </legend>
@@ -53,6 +110,7 @@ const AddUser = ({ submitForm }) => {
               name="fname"
               placeholder="Enter your first name"
               onChange={handleChange}
+              value={data.first_name}
               label="First name"
               variant="outlined"
             />
@@ -76,7 +134,7 @@ const AddUser = ({ submitForm }) => {
               id="personalEmail"
               name="personalEmail"
               placeholder="Enter personal email"
-              onChange={handleChange}
+              // onChange={handleChange}
               label="Personal email"
               variant="outlined"
             />
@@ -84,12 +142,12 @@ const AddUser = ({ submitForm }) => {
           <Grid item xs={6}>
             <TextField
               disabled
-              helperText={errors.email}
+              // helperText={errors.email}
               type="email"
               id="companyEmail"
               name="companyEmail"
               placeholder="Enter company email"
-              onChange={handleChange}
+              // onChange={handleChange}
               label="Company email"
               variant="outlined"
             />
@@ -102,7 +160,7 @@ const AddUser = ({ submitForm }) => {
               id="phone"
               name="phone"
               placeholder="Enter phone number"
-              onChange={handleChange}
+              // onChange={handleChange}
               label="Phone"
               variant="outlined"
             />
@@ -115,7 +173,7 @@ const AddUser = ({ submitForm }) => {
               id="address"
               name="address"
               placeholder="Enter address"
-              onChange={handleChange}
+              // onChange={handleChange}
               label="Enter address"
               multiline
               variant="outlined"
@@ -123,28 +181,28 @@ const AddUser = ({ submitForm }) => {
           </Grid>
           <Grid item xs={6}>
             <TextField
-              error={errors.username ? "error" : ""}
-              helperText={errors.username}
+              // error={errors.username ? "error" : ""}
+              // helperText={errors.username}
               type="username"
               id="username"
               name="username"
               placeholder="Enter username"
-              value={values.username}
-              onChange={handleChange}
+              // value={values.username}
+              // onChange={handleChange}
               label="Username"
               variant="outlined"
             />
           </Grid>
           <Grid item xs={6}>
             <TextField
-              error={errors.password ? "error" : ""}
-              helperText={errors.password}
+              // error={errors.password ? "error" : ""}
+              // helperText={errors.password}
               type="password"
               id="password"
               name="password"
               placeholder="Enter your password"
-              value={values.password}
-              onChange={handleChange}
+              // value={values.password}
+              // onChange={handleChange}
               label="Password"
               variant="outlined"
             />
@@ -154,13 +212,11 @@ const AddUser = ({ submitForm }) => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" sx={{ mr: 3 }}>
-              Add user
+            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={() => SubmitHandler()}>
+              Save
             </Button>
-            <Button type="submit" variant="contained">
-              <Link href="/user" underline="none" color="inherit">
-                {"Cancel"}
-              </Link>
+            <Button variant="contained" onClick={() => cancelHandelder()}>
+              Cancel
             </Button>
           </Grid>
           <Grid item xs={12} sm={12}>

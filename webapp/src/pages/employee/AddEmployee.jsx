@@ -15,6 +15,7 @@ const defaultData = {
 
 // destructing in FormSignUp function
 const AddEmployee = () => {
+  // https://reactrouter.com/en/main/hooks/use-navigate
   let navigate = useNavigate();
   const { id } = useParams();
 

@@ -27,11 +27,11 @@ const Guest = () => {
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-      <Button type="submit" variant="contained">
-        {/* <Link href="/AddGuest" underline="none" color="inherit">
+      {/* <Button type="submit" variant="contained">
+        <Link href="/AddGuest" underline="none" color="inherit">
           Add Guest
-        </Link> */}
-      </Button>
+        </Link>
+      </Button> */}
       <TableContainer>
         <Table sx={{ minWidth: 550 }} aria-label="simple table">
           <TableHead>

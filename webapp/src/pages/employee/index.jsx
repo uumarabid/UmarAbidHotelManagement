@@ -59,6 +59,7 @@ const Employee = () => {
                 <TableCell>{item.company_email}</TableCell>
                 <TableCell>
                   <Button variant="contained" sx={{ mr: 1 }}>
+                    {/* react link not Material UI link */}
                     <RLink to={`/addemployee/${item.id}`} className="App-navigation">
                       Edit
                     </RLink>

@@ -4,17 +4,28 @@ import { Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, TableC
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
+import { Link as RLink } from "react-router-dom";
 
 // destructing in FormSignUp function
 const User = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    //retrive and display data in table
+  // load users
+  const loadUsers = () => {
     axios.get("http://localhost:3001/user/getAll").then((response) => {
-      // console.log(response.data);
       setData(response.data);
     });
+  };
+
+  //delete user
+  const deleteUser = (id) => {
+    axios.post("http://localhost:3001/user/delete", { id }).then((response) => {
+      loadUsers();
+    });
+  };
+
+  useEffect(() => {
+    loadUsers();
   }, []);
 
   return (
@@ -52,11 +63,17 @@ const User = () => {
                 <TableCell>{item.is_admin.data[0]}</TableCell>
                 <TableCell>
                   <Button type="submit" variant="contained" sx={{ mr: 1 }}>
-                    <Link href="#" underline="none" color="inherit">
+                    <RLink to={`/addUser/${item.id}`} className="App-navigation">
                       {"Edit"}
-                    </Link>
+                    </RLink>
                   </Button>
-                  <Button type="submit" variant="contained" color="error" startIcon={<DeleteIcon />}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => deleteUser(item.id)}
+                  >
                     Delete
                   </Button>
                 </TableCell>
