@@ -18,6 +18,8 @@ import {
 import axios from "axios";
 
 const defaultData = {
+  first_name: "",
+  last_name: "",
   user_name: "",
   password: "",
   employee_name: "",
@@ -25,7 +27,7 @@ const defaultData = {
 };
 
 // destructing in FormSignUp function
-const AddUser = ({ submitForm }) => {
+const AddUser = () => {
   let navigate = useNavigate();
   const { id } = useParams();
 
@@ -34,7 +36,7 @@ const AddUser = ({ submitForm }) => {
 
   const handleChange = (e) => {
     setData({
-      //spread operator--spreading the values first
+      //spread operator--spreading the values firsc
       ...data,
       // targetting the name of each input of the form on FormSignUp
       [e.target.name]: e.target.value,
@@ -74,7 +76,7 @@ const AddUser = ({ submitForm }) => {
         console.log(response.data);
       });
 
-      navigate("/employee");
+      navigate("/user");
     }
   };
   return (
@@ -123,6 +125,7 @@ const AddUser = ({ submitForm }) => {
               name="lname"
               placeholder="Enter your last name"
               onChange={handleChange}
+              value={data.last_name}
               label="Last name"
               variant="outlined"
             />

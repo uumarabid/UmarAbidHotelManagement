@@ -4,6 +4,7 @@ import { Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, TableC
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
+import { Link as RLink } from "react-router-dom";
 
 const formatFacilities = (facilities) => {
   const list = facilities.split(",");
@@ -16,16 +17,23 @@ const formatFacilities = (facilities) => {
   );
 };
 
-// destructing in FormSignUp function
 const Room = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    //retrive and display data in table
+  const loadRooms = () => {
     axios.get("http://localhost:3001/room/getAll").then((response) => {
-      // console.log(response.data);
       setData(response.data);
     });
+  };
+
+  const deleteRoom = (id) => {
+    axios.post("http://localhost:3001/room/delete", { id }).then((response) => {
+      loadRooms();
+    });
+  };
+
+  useEffect(() => {
+    loadRooms();
   }, []);
 
   return (
@@ -56,10 +64,18 @@ const Room = () => {
                 <TableCell>{item.floor_number}</TableCell>
                 <TableCell>{formatFacilities(item.facilities)}</TableCell>
                 <TableCell>
-                  <Button type="submit" variant="contained" sx={{ mr: 1 }}>
-                    Edit
+                  <Button variant="contained" sx={{ mr: 1 }}>
+                    <RLink to={`/addRoom/${item.id}`} className="App-navigation">
+                      Edit
+                    </RLink>
                   </Button>
-                  <Button type="submit" variant="contained" color="error" startIcon={<DeleteIcon />}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => deleteRoom(item.id)}
+                  >
                     Delete
                   </Button>
                 </TableCell>

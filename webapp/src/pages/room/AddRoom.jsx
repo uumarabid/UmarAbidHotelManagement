@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Button, TextField, Grid, Paper, FormControlLabel, FormGroup } from "@mui/material";
 
@@ -10,6 +11,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
+import axios from "axios";
 
 const facilities = ["Fridge", "Dinning table with chairs", "Locker", "TV", "Hair dryer"];
 
@@ -24,9 +26,19 @@ const MenuProps = {
   },
 };
 
-// destructing in FormSignUp function
+const defaultData = {
+  room_number: "",
+  room_type: "",
+  floor_number: "",
+  facilities: "",
+};
+
 const AddRoom = () => {
   const [roomFacilities, setRoomFacilities] = useState([]);
+  const [data, setData] = useState(defaultData);
+
+  let navigate = useNavigate();
+  const { id } = useParams();
 
   const handleChange = (event) => {
     const {
@@ -36,6 +48,33 @@ const AddRoom = () => {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+  };
+
+  useEffect(() => {
+    if (id) {
+      axios.get(`http://localhost:3001/room/get?id=${id}`).then((response) => {
+        if (response.data) {
+          setData(response.data[0]);
+        }
+      });
+    }
+  }, [id]);
+
+  const cancelHandler = () => {
+    navigate("/room");
+  };
+
+  const submitHandler = () => {
+    let operation = "add";
+    if (data.id) {
+      operation = "edit";
+    }
+
+    axios.post(`http://localhost:3001/room/${operation}`, data).then((response) => {
+      console.log(response.data);
+    });
+
+    navigate("/room");
   };
 
   return (
@@ -53,6 +92,7 @@ const AddRoom = () => {
               placeholder="Enter room number"
               label="Room number"
               variant="outlined"
+              value={data.room_number}
             />
           </Grid>
           <Grid item xs={6}>
@@ -61,8 +101,8 @@ const AddRoom = () => {
               <Select
                 labelId="roomType-label"
                 id="roomType"
-                value={[]}
                 label="Room type"
+                value={data.room_type}
                 // onChange={handleChange}
               >
                 <MenuItem value={10}>Standard</MenuItem>
@@ -82,10 +122,10 @@ const AddRoom = () => {
               id="floorNumber"
               name="floorNumber"
               placeholder="Enter floor number"
-              // value={values.username}
               // onChange={handleChange}
               label="Floor number"
               variant="outlined"
+              value={data.floor_number}
             />
           </Grid>
 
@@ -102,6 +142,7 @@ const AddRoom = () => {
                 input={<OutlinedInput label="Tag" />}
                 renderValue={(selected) => selected.join(", ")}
                 MenuProps={MenuProps}
+                // value={data.facilities}
               >
                 {facilities.map((name) => (
                   <MenuItem key={name} value={name}>
@@ -114,13 +155,11 @@ const AddRoom = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Button type="submit" variant="contained" sx={{ mr: 3 }}>
-              Add room
+            <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={() => submitHandler()}>
+              Save
             </Button>
-            <Button type="submit" variant="contained">
-              <Link href="/room" underline="none" color="inherit">
-                {"Cancel"}
-              </Link>
+            <Button variant="contained" onClick={() => cancelHandler()}>
+              Cancel
             </Button>
           </Grid>
           <Grid item xs={12} sm={12}></Grid>
