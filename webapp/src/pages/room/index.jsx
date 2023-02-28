@@ -11,7 +11,7 @@ const formatFacilities = (facilities) => {
   return (
     <ul>
       {list.map((item) => {
-        return <li>{item}</li>;
+        return <li key={item}>{item}</li>;
       })}
     </ul>
   );

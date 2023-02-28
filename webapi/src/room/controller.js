@@ -3,12 +3,7 @@
 import { selectQuery, deleteQuery, insertQuery, updateQuery } from "../../utils/sql.js";
 
 export const addRoom = async (req, res) => {
-  let room = {
-    room_number: 107,
-    room_type: "delux",
-    floor_number: 1,
-    facilities: "",
-  };
+  const room = req.body;
   await insertQuery("rooms", room);
 
   res.send("New room is added successfully.");

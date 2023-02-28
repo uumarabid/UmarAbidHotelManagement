@@ -36,11 +36,12 @@ const defaultData = {
 const AddRoom = () => {
   const [roomFacilities, setRoomFacilities] = useState([]);
   const [data, setData] = useState(defaultData);
+  const [formErrors, setFormErrors] = useState(defaultData);
 
   let navigate = useNavigate();
   const { id } = useParams();
 
-  const handleChange = (event) => {
+  const handleFacilitiesChange = (event) => {
     const {
       target: { value },
     } = event;
@@ -48,12 +49,28 @@ const AddRoom = () => {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+    console.log(roomFacilities);
+  };
+
+  const handleChange = (e) => {
+    setData({
+      //spread operator--spreading the values firsc
+      ...data,
+      // targetting the name of each input of the form on FormSignUp
+      [e.target.name]: e.target.value,
+    });
+    setFormErrors({
+      ...formErrors,
+      [e.target.name]: "",
+    });
   };
 
   useEffect(() => {
     if (id) {
       axios.get(`http://localhost:3001/room/get?id=${id}`).then((response) => {
         if (response.data) {
+          const facilitiesList = response.data[0].facilities.split(",").filter((item) => item !== "");
+          setRoomFacilities(facilitiesList);
           setData(response.data[0]);
         }
       });
@@ -69,8 +86,11 @@ const AddRoom = () => {
     if (data.id) {
       operation = "edit";
     }
-
-    axios.post(`http://localhost:3001/room/${operation}`, data).then((response) => {
+    const saveData = {
+      ...data,
+      facilities: roomFacilities.join(","),
+    };
+    axios.post(`http://localhost:3001/room/${operation}`, saveData).then((response) => {
       console.log(response.data);
     });
 
@@ -87,12 +107,13 @@ const AddRoom = () => {
           <Grid item xs={6}>
             <TextField
               type="number"
-              id="roomNumber"
-              name="roomNumber"
+              id="room_number"
+              name="room_number"
               placeholder="Enter room number"
               label="Room number"
               variant="outlined"
               value={data.room_number}
+              onChange={handleChange}
             />
           </Grid>
           <Grid item xs={6}>
@@ -100,16 +121,17 @@ const AddRoom = () => {
               <InputLabel id="roomType-label">Room type</InputLabel>
               <Select
                 labelId="roomType-label"
-                id="roomType"
+                id="room_type"
+                name="room_type"
                 label="Room type"
                 value={data.room_type}
-                // onChange={handleChange}
+                onChange={handleChange}
               >
-                <MenuItem value={10}>Standard</MenuItem>
-                <MenuItem value={20}>Deluxe</MenuItem>
-                <MenuItem value={30}>Suites</MenuItem>
-                <MenuItem value={40}>Executive</MenuItem>
-                <MenuItem value={50}>Luxury</MenuItem>
+                <MenuItem value="standard">Standard</MenuItem>
+                <MenuItem value="deluxe">Deluxe</MenuItem>
+                <MenuItem value="suites">Suites</MenuItem>
+                <MenuItem value="executive">Executive</MenuItem>
+                <MenuItem value="luxury">Luxury</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -119,10 +141,10 @@ const AddRoom = () => {
               // error={errors.username ? "error" : ""}
               // helperText={errors.username}
               type="number"
-              id="floorNumber"
-              name="floorNumber"
+              id="floor_number"
+              name="floor_number"
               placeholder="Enter floor number"
-              // onChange={handleChange}
+              onChange={handleChange}
               label="Floor number"
               variant="outlined"
               value={data.floor_number}
@@ -133,21 +155,16 @@ const AddRoom = () => {
             <FormControl sx={{ mb: 1, minWidth: 210 }}>
               <InputLabel id="demo-multiple-checkbox-label">Facilities</InputLabel>
               <Select
-                labelId="demo-multiple-checkbox-label"
-                id="demo-multiple-checkbox"
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
                 multiple
                 value={roomFacilities}
-                label="Facilities"
-                onChange={handleChange}
-                input={<OutlinedInput label="Tag" />}
-                renderValue={(selected) => selected.join(", ")}
-                MenuProps={MenuProps}
-                // value={data.facilities}
+                onChange={handleFacilitiesChange}
+                input={<OutlinedInput label="Name" />}
               >
                 {facilities.map((name) => (
                   <MenuItem key={name} value={name}>
-                    <Checkbox checked={roomFacilities.indexOf(name) > -1} />
-                    <ListItemText primary={name} />
+                    {name}
                   </MenuItem>
                 ))}
               </Select>
