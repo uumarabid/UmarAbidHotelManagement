@@ -58,13 +58,19 @@ const Employee = () => {
                 <TableCell>{item.personal_email}</TableCell>
                 <TableCell>{item.company_email}</TableCell>
                 <TableCell>
-                  <Button variant="contained" sx={{ mr: 1 }}>
+                  <Button variant="contained" sx={{ m: 1, display: "flex", flexDirection: "row" }}>
                     {/* react link not Material UI link */}
                     <RLink to={`/addemployee/${item.id}`} className="App-navigation">
                       Edit
                     </RLink>
                   </Button>
-                  <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEmployee(item.id)}>
+                  <Button
+                    variant="contained"
+                    color="error"
+                    sx={{ m: 1, display: "flex", flexDirection: "row" }}
+                    startIcon={<DeleteIcon />}
+                    onClick={() => deleteEmployee(item.id)}
+                  >
                     Delete
                   </Button>
                 </TableCell>

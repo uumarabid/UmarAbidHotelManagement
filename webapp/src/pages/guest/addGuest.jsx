@@ -3,24 +3,34 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField, Grid, Paper } from "@mui/material";
 import validateInfo from "./validateInfo";
+import Box from "@mui/material/Box";
+// import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+// import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
+// import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
 const defaultData = {
   first_name: "",
   last_name: "",
+  number_of_guests: "",
   address: "",
-  phone: "",
-  personal_email: "",
-  company_email: "",
+  phone_number: "",
+  email: "",
+  check_in_date: "",
+  check_out_date: "",
+  is_reserved: "",
 };
 
 // destructing in FormSignUp function
-const AddEmployee = () => {
+const AddGuest = () => {
   // https://reactrouter.com/en/main/hooks/use-navigate
   let navigate = useNavigate();
   const { id } = useParams();
 
   const [data, setData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(defaultData);
+
+  //vlues for date range picker
+  const [value, setValue] = useState([null, null]);
 
   const handleChange = (e) => {
     setData({
@@ -38,7 +48,7 @@ const AddEmployee = () => {
   useEffect(() => {
     // only load information from api if the id is present.
     if (id) {
-      axios.get(`http://localhost:3001/employee/get?id=${id}`).then((response) => {
+      axios.get(`http://localhost:3001/guest/get?id=${id}`).then((response) => {
         if (response.data) {
           setData(response.data[0]);
         }
@@ -47,7 +57,7 @@ const AddEmployee = () => {
   }, [id]);
 
   const CancelHandler = () => {
-    navigate("/employee");
+    navigate("/guest");
   };
 
   // extract data from useForm
@@ -62,18 +72,18 @@ const AddEmployee = () => {
         operation = "edit";
       }
 
-      axios.post(`http://localhost:3001/employee/${operation}`, data).then((response) => {
+      axios.post(`http://localhost:3001/guest/${operation}`, data).then((response) => {
         console.log(response.data);
       });
 
-      navigate("/employee");
+      navigate("/guest");
     }
   };
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <legend>
-        <h2>Add/Edit Employee</h2>
+        <h2>Add Guest</h2>
       </legend>
       <Grid container rowSpacing={1}>
         <Grid item xs={6} sm={6} md={6} lg={6}>
@@ -104,46 +114,17 @@ const AddEmployee = () => {
             variant="outlined"
           />
         </Grid>
-        <Grid item xs={6} sm={6} md={6} lg={6}>
-          <TextField
-            error={formErrors.personal_email ? true : false}
-            helperText={formErrors.personal_email}
-            type="email"
-            id="personal_email"
-            name="personal_email"
-            placeholder="Enter personal email"
-            onChange={handleChange}
-            value={data.personal_email}
-            label="Personal email"
-            variant="outlined"
-          />
-        </Grid>
-        <Grid item xs={6} sm={6} md={6} lg={6}>
-          <TextField
-            error={formErrors.company_email ? true : false}
-            helperText={formErrors.company_email}
-            type="email"
-            id="company_email"
-            name="company_email"
-            placeholder="Enter company email"
-            onChange={handleChange}
-            value={data.company_email}
-            label="Company email"
-            variant="outlined"
-          />
-        </Grid>
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            error={formErrors.phone ? true : false}
-            helperText={formErrors.phone}
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter phone number"
+            type="number"
+            id="number_of_guests"
+            name="number_of_guests"
+            placeholder="Number of guests"
+            value={data.number_of_guests}
             onChange={handleChange}
-            value={data.phone}
-            label="Phone"
+            label="Number of guests"
+            multiline
             variant="outlined"
           />
         </Grid>
@@ -162,8 +143,68 @@ const AddEmployee = () => {
           />
         </Grid>
 
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <TextField
+            error={formErrors.phone ? true : false}
+            helperText={formErrors.phone}
+            type="tel"
+            id="phone_number"
+            name="phone_number"
+            placeholder="Enter phone number"
+            onChange={handleChange}
+            value={data.phone_number}
+            label="Phone"
+            variant="outlined"
+          />
+        </Grid>
+
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <TextField
+            error={formErrors.email ? true : false}
+            helperText={formErrors.email}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter email"
+            onChange={handleChange}
+            value={data.email}
+            label="Email"
+            variant="outlined"
+          />
+        </Grid>
+
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <TextField
+            disabled
+            type="number"
+            id="is_reserved"
+            name="is_reserved"
+            placeholder="Is reserved"
+            value={data.address}
+            onChange={handleChange}
+            label="Is reserved"
+            variant="outlined"
+          />
+        </Grid>
+
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs} localeText={{ start: "Check-in", end: "Check-out" }}>
+          <DateRangePicker
+            value={value}
+            onChange={(newValue) => {
+              setValue(newValue);
+            }}
+            renderInput={(startProps, endProps) => (
+              <React.Fragment>
+                <TextField {...startProps} />
+                <Box sx={{ mx: 2 }}> to </Box>
+                <TextField {...endProps} />
+              </React.Fragment>
+            )}
+          />
+        </LocalizationProvider> */}
+
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" sx={{ m: 3 }} onClick={() => SubmitHandler()}>
+          <Button variant="contained" sx={{ mr: 3 }} onClick={() => SubmitHandler()}>
             Save
           </Button>
           <Button variant="contained" onClick={() => CancelHandler()}>
@@ -175,4 +216,4 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+export default AddGuest;
