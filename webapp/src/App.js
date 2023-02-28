@@ -48,6 +48,7 @@ function App() {
               <Route path="/user" element={<User />} />
               <Route path="/employee" element={<Employee />} />
               <Route path="/reservation" element={<Reservation />} />
+              <Route path="/addReservation/:id" element={<AddReservation />} />
               <Route path="/guest" element={<Guest />} />
               <Route path="/addGuest" element={<AddGuest />} />
               <Route path="/addGuest/:id" element={<AddGuest />} />

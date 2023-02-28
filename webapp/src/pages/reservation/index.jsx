@@ -28,19 +28,19 @@ const Reservation = () => {
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <Button type="submit" variant="contained">
-        <Link href="/AddReservation" underline="none" color="inherit">
+        <RLink to={"/addReservation"} underline="none" color="inherit" className="App-navigation">
           Add Reservation
-        </Link>
+        </RLink>
       </Button>
       <TableContainer>
         <Table sx={{ minWidth: 550 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>id</TableCell>
-              <TableCell>Guest name</TableCell>
+              <TableCell>Guest first & last name</TableCell>
               <TableCell>Room number</TableCell>
-              <TableCell>Check in</TableCell>
-              <TableCell>Check out</TableCell>
+              <TableCell>Check in date</TableCell>
+              <TableCell>Check out date</TableCell>
               <TableCell>Cost </TableCell>
               <TableCell>extra</TableCell>
               <TableCell>deposit</TableCell>
@@ -59,12 +59,18 @@ const Reservation = () => {
                 <TableCell>{item.extra_cost}</TableCell>
                 <TableCell>£{item.deposit}</TableCell>
                 <TableCell>
-                  <Button variant="contained" sx={{ mr: 1 }}>
+                  <Button variant="contained" sx={{ m: 1, display: "flex", flexDirection: "row" }}>
                     <RLink to={`/addreservation/${item.id}`} className="App-navigation">
                       Edit
                     </RLink>
                   </Button>
-                  <Button variant="contained" color="error" startIcon={<DeleteIcon />} onClick={() => deleteReservation(item.id)}>
+                  <Button
+                    variant="contained"
+                    sx={{ m: 1, display: "flex", flexDirection: "row" }}
+                    color="error"
+                    startIcon={<DeleteIcon />}
+                    onClick={() => deleteReservation(item.id)}
+                  >
                     Delete
                   </Button>
                 </TableCell>

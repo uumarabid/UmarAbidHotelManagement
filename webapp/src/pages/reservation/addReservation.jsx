@@ -4,13 +4,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField, Grid, Paper } from "@mui/material";
 import validateInfo from "./validateInfo";
 
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 const defaultData = {
   first_name: "",
   last_name: "",
-  address: "",
-  phone: "",
-  personal_email: "",
-  company_email: "",
+  room_number: "",
+  reservation_check_in_date: "",
+  reservation_check_out_date: "",
+  total_cost: "",
+  extra_cost: "",
+  deposit: "",
 };
 
 // destructing in FormSignUp function
@@ -69,6 +75,9 @@ const AddReservation = () => {
     }
   };
 
+  // date picker values
+  // const [value, setValue] = React.useState(null);
+
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <legend>
@@ -103,60 +112,87 @@ const AddReservation = () => {
             variant="outlined"
           />
         </Grid>
+
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            error={formErrors.personal_email ? true : false}
-            helperText={formErrors.personal_email}
-            type="email"
-            id="personal_email"
-            name="personal_email"
-            placeholder="Enter personal email"
+            type="number"
+            id="room_number"
+            name="room_number"
+            placeholder="room_number"
+            value={data.room_number}
             onChange={handleChange}
-            value={data.personal_email}
-            label="Personal email"
+            label="Room number"
             variant="outlined"
           />
         </Grid>
+
+        {/* <Grid item xs={6} sm={6} md={6} lg={6}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Basic example"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid> */}
+
+        {/* <Grid item xs={6} sm={6} md={6} lg={6}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Basic example"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid> */}
+
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            error={formErrors.company_email ? true : false}
-            helperText={formErrors.company_email}
-            type="email"
-            id="company_email"
-            name="company_email"
-            placeholder="Enter company email"
+            // error={formErrors.phone ? true : false}
+            // helperText={formErrors.phone}
+            type="number"
+            id="total_cost"
+            name="total_cost"
+            placeholder="Total cost"
             onChange={handleChange}
-            value={data.company_email}
-            label="Company email"
+            value={data.total_cost}
+            label="Total cost"
             variant="outlined"
           />
         </Grid>
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            error={formErrors.phone ? true : false}
-            helperText={formErrors.phone}
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="Enter phone number"
+            // error={formErrors.phone ? true : false}
+            // helperText={formErrors.phone}
+            type="number"
+            id="extra_cost"
+            name="extra_cost"
+            placeholder="Extra_cost"
             onChange={handleChange}
-            value={data.phone}
-            label="Phone"
+            value={data.extra_cost}
+            label="Extra cost"
             variant="outlined"
           />
         </Grid>
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            type="address"
-            id="address"
-            name="address"
-            placeholder="Enter address"
-            value={data.address}
+            // error={formErrors.phone ? true : false}
+            // helperText={formErrors.phone}
+            type="number"
+            id="deposit"
+            name="deposit"
+            placeholder="Deposit"
             onChange={handleChange}
-            label="Enter address"
-            multiline
+            value={data.deposit}
+            label="Deposit"
             variant="outlined"
           />
         </Grid>
