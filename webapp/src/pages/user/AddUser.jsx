@@ -75,6 +75,19 @@ const AddUser = () => {
     });
   };
 
+  const handleCheckboxChange = (e) => {
+    setData({
+      //spread operator--spreading the values firsc
+      ...data,
+      // targetting the name of each input of the form on FormSignUp
+      [e.target.name]: e.target.checked,
+    });
+    setFormErrors({
+      ...formErrors,
+      [e.target.name]: "",
+    });
+  };
+
   useEffect(() => {
     axios.get("http://localhost:3001/employee/getAll").then((response) => {
       setEmployees(response.data);
@@ -85,15 +98,15 @@ const AddUser = () => {
     if (id) {
       axios.get(`http://localhost:3001/user/get?id=${id}`).then((response) => {
         if (response.data) {
-          // const users = [];
-          // for (let user of response.data) {
-          //   users.push({
-          //     ...user,
-          //     //is_admin: user.is_admin.data[0] === 0 ? false : true,
-          //   });
-          // }
+          const users = [];
+          for (let user of response.data) {
+            users.push({
+              ...user,
+              is_admin: user.is_admin.data[0] === 0 ? false : true,
+            });
+          }
           setData({
-            ...response.data[0],
+            ...users[0],
             first_name: "",
             last_name: "",
             address: "",
@@ -101,7 +114,7 @@ const AddUser = () => {
             personal_email: "",
             company_email: "",
           });
-          changeEmployeeData(response.data[0].employee_id);
+          changeEmployeeData(users[0].employee_id);
         }
       });
     }
@@ -127,7 +140,7 @@ const AddUser = () => {
         user_name: data.user_name,
         password: data.password,
         employee_id: data.employee_id,
-        is_admin: 0,
+        is_admin: data.is_admin ? 1 : 0,
       };
 
       axios.post(`http://localhost:3001/user/${operation}`, user).then((response) => {
@@ -198,7 +211,6 @@ const AddUser = () => {
             name="personal_email"
             placeholder="Enter personal email"
             value={data.personal_email}
-            // onChange={handleChange}
             label="Personal email"
             variant="outlined"
           />
@@ -212,7 +224,6 @@ const AddUser = () => {
             name="company_email"
             placeholder="Enter company email"
             value={data.company_email}
-            // onChange={handleChange}
             label="Company email"
             variant="outlined"
           />
@@ -226,7 +237,6 @@ const AddUser = () => {
             name="phone"
             placeholder="Enter phone number"
             value={data.phone}
-            // onChange={handleChange}
             label="Phone"
             variant="outlined"
           />
@@ -240,7 +250,6 @@ const AddUser = () => {
             name="address"
             placeholder="Enter address"
             value={data.address}
-            // onChange={handleChange}
             label="Enter address"
             multiline
             variant="outlined"
@@ -277,7 +286,10 @@ const AddUser = () => {
         </Grid>
         <Grid item xs={6}></Grid>
         <Grid item xs={6}>
-          {/* <FormControlLabel control={<Checkbox checked={data?.is_admin?.data[0] === 0 ? false : true} />} label="Is admin" /> */}
+          <FormControlLabel
+            label="Is admin"
+            control={<Checkbox id="is_admin" name="is_admin" checked={data?.is_admin || false} onChange={handleCheckboxChange} />}
+          />
         </Grid>
 
         <Grid item xs={12}>
