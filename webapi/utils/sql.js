@@ -96,7 +96,7 @@ export const insertQuery = async (table, data) => {
     await connection.connect();
 
     const columns = Object.keys(data);
-    const values = columns.map((column) => `"${data[column]}"`);
+    const values = columns.map((column) => (typeof data[column] == "string" ? `"${data[column]}"` : `${data[column]}`));
     const placeholders = values.join(",");
     const query = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders})`;
     // insert entry into table
@@ -134,7 +134,9 @@ export const updateQuery = async (table, data, condition) => {
 
     const keys = Object.keys(data);
     const values = Object.values(data);
-    const set = keys.map((key, index) => key + ` = '${values[index]}' `).join(", ");
+    const set = keys
+      .map((key, index) => (typeof values[index] == "string" ? `${key} = '${values[index]}' ` : `${key} = ${values[index]} `))
+      .join(", ");
 
     const sql = `UPDATE ${table} SET ${set} WHERE ${condition}`;
 

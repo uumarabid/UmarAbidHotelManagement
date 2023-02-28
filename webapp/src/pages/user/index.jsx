@@ -13,7 +13,14 @@ const User = () => {
   // load users
   const loadUsers = () => {
     axios.get("http://localhost:3001/user/getAll").then((response) => {
-      setData(response.data);
+      const users = [];
+      for (let user of response.data) {
+        users.push({
+          ...user,
+          is_admin: user.is_admin.data[0] === 0 ? false : true,
+        });
+      }
+      setData(users);
     });
   };
 
@@ -41,9 +48,7 @@ const User = () => {
             <TableRow>
               <TableCell>id</TableCell>
               <TableCell>User name</TableCell>
-              <TableCell>Password</TableCell>
               <TableCell>Employee Name</TableCell>
-              {/* Fix is_admin cell */}
               <TableCell>Is admin</TableCell>
               <TableCell></TableCell>
             </TableRow>
@@ -53,14 +58,12 @@ const User = () => {
               <TableRow key={index}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.user_name}</TableCell>
-                <TableCell>{item.password}</TableCell>
                 <TableCell>{item.employee_name}</TableCell>
-                {/* come back to fix is admin */}
-                <TableCell>{item.is_admin.data[0]}</TableCell>
+                <TableCell>{item.is_admin.toString()}</TableCell>
                 <TableCell>
                   <Button type="submit" variant="contained" sx={{ mr: 1 }}>
                     <RLink to={`/addUser/${item.id}`} className="App-navigation">
-                      {"Edit"}
+                      Edit
                     </RLink>
                   </Button>
                   <Button
