@@ -23,12 +23,13 @@ const defaultData = {
   last_name: "",
   user_name: "",
   password: "",
+  employee_id: 0,
   employee_name: "",
   personal_email: "",
   company_email: "",
   phone: "",
   address: "",
-  is_admin: "",
+  is_admin: false,
 };
 
 // destructing in FormSignUp function
@@ -43,7 +44,19 @@ const AddUser = () => {
   const loadEmployeeInformation = (e) => {
     const empId = e.target.value;
     const employee = employees.find((x) => x.id === empId);
-    setData(employee);
+    setData({
+      //spread operator--spreading the values firsc
+      ...data,
+      // targetting the name of each input of the form on FormSignUp
+      [e.target.name]: e.target.value,
+      first_name: employee.first_name,
+      last_name: employee.last_name,
+      address: employee.address,
+      phone: employee.phone,
+      personal_email: employee.personal_email,
+      company_email: employee.company_email,
+    });
+    // setData(employee);
   };
 
   const handleChange = (e) => {
@@ -99,7 +112,7 @@ const AddUser = () => {
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <form>
         <legend>
-          <h2>Add User</h2>
+          <h2>Add User {data.employee_id}</h2>
         </legend>
         <Grid container rowSpacing={1}>
           <Grid item xs={6}>
@@ -108,9 +121,9 @@ const AddUser = () => {
               {employees && (
                 <Select
                   labelId="employee-label"
-                  id="employee"
+                  name="employee_id"
+                  id="employee_id"
                   value={data.employee_id}
-                  defaultValue={data.employee_id}
                   label="Room type"
                   onChange={loadEmployeeInformation}
                 >
@@ -127,8 +140,8 @@ const AddUser = () => {
             <TextField
               disabled
               type="text"
-              id="fname"
-              name="fname"
+              id="first_name"
+              name="first_name"
               placeholder="Enter your first name"
               onChange={handleChange}
               value={data.first_name}
@@ -140,8 +153,8 @@ const AddUser = () => {
             <TextField
               disabled
               type="text"
-              id="lname"
-              name="lname"
+              id="last_name"
+              name="last_name"
               placeholder="Enter your last name"
               onChange={handleChange}
               value={data.last_name}
@@ -153,8 +166,8 @@ const AddUser = () => {
             <TextField
               disabled
               type="email"
-              id="personalEmail"
-              name="personalEmail"
+              id="personal_email"
+              name="personal_email"
               placeholder="Enter personal email"
               value={data.personal_email}
               // onChange={handleChange}
@@ -167,8 +180,8 @@ const AddUser = () => {
               disabled
               // helperText={errors.email}
               type="email"
-              id="companyEmail"
-              name="companyEmail"
+              id="company_email"
+              name="company_email"
               placeholder="Enter company email"
               value={data.company_email}
               // onChange={handleChange}
