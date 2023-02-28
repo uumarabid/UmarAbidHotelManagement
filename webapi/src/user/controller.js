@@ -30,6 +30,7 @@ export const getAllUser = async (req, res) => {
   const query = `SELECT u.*, CONCAT(e.first_name, ', ', e.last_name) as employee_name 
                   FROM users u INNER JOIN employees e ON u.employee_id = e.id`;
   let users = await selectCustomQuery(query);
+
   res.send(users);
 };
 

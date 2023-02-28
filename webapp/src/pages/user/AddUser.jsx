@@ -18,11 +18,16 @@ import {
 import axios from "axios";
 
 const defaultData = {
+  id: 0,
   first_name: "",
   last_name: "",
   user_name: "",
   password: "",
   employee_name: "",
+  personal_email: "",
+  company_email: "",
+  phone: "",
+  address: "",
   is_admin: "",
 };
 
@@ -32,7 +37,14 @@ const AddUser = () => {
   const { id } = useParams();
 
   const [data, setData] = useState(defaultData);
+  const [employees, setEmployees] = useState([]);
   const [formErrors, setFormErrors] = useState(defaultData);
+
+  const loadEmployeeInformation = (e) => {
+    const empId = e.target.value;
+    const employee = employees.find((x) => x.id === empId);
+    setData(employee);
+  };
 
   const handleChange = (e) => {
     setData({
@@ -48,6 +60,10 @@ const AddUser = () => {
   };
 
   useEffect(() => {
+    axios.get("http://localhost:3001/employee/getAll").then((response) => {
+      setEmployees(response.data);
+    });
+
     if (id) {
       axios.get(`http://localhost:3001/user/get?id=${id}`).then((response) => {
         if (response.data) {
@@ -89,19 +105,22 @@ const AddUser = () => {
           <Grid item xs={6}>
             <FormControl sx={{ mb: 1, minWidth: 210 }}>
               <InputLabel id="employee-label">Employee</InputLabel>
-              <Select
-                labelId="employee-label"
-                id="employee"
-                value={[]}
-                label="Room type"
-                // onChange={handleChange}
-              >
-                <MenuItem value={10}>Standard</MenuItem>
-                <MenuItem value={20}>Deluxe</MenuItem>
-                <MenuItem value={30}>Suites</MenuItem>
-                <MenuItem value={40}>Executive</MenuItem>
-                <MenuItem value={50}>Luxury</MenuItem>
-              </Select>
+              {employees && (
+                <Select
+                  labelId="employee-label"
+                  id="employee"
+                  value={data.employee_id}
+                  defaultValue={data.employee_id}
+                  label="Room type"
+                  onChange={loadEmployeeInformation}
+                >
+                  {employees.map((item) => (
+                    <MenuItem value={item.id} key={item.id}>
+                      {item.first_name} {item.last_name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={6}>
@@ -137,6 +156,7 @@ const AddUser = () => {
               id="personalEmail"
               name="personalEmail"
               placeholder="Enter personal email"
+              value={data.personal_email}
               // onChange={handleChange}
               label="Personal email"
               variant="outlined"
@@ -150,6 +170,7 @@ const AddUser = () => {
               id="companyEmail"
               name="companyEmail"
               placeholder="Enter company email"
+              value={data.company_email}
               // onChange={handleChange}
               label="Company email"
               variant="outlined"
@@ -163,6 +184,7 @@ const AddUser = () => {
               id="phone"
               name="phone"
               placeholder="Enter phone number"
+              value={data.phone}
               // onChange={handleChange}
               label="Phone"
               variant="outlined"
@@ -176,12 +198,14 @@ const AddUser = () => {
               id="address"
               name="address"
               placeholder="Enter address"
+              value={data.address}
               // onChange={handleChange}
               label="Enter address"
               multiline
               variant="outlined"
             />
           </Grid>
+          <Grid item xs={6}></Grid>
           <Grid item xs={6}>
             <TextField
               // error={errors.username ? "error" : ""}
@@ -190,7 +214,7 @@ const AddUser = () => {
               id="username"
               name="username"
               placeholder="Enter username"
-              // value={values.username}
+              // value={data.username}
               // onChange={handleChange}
               label="Username"
               variant="outlined"
@@ -204,12 +228,13 @@ const AddUser = () => {
               id="password"
               name="password"
               placeholder="Enter your password"
-              // value={values.password}
+              // value={data.password}
               // onChange={handleChange}
               label="Password"
               variant="outlined"
             />
           </Grid>
+          <Grid item xs={6}></Grid>
           <Grid item xs={6}>
             <FormControlLabel control={<Checkbox />} label="Is admin" />
           </Grid>

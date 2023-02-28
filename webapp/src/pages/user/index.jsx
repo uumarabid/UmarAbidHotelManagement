@@ -30,14 +30,10 @@ const User = () => {
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-      {/* <Button type="submit" variant="contained">
-            <a href="/AddUser">Add user</a>
-          </Button> */}
-      <Button type="submit" variant="contained">
-        <Link href="/AddUser" underline="none" color="inherit">
-          {"Add user"}
-        </Link>
-        {/* <a href="/AddUser">Add user</a> */}
+      <Button variant="contained">
+        <RLink to={`/addUser`} className="App-navigation">
+          Add User
+        </RLink>
       </Button>
       <TableContainer>
         <Table sx={{ minWidth: 550 }} aria-label="simple table">
