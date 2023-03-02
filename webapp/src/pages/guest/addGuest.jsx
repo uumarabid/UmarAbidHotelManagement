@@ -107,7 +107,7 @@ const AddGuest = () => {
             type="text"
             id="last_name"
             name="last_name"
-            placeholder="Enter your last name"
+            placeholder="Enter last name"
             onChange={handleChange}
             value={data.last_name}
             label="Last name"

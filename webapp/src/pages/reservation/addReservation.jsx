@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, TextField, Grid, Paper } from "@mui/material";
+import { Button, TextField, Grid, Paper, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import validateInfo from "./validateInfo";
 
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const defaultData = {
   first_name: "",
@@ -17,6 +17,8 @@ const defaultData = {
   total_cost: "",
   extra_cost: "",
   deposit: "",
+  room_type: "",
+  facilities: "",
 };
 
 // destructing in FormSignUp function
@@ -26,6 +28,28 @@ const AddReservation = () => {
 
   const [data, setData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(defaultData);
+  const [rooms, setRooms] = useState([]);
+
+  const [value, setValue] = useState(null);
+
+  const changeRoomData = (roomId) => {
+    const room = rooms.find((x) => x.id === roomId);
+
+    if (room !== undefined) {
+      setData({
+        ...data,
+        room_id: roomId,
+        room_number: room?.room_number,
+        room_type: room?.room_type,
+        facilities: room?.facilities,
+      });
+    }
+  };
+
+  const onRoomChange = (e) => {
+    const roomId = e.target.value;
+    changeRoomData(roomId);
+  };
 
   const handleChange = (e) => {
     setData({
@@ -39,6 +63,12 @@ const AddReservation = () => {
       [e.target.name]: "",
     });
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/room/getAll").then((response) => {
+      setRooms(response.data);
+    });
+  }, [id]);
 
   useEffect(() => {
     // only load information from api if the id is present.
@@ -84,6 +114,39 @@ const AddReservation = () => {
         <h2>Add/Edit Reservation</h2>
       </legend>
       <Grid container rowSpacing={1}>
+        <Grid item xs={6}>
+          <FormControl sx={{ mb: 1, minWidth: 210 }}>
+            <InputLabel id="room_label">Room</InputLabel>
+            {rooms && (
+              <Select labelId="room_label" name="room_id" id="room_id" value={data.room_id} label="Room" onChange={onRoomChange}>
+                {rooms.map((item) => (
+                  <MenuItem value={item.id} key={item.id}>
+                    {item.room_number} {item.room_type}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <TextField
+            disabled
+            type="text"
+            id="faciliries"
+            name="faciliries"
+            placeholder="Facilities"
+            onChange={handleChange}
+            value={data.facilities}
+            label="Facilities"
+            variant="outlined"
+          />
+        </Grid>
+
+        <Grid item xs={12}>
+          <h2>Guest</h2>
+        </Grid>
+
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
             error={formErrors.first_name ? true : false}
@@ -105,7 +168,7 @@ const AddReservation = () => {
             type="text"
             id="last_name"
             name="last_name"
-            placeholder="Enter your last name"
+            placeholder="Enter last name"
             onChange={handleChange}
             value={data.last_name}
             label="Last name"
@@ -115,34 +178,52 @@ const AddReservation = () => {
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            type="number"
-            id="room_number"
-            name="room_number"
-            placeholder="room_number"
-            value={data.room_number}
+            error={formErrors.email ? true : false}
+            helperText={formErrors.email}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter email"
             onChange={handleChange}
-            label="Room number"
+            value={data.email}
+            label="Email"
             variant="outlined"
           />
         </Grid>
 
-        {/* <Grid item xs={6} sm={6} md={6} lg={6}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Basic example"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid> */}
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <TextField
+            error={formErrors.phone ? true : false}
+            helperText={formErrors.phone}
+            type="tel"
+            id="phone_number"
+            name="phone_number"
+            placeholder="Enter phone number"
+            onChange={handleChange}
+            value={data.phone_number}
+            label="Phone"
+            variant="outlined"
+          />
+        </Grid>
 
-        {/* <Grid item xs={6} sm={6} md={6} lg={6}>
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <TextField
+            type="address"
+            id="address"
+            name="address"
+            placeholder="Enter address"
+            value={data.address}
+            onChange={handleChange}
+            label="Enter address"
+            multiline
+            variant="outlined"
+          />
+        </Grid>
+
+        <Grid item xs={6} sm={6} md={6} lg={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Basic example"
+              label="Checkin/reservation date"
               value={value}
               onChange={(newValue) => {
                 setValue(newValue);
@@ -150,7 +231,20 @@ const AddReservation = () => {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
-        </Grid> */}
+        </Grid>
+
+        <Grid item xs={6} sm={6} md={6} lg={6}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Checkout/reservation date"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
@@ -172,21 +266,6 @@ const AddReservation = () => {
             // error={formErrors.phone ? true : false}
             // helperText={formErrors.phone}
             type="number"
-            id="extra_cost"
-            name="extra_cost"
-            placeholder="Extra_cost"
-            onChange={handleChange}
-            value={data.extra_cost}
-            label="Extra cost"
-            variant="outlined"
-          />
-        </Grid>
-
-        <Grid item xs={6} sm={6} md={6} lg={6}>
-          <TextField
-            // error={formErrors.phone ? true : false}
-            // helperText={formErrors.phone}
-            type="number"
             id="deposit"
             name="deposit"
             placeholder="Deposit"
@@ -198,11 +277,15 @@ const AddReservation = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" sx={{ mr: 3 }} onClick={() => SubmitHandler()}>
-            Save
-          </Button>
           <Button variant="contained" onClick={() => CancelHandler()}>
             Cancel
+          </Button>
+
+          <Button variant="contained" sx={{ mr: 3, ml: 3 }} onClick={() => SubmitHandler()}>
+            Reserve
+          </Button>
+          <Button variant="contained" sx={{ mr: 3, ml: 3 }} onClick={() => SubmitHandler()}>
+            Checkin
           </Button>
         </Grid>
       </Grid>
