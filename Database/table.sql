@@ -34,8 +34,8 @@ CREATE TABLE `hotelmanagement`.`employees` (
   `address` VARCHAR(100) NULL,
   `phone_number` VARCHAR(45) NULL,
   `email` VARCHAR(60) NULL,
-  `check_in_date` DATETIME NULL,
-  `check_out_date` DATETIME NULL,
+  `check_in_date` VARCHAR(60) NULL,
+  `check_out_date` VARCHAR(60) NULL,
   `is_reserved` BIT NULL,
   PRIMARY KEY (`id`));
   
@@ -43,8 +43,8 @@ CREATE TABLE `hotelmanagement`.`employees` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `guests_id` INT NULL,
   `rooms_id` INT NULL,
-  `reservation_check_in_date` DATETIME NULL,
-  `reservation_check_out_date` DATETIME NULL,
+  `reservation_check_in_date` VARCHAR(60) NULL,
+  `reservation_check_out_date` VARCHAR(60) NULL,
   `total_cost` FLOAT NULL,
   `extra_cost` FLOAT NULL,
   `deposit` FLOAT NULL,
@@ -55,8 +55,8 @@ CREATE TABLE `hotelmanagement`.`employees` (
   `guest_id` INT NULL,
   `rooms_id` INT NULL,
   `reservation_id` INT NULL,
-  `check_in_date` DATETIME NULL,
-  `check_out_date` DATETIME NULL,
+  `check_in_date` VARCHAR(60) NULL,
+  `check_out_date` VARCHAR(60) NULL,
   `total_cost` FLOAT NULL,
   `extra_cost` FLOAT NULL,
   ` deposit` FLOAT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `hotelmanagement`.`employees` (
   
   CREATE TABLE `hotelmanagement`.`audit` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `employee_id` INT NULL,
+  `user_id` INT NULL,
   `operation` VARCHAR(60) NULL,
-  `operation_date_time` DATETIME NULL,
+  `operation_date_time` VARCHAR(60) NULL,
   PRIMARY KEY (`id`));

@@ -1,8 +1,12 @@
+import auditEntry from "../utils/audit.js";
+
 export const addBooking = (req, res) => {
+  auditEntry(1, "add booking");
   res.send("New booking is added successfully.");
 };
 
 export const editBokking = (req, res) => {
+  auditEntry(1, "edit booking");
   res.send("Updated successfully.");
 };
 
@@ -15,5 +19,6 @@ export const getAllBooking = (req, res) => {
 };
 
 export const deleteBokkig = (req, res) => {
+  auditEntry(1, "delete booking");
   res.send("Successfully deleted.");
 };

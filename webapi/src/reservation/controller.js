@@ -1,14 +1,17 @@
 import { selectQuery, deleteQuery, insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
+import auditEntry from "../utils/audit.js";
 
 export const addReservation = async (req, res) => {
   let reservation = req.body;
   await insertQuery("reservations", reservation);
+  auditEntry(1, "add reservation");
   res.send("New Reservation is added successfully.");
 };
 
 export const editReservation = async (req, res) => {
   const reservation = req.body;
   await updateQuery("reservations", reservation, `id = ${reservation.id}`);
+  auditEntry(1, "edit reservation");
   res.send("Updated successfully.");
 };
 
@@ -28,5 +31,6 @@ export const getAllReservation = async (req, res) => {
 export const deleteReservation = async (req, res) => {
   let { id } = req.body;
   await deleteQuery("reservations", `id = ${id}`);
+  auditEntry(1, "delete reservation");
   res.send(true);
 };

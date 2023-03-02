@@ -1,14 +1,17 @@
 import { selectQuery, deleteQuery, insertQuery, updateQuery } from "../../utils/sql.js";
+import auditEntry from "../utils/audit.js";
 
 export const addGuest = async (req, res) => {
   let guest = req.body;
   await insertQuery("guests", guest);
+  auditEntry(1, "add guests");
   res.send("New Guest is added successfully.");
 };
 
 export const editGuest = async (req, res) => {
   const guest = req.body;
   await updateQuery("guests", guest, `id = ${guest.id}`);
+  auditEntry(1, "edit guests");
   res.send("Updated successfully.");
 };
 
@@ -26,5 +29,6 @@ export const getAllGuest = async (req, res) => {
 export const deleteGuest = async (req, res) => {
   let { id } = req.body;
   await deleteQuery("guests", `id = ${id}`);
+  auditEntry(1, "delete guests");
   res.send(true);
 };
