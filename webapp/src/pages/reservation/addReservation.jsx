@@ -30,6 +30,7 @@ const AddReservation = () => {
   const [formErrors, setFormErrors] = useState(defaultData);
   const [rooms, setRooms] = useState([]);
 
+  // date picker values
   const [value, setValue] = useState(null);
 
   const changeRoomData = (roomId) => {
@@ -104,9 +105,6 @@ const AddReservation = () => {
       navigate("/reservation");
     }
   };
-
-  // date picker values
-  // const [value, setValue] = React.useState(null);
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -193,8 +191,8 @@ const AddReservation = () => {
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
-            error={formErrors.phone ? true : false}
-            helperText={formErrors.phone}
+            error={formErrors.phone_number ? true : false}
+            helperText={formErrors.phone_number}
             type="tel"
             id="phone_number"
             name="phone_number"
