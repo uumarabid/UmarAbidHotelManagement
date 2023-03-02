@@ -9,15 +9,18 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const defaultData = {
+  id: 0,
   first_name: "",
   last_name: "",
   room_number: "",
+  email: "",
+  phone_number: "",
+  address: "",
   reservation_check_in_date: "",
   reservation_check_out_date: "",
   total_cost: "",
-  extra_cost: "",
   deposit: "",
-  room_type: "",
+  rooms_id: "",
   facilities: "",
 };
 
@@ -29,19 +32,12 @@ const AddReservation = () => {
   const [data, setData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(defaultData);
   const [rooms, setRooms] = useState([]);
-
-  // date picker values
-  const [value, setValue] = useState(null);
-
   const changeRoomData = (roomId) => {
     const room = rooms.find((x) => x.id === roomId);
-
     if (room !== undefined) {
       setData({
         ...data,
-        room_id: roomId,
-        room_number: room?.room_number,
-        room_type: room?.room_type,
+        rooms_id: roomId,
         facilities: room?.facilities,
       });
     }
@@ -50,6 +46,15 @@ const AddReservation = () => {
   const onRoomChange = (e) => {
     const roomId = e.target.value;
     changeRoomData(roomId);
+  };
+
+  const changeReservationDate = (name, value) => {
+    setData({
+      //spread operator--spreading the values first
+      ...data,
+      // targetting the name of each input of the form on FormSignUp
+      [name]: [value],
+    });
   };
 
   const handleChange = (e) => {
@@ -76,11 +81,16 @@ const AddReservation = () => {
     if (id) {
       axios.get(`http://localhost:3001/reservation/get?id=${id}`).then((response) => {
         if (response.data) {
-          setData(response.data[0]);
+          setData({
+            ...response.data[0],
+            facilities: "",
+          });
+
+          changeRoomData(response.data[0].rooms_id);
         }
       });
     }
-  }, [id]);
+  }, [rooms]);
 
   const CancelHandler = () => {
     navigate("/reservation");
@@ -88,6 +98,7 @@ const AddReservation = () => {
 
   // extract data from useForm
   const SubmitHandler = () => {
+    debugger;
     const { errors, hasError } = validateInfo(data);
     setFormErrors(errors);
 
@@ -98,7 +109,13 @@ const AddReservation = () => {
         operation = "edit";
       }
 
-      axios.post(`http://localhost:3001/reservation/${operation}`, data).then((response) => {
+      const room = {
+        id: data.id,
+        room_number: data.room_number,
+        room_type: data.room_type,
+      };
+
+      axios.post(`http://localhost:3001/reservation/${operation}`, room).then((response) => {
         console.log(response.data);
       });
 
@@ -116,7 +133,14 @@ const AddReservation = () => {
           <FormControl sx={{ mb: 1, minWidth: 210 }}>
             <InputLabel id="room_label">Room</InputLabel>
             {rooms && (
-              <Select labelId="room_label" name="room_id" id="room_id" value={data.room_id} label="Room" onChange={onRoomChange}>
+              <Select
+                labelId="room_label"
+                name="rooms_id"
+                id="rooms_id"
+                value={data.rooms_id}
+                label="Room"
+                onChange={onRoomChange}
+              >
                 {rooms.map((item) => (
                   <MenuItem value={item.id} key={item.id}>
                     {item.room_number} {item.room_type}
@@ -221,10 +245,12 @@ const AddReservation = () => {
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              id="reservation_check_in_date"
+              name="reservation_check_in_date"
               label="Checkin/reservation date"
-              value={value}
+              value={data.reservation_check_in_date}
               onChange={(newValue) => {
-                setValue(newValue);
+                changeReservationDate("reservation_check_in_date", newValue);
               }}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -234,10 +260,12 @@ const AddReservation = () => {
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
+              id="reservation_check_out_date"
+              name="reservation_check_out_date"
               label="Checkout/reservation date"
-              value={value}
+              value={data.reservation_check_out_date}
               onChange={(newValue) => {
-                setValue(newValue);
+                changeReservationDate("reservation_check_out_date", newValue);
               }}
               renderInput={(params) => <TextField {...params} />}
             />

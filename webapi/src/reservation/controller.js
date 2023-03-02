@@ -1,4 +1,4 @@
-import { selectQuery, deleteQuery, insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
+import { deleteQuery, insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
 import auditEntry from "../utils/audit.js";
 
 export const addReservation = async (req, res) => {
@@ -17,7 +17,8 @@ export const editReservation = async (req, res) => {
 
 export const getReservation = async (req, res) => {
   let { id } = req.query;
-  let reservation = await selectQuery("reservations", `id = ${id}`);
+  const query = `SELECT * FROM reservations r INNER JOIN guests g ON r.guests_id =  g.id WHERE r.id = ${id}`;
+  let reservation = await selectCustomQuery(query);
   res.send(reservation);
 };
 
