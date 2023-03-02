@@ -2,6 +2,24 @@ import { deleteQuery, insertQuery, selectCustomQuery, selectQuery, updateQuery }
 import auditEntry from "../utils/audit.js";
 
 // Create all methods here
+export const loginGet = async (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+};
+export const loginPost = async (req, res) => {
+  let { user_name, password } = req.body;
+  let users = await selectQuery("users", `user_name = '${user_name}' AND password = '${password}'`);
+  if (users.length > 0) {
+    req.session.user = users;
+    console.log(req.session.user);
+    res.send(users);
+  } else {
+    res.send({ message: "User doesn't exists" });
+  }
+};
 
 export const addUser = async (req, res) => {
   const user = req.body;

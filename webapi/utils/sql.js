@@ -21,7 +21,6 @@ export const selectQuery = async (table, condition, columns) => {
     if (condition) {
       query += ` WHERE ${condition}`;
     }
-
     // select data from table
     // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
     let data = await connection.promise().query(query);
