@@ -14,6 +14,7 @@ const defaultData = {
   first_name: "",
   last_name: "",
   room_number: "",
+  room_type: "",
   email: "",
   phone_number: "",
   address: "",
@@ -46,7 +47,7 @@ const RoomCheckout = () => {
     }
   };
 
-  const changeGustData = (guestId) => {
+  const changeGuestData = (guestId) => {
     const guest = guests.find((x) => x.id === guestId);
     if (guest !== undefined) {
       setData({
@@ -93,7 +94,20 @@ const RoomCheckout = () => {
   useEffect(() => {
     // only load information from api if the id is present.
     if (id) {
-      axios.get(`http://localhost:3001/guest/get?id=${id}`).then((response) => {
+      axios.get(`http://localhost:3001/guest/get?id=${id}`, data).then((response) => {
+        if (response.data) {
+          setData(response.data[0]);
+
+          changeRoomData(response.data[0].rooms_id);
+        }
+      });
+    }
+  }, [rooms]);
+
+  useEffect(() => {
+    // only load information from api if the id is present.
+    if (id) {
+      axios.get(`http://localhost:3001/room/get?id=${id}`, data).then((response) => {
         if (response.data) {
           setData(response.data[0]);
 
@@ -104,7 +118,7 @@ const RoomCheckout = () => {
   }, [rooms]);
 
   const CancelHandler = () => {
-    navigate("/checkout");
+    navigate("/booking");
   };
 
   // extract data from useForm
@@ -127,6 +141,34 @@ const RoomCheckout = () => {
 
       <Grid container rowSpacing={1}>
         <Grid item xs={6}>
+          <TextField
+            disabled
+            type="number"
+            id="room_number"
+            name="room_number"
+            placeholder="Room number"
+            label="Room number"
+            variant="outlined"
+            value={data.room_number}
+            onChange={handleChange}
+          />
+        </Grid>
+
+        <Grid item xs={6}>
+          <TextField
+            disabled
+            type="text"
+            id="room_type"
+            name="room_type"
+            placeholder="Room type"
+            label="Room type"
+            variant="outlined"
+            value={data.room_type}
+            onChange={handleChange}
+          />
+        </Grid>
+
+        {/* <Grid item xs={6}>
           <FormControl sx={{ mb: 1, minWidth: 210 }}>
             <InputLabel id="room_label">Room</InputLabel>
             {rooms && (
@@ -146,9 +188,9 @@ const RoomCheckout = () => {
               </Select>
             )}
           </FormControl>
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={6} sm={6} md={6} lg={6}>
+        {/* <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
             disabled
             type="text"
@@ -160,10 +202,11 @@ const RoomCheckout = () => {
             label="Facilities"
             variant="outlined"
           />
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
+            disabled
             error={formErrors.first_name ? true : false}
             helperText={formErrors.first_name}
             type="text"
@@ -178,6 +221,7 @@ const RoomCheckout = () => {
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
+            disabled
             error={formErrors.last_name ? true : false}
             helperText={formErrors.last_name}
             type="text"
@@ -193,6 +237,7 @@ const RoomCheckout = () => {
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
+            disabled
             error={formErrors.email ? true : false}
             helperText={formErrors.email}
             type="email"
@@ -208,6 +253,7 @@ const RoomCheckout = () => {
 
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <TextField
+            disabled
             error={formErrors.phone_number ? true : false}
             helperText={formErrors.phone_number}
             type="tel"
@@ -274,7 +320,7 @@ const RoomCheckout = () => {
             name="extra_cost"
             placeholder="Extra cost"
             onChange={handleChange}
-            value={data.total_cost}
+            value={data.extra_cost}
             label="Extra cost"
             variant="outlined"
           />
