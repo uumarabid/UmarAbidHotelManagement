@@ -44,7 +44,7 @@ export const selectCustomQuery = async (query) => {
 
   try {
     await connection.connect();
-
+    console.log(query);
     // select data from table
     // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
     let data = await connection.promise().query(query);
@@ -100,6 +100,7 @@ export const insertQuery = async (table, data) => {
     const placeholders = values.join(",");
     const query = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders})`;
     // insert entry into table
+    console.log(query);
     id = await connection.promise().execute(query);
   } catch (err) {
     console.error(err);
@@ -140,7 +141,7 @@ export const updateQuery = async (table, data, condition) => {
       .join(", ");
 
     const sql = `UPDATE ${table} SET ${set} WHERE ${condition}`;
-
+    console.log(sql);
     // insert entry into table
     await connection.promise().execute(sql);
   } catch (err) {

@@ -16,12 +16,16 @@ const defaultData = {
   email: "",
   phone_number: "",
   address: "",
-  reservation_check_in_date: "",
-  reservation_check_out_date: "",
+  check_in_date: "",
+  check_out_date: "",
   total_cost: "",
-  deposit: "",
-  rooms_id: "",
+  deposit: 0,
+  rooms_id: 0,
   facilities: "",
+
+  guest_id: 0,
+  extra_cost: 0,
+  reservation_id: 0,
 };
 
 // destructing in FormSignUp function
@@ -76,21 +80,21 @@ const Checkin = () => {
     });
   }, [id]);
 
-  useEffect(() => {
-    // only load information from api if the id is present.
-    if (id) {
-      axios.get(`http://localhost:3001/reservation/get?id=${id}`).then((response) => {
-        if (response.data) {
-          setData({
-            ...response.data[0],
-            facilities: "",
-          });
+  // useEffect(() => {
+  //   // only load information from api if the id is present.
+  //   if (id) {
+  //     axios.get(`http://localhost:3001/reservation/get?id=${id}`).then((response) => {
+  //       if (response.data) {
+  //         setData({
+  //           ...response.data[0],
+  //           facilities: "",
+  //         });
 
-          changeRoomData(response.data[0].rooms_id);
-        }
-      });
-    }
-  }, [rooms]);
+  //         changeRoomData(response.data[0].rooms_id);
+  //       }
+  //     });
+  //   }
+  // }, [rooms]);
 
   const CancelHandler = () => {
     navigate("/dashboard");
@@ -108,17 +112,11 @@ const Checkin = () => {
         operation = "edit";
       }
 
-      const room = {
-        id: data.id,
-        room_number: data.room_number,
-        room_type: data.room_type,
-      };
-
-      axios.post(`http://localhost:3001/reservation/${operation}`, room).then((response) => {
+      axios.post(`http://localhost:3001/booking/${operation}`, data).then((response) => {
         console.log(response.data);
       });
 
-      navigate("/reservation");
+      // navigate("/reservation");
     }
   };
 
@@ -175,7 +173,7 @@ const Checkin = () => {
             type="text"
             id="first_name"
             name="first_name"
-            placeholder="Enter your first name"
+            placeholder="Enter first name"
             onChange={handleChange}
             value={data.first_name}
             label="First name"
@@ -244,12 +242,12 @@ const Checkin = () => {
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              id="reservation_check_in_date"
-              name="reservation_check_in_date"
-              label="Checkin/reservation date"
-              value={data.reservation_check_in_date}
+              id="check_in_date"
+              name="check_in_date"
+              label="Checkin date"
+              value={data.check_in_date}
               onChange={(newValue) => {
-                changeReservationDate("reservation_check_in_date", newValue);
+                changeReservationDate("check_in_date", newValue);
               }}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -259,12 +257,12 @@ const Checkin = () => {
         <Grid item xs={6} sm={6} md={6} lg={6}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              id="reservation_check_out_date"
-              name="reservation_check_out_date"
-              label="Checkout/reservation date"
-              value={data.reservation_check_out_date}
+              id="check_out_date"
+              name="check_out_date"
+              label="Checkout date"
+              value={data.check_out_date}
               onChange={(newValue) => {
-                changeReservationDate("reservation_check_out_date", newValue);
+                changeReservationDate("check_out_date", newValue);
               }}
               renderInput={(params) => <TextField {...params} />}
             />

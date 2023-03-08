@@ -25,7 +25,7 @@ export const addReservation = async (req, res) => {
   const result = await insertQuery("guests", guest);
   reservation.guests_id = result[0]?.insertId;
   await insertQuery("reservations", reservation);
-  auditEntry(1, "add reservation");
+  auditEntry(1, "add reservation with guest");
   res.send("New Reservation is added successfully.");
 };
 

@@ -52,7 +52,7 @@ CREATE TABLE `hotelmanagement`.`employees` (
   
   CREATE TABLE `hotelmanagement`.`bookings` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `guest_id` INT NULL,
+  `guests_id` INT NULL,
   `rooms_id` INT NULL,
   `reservation_id` INT NULL,
   `check_in_date` VARCHAR(60) NULL,

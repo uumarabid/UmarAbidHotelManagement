@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { addBooking, deleteBokkig, editBokking, getAllBooking, getBokking } from "./controller.js";
+import { addBooking, deleteBookig, editBooking, getAllBooking, getBooking } from "./controller.js";
 
 const bookingRoute = Router()
   .post("/add", addBooking)
-  .post("/edit", editBokking)
-  .get("/get", getBokking)
+  .post("/edit", editBooking)
+  .get("/get", getBooking)
   .get("/getAll", getAllBooking)
-  .post("/delete", deleteBokkig);
+  .post("/delete", deleteBookig);
 
 export default bookingRoute;
