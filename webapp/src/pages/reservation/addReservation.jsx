@@ -109,13 +109,7 @@ const AddReservation = () => {
         operation = "edit";
       }
 
-      const room = {
-        id: data.id,
-        room_number: data.room_number,
-        room_type: data.room_type,
-      };
-
-      axios.post(`http://localhost:3001/reservation/${operation}`, room).then((response) => {
+      axios.post(`http://localhost:3001/reservation/${operation}`, data).then((response) => {
         console.log(response.data);
       });
 
@@ -176,7 +170,7 @@ const AddReservation = () => {
             type="text"
             id="first_name"
             name="first_name"
-            placeholder="Enter your first name"
+            placeholder="Ente first name"
             onChange={handleChange}
             value={data.first_name}
             label="First name"

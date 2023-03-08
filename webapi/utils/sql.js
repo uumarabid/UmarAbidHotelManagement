@@ -91,7 +91,7 @@ export const insertQuery = async (table, data) => {
     password: "123qwe123qwe", //process.env.DB_PASSWORD,
     database: "hotelmanagement", //process.env.DB_NAME,
   });
-
+  let id = 0;
   try {
     await connection.connect();
 
@@ -100,12 +100,13 @@ export const insertQuery = async (table, data) => {
     const placeholders = values.join(",");
     const query = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders})`;
     // insert entry into table
-    await connection.promise().execute(query);
+    id = await connection.promise().execute(query);
   } catch (err) {
     console.error(err);
   } finally {
     await connection.end();
   }
+  return id;
 };
 
 // example
