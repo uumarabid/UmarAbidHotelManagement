@@ -75,7 +75,7 @@ const Booking = () => {
                 {/* <TableCell>{formatFacilities(item.facilities)}</TableCell> */}
                 <TableCell>
                   <Button variant="contained" sx={{ m: 1, display: "flex", flexDirection: "row" }}>
-                    <RLink to={`/roomCheckout/${item.id}`} className="App-navigation">
+                    <RLink to={`/checkout/${item.id}`} className="App-navigation">
                       Checkout
                     </RLink>
                   </Button>
