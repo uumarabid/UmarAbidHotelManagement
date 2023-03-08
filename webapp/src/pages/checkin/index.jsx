@@ -97,7 +97,7 @@ const Checkin = () => {
   // }, [rooms]);
 
   const CancelHandler = () => {
-    navigate("/dashboard");
+    navigate("/booking");
   };
 
   // extract data from useForm
@@ -116,7 +116,7 @@ const Checkin = () => {
         console.log(response.data);
       });
 
-      // navigate("/reservation");
+      navigate("/booking");
     }
   };
 

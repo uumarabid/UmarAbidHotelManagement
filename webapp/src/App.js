@@ -23,6 +23,7 @@ import Profile from "./pages/profile";
 import AddReservation from "./pages/reservation/addReservation";
 import AddGuest from "./pages/guest/addGuest";
 import RoomCheckout from "./pages/checkout/roomCheckout";
+import Booking from "./pages/booking";
 
 function App() {
   const theme = createTheme();
@@ -59,6 +60,7 @@ function App() {
               <Route path="/roomCheckout" element={<RoomCheckout />} />
               <Route path="/roomCheckout/:id" element={<RoomCheckout />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/booking" element={<Booking />} />
             </Routes>
           </Container>
         </ThemeProvider>{" "}
