@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField, Grid, Paper, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-// import validateInfo from "./validateInfo";
+import validateInfo from "./validateInfo";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -108,31 +108,25 @@ const RoomCheckout = () => {
   };
 
   // extract data from useForm
-  // const SubmitHandler = () => {
-  //   debugger;
-  //   const { errors, hasError } = validateInfo(data);
-  //   setFormErrors(errors);
+  const SubmitHandler = () => {
+    debugger;
+    const { errors, hasError } = validateInfo(data);
+    setFormErrors(errors);
 
-  //   if (!hasError) {
-  //     // call save funciton
-  //     let operation = "add";
-  //     if (data.id) {
-  //       operation = "edit";
-  //     }
+    if (!hasError) {
+      // call save funciton
+      let operation = "add";
+      if (data.id) {
+        operation = "edit";
+      }
 
-  //     const room = {
-  //       id: data.id,
-  //       room_number: data.room_number,
-  //       room_type: data.room_type,
-  //     };
+      axios.post(`http://localhost:3001/reservation/${operation}`, data).then((response) => {
+        console.log(response.data);
+      });
 
-  //     axios.post(`http://localhost:3001/reservation/${operation}`, room).then((response) => {
-  //       console.log(response.data);
-  //     });
-
-  //     navigate("/");
-  //   }
-  // };
+      navigate("/booking");
+    }
+  };
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
