@@ -109,18 +109,11 @@ const RoomCheckout = () => {
 
   // extract data from useForm
   const SubmitHandler = () => {
-    debugger;
     const { errors, hasError } = validateInfo(data);
     setFormErrors(errors);
 
     if (!hasError) {
-      // call save funciton
-      let operation = "add";
-      if (data.id) {
-        operation = "edit";
-      }
-
-      axios.post(`http://localhost:3001/reservation/${operation}`, data).then((response) => {
+      axios.post(`http://localhost:3001/booking/checkout`, data).then((response) => {
         console.log(response.data);
       });
 
@@ -322,7 +315,7 @@ const RoomCheckout = () => {
             Cancel
           </Button>
 
-          <Button variant="contained" sx={{ ml: 3 }}>
+          <Button variant="contained" sx={{ ml: 3 }} onClick={() => SubmitHandler()}>
             Checkout
           </Button>
 
