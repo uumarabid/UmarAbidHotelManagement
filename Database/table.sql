@@ -59,7 +59,20 @@ CREATE TABLE `hotelmanagement`.`employees` (
   `check_out_date` VARCHAR(60) NULL,
   `total_cost` FLOAT NULL,
   `extra_cost` FLOAT NULL,
-  ` deposit` FLOAT NULL,
+  `deposit` FLOAT NULL,
+  PRIMARY KEY (`id`));
+
+  
+  CREATE TABLE `hotelmanagement`.`history` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `guests_id` INT NULL,
+  `rooms_id` INT NULL,
+  `reservation_id` INT NULL,
+  `check_in_date` VARCHAR(60) NULL,
+  `check_out_date` VARCHAR(60) NULL,
+  `total_cost` FLOAT NULL,
+  `extra_cost` FLOAT NULL,
+  `deposit` FLOAT NULL,
   PRIMARY KEY (`id`));
   
   CREATE TABLE `hotelmanagement`.`audit` (
@@ -68,3 +81,5 @@ CREATE TABLE `hotelmanagement`.`employees` (
   `operation` VARCHAR(60) NULL,
   `operation_date_time` VARCHAR(60) NULL,
   PRIMARY KEY (`id`));
+
+
