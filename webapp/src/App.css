@@ -44,3 +44,11 @@
     transform: rotate(360deg);
   }
 }
+
+/* footer {
+  border-style: groove;
+  border-radius: 2%;
+  margin: 5%;
+  margin-top: calc(20% + 60px);
+  bottom: 0;
+} */
