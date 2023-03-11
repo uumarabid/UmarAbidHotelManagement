@@ -88,6 +88,11 @@ export default function MenuAppBar() {
                 </Link>
               </Button>
               <Button color="inherit">
+                <Link to="/audit" className="App-navigation">
+                  Audit
+                </Link>
+              </Button>
+              <Button color="inherit">
                 <Link to="/checkin" className="App-navigation">
                   Checkin
                 </Link>
