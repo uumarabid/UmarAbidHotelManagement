@@ -6,8 +6,14 @@ import validateInfo from "./validateInfo";
 import axios from "axios";
 import Cookies from "universal-cookie";
 
+// this one is discarded.
 //https://medium.com/@gsandamali30/jwt-based-user-authentication-using-reactjs-node-express-and-mysql-41b5bedde11f
 //https://github.com/gsandamali/Part-2-User-registration-and-login-with-Cookies-Sessions-Hashing/blob/main/server/index.js
+
+// using following for login
+// https://www.freecodecamp.org/news/how-to-build-a-fullstack-authentication-system-with-react-express-mongodb-heroku-and-netlify/#section-2-how-to-build-the-frontend
+// front-end: https://github.com/EBEREGIT/react-auth
+// back-end: https://github.com/EBEREGIT/auth-backend
 const defaultData = {
   user_name: "",
   password: "",
