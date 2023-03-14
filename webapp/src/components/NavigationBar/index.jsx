@@ -13,14 +13,12 @@ import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Hotel } from "@mui/icons-material";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export default function MenuAppBar() {
-  const [auth, setAuth] = React.useState(true);
+  const token = cookies.get("TOKEN");
   const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -39,7 +37,7 @@ export default function MenuAppBar() {
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
 
-          {auth && (
+          {token && (
             <>
               <Button color="inherit">
                 <Link to="/dashboard" className="App-navigation">
@@ -107,8 +105,12 @@ export default function MenuAppBar() {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
+                  <MenuItem onClick={handleClose}>
+                    <Link to="/logout" className="App-navigationMenu">
+                      Logout
+                    </Link>
+                  </MenuItem>
                 </Menu>
               </div>
             </>

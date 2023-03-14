@@ -1,7 +1,26 @@
 import { deleteQuery, insertQuery, selectCustomQuery, selectQuery, updateQuery } from "../../utils/sql.js";
 import auditEntry from "../utils/audit.js";
-
+import jwt from "jsonwebtoken";
 // Create all methods here
+
+export const loginPost = async (req, res) => {
+  let { user_name, password } = req.body;
+  let users = await selectQuery("users", `user_name = '${user_name}' AND password = '${password}'`);
+  if (users.length > 0) {
+    const token = jwt.sign(
+      {
+        user_id: users[0].id,
+        user_name: users[0].user_name,
+      },
+      "RANDOM-TOKEN",
+      { expiresIn: "24h" }
+    );
+
+    res.send({ message: "login success", username: users[0].user_name, token });
+  } else {
+    res.send({ message: "User doesn't exists" });
+  }
+};
 
 export const addUser = async (req, res) => {
   const user = req.body;
