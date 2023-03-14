@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getAll } from "./controller.js";
+import { getAllAudit } from "./controller.js";
 
-const auditRoute = Router().get("/get", getAll);
+const auditRoute = Router().get("/getAll", getAllAudit);
 
 export default auditRoute;

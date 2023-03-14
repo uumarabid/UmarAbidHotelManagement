@@ -2,7 +2,7 @@ import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 
-export const LoginForm = () => {
+export const Login = () => {
   const theme = createTheme();
 
   return (
@@ -93,4 +93,4 @@ export const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default Login;

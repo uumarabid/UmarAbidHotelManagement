@@ -34,6 +34,29 @@ export const selectQuery = async (table, condition, columns) => {
   }
 };
 
+export const selectCustomQuery = async (query) => {
+  const connection = mysql.createConnection({
+    host: "127.0.0.1", //process.env.DB_HOST,
+    user: "admin", //process.env.DB_USER,
+    password: "123qwe123qwe", //process.env.DB_PASSWORD,
+    database: "hotelmanagement", //process.env.DB_NAME,
+  });
+
+  try {
+    await connection.connect();
+    console.log(query);
+    // select data from table
+    // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
+    let data = await connection.promise().query(query);
+
+    return data[0];
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await connection.end();
+  }
+};
+
 export const deleteQuery = async (table, condition) => {
   const connection = mysql.createConnection({
     host: "127.0.0.1", //process.env.DB_HOST,
@@ -49,7 +72,7 @@ export const deleteQuery = async (table, condition) => {
 
     await connection.connect();
 
-    let query = `DELETE * FROM ${table} where ${condition}`;
+    let query = `DELETE FROM ${table} where ${condition}`;
 
     // delete entry from table
     let data = await connection.promise().query(query);
@@ -68,21 +91,23 @@ export const insertQuery = async (table, data) => {
     password: "123qwe123qwe", //process.env.DB_PASSWORD,
     database: "hotelmanagement", //process.env.DB_NAME,
   });
-
+  let id = 0;
   try {
     await connection.connect();
 
     const columns = Object.keys(data);
-    const values = columns.map((column) => `"${data[column]}"`);
+    const values = columns.map((column) => (typeof data[column] == "string" ? `"${data[column]}"` : `${data[column]}`));
     const placeholders = values.join(",");
     const query = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders})`;
     // insert entry into table
-    await connection.promise().execute(query);
+    console.log(query);
+    id = await connection.promise().execute(query);
   } catch (err) {
     console.error(err);
   } finally {
     await connection.end();
   }
+  return id;
 };
 
 // example
@@ -111,10 +136,12 @@ export const updateQuery = async (table, data, condition) => {
 
     const keys = Object.keys(data);
     const values = Object.values(data);
-    const set = keys.map((key, index) => key + ` = '${values[index]}' `).join(", ");
+    const set = keys
+      .map((key, index) => (typeof values[index] == "string" ? `${key} = '${values[index]}' ` : `${key} = ${values[index]} `))
+      .join(", ");
 
     const sql = `UPDATE ${table} SET ${set} WHERE ${condition}`;
-
+    console.log(sql);
     // insert entry into table
     await connection.promise().execute(sql);
   } catch (err) {

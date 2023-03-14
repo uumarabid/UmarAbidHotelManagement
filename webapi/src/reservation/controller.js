@@ -1,19 +1,58 @@
-export const addReservation = (req, res) => {
-  res.send("New User is added successfully.");
+import { deleteQuery, insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
+import auditEntry from "../utils/audit.js";
+
+export const addReservation = async (req, res) => {
+  const data = req.body;
+  const reservation = {
+    guests_id: 0,
+    rooms_id: data.rooms_id,
+    reservation_check_in_date: `${data.reservation_check_in_date}`,
+    reservation_check_out_date: `${data.reservation_check_out_date}`,
+    total_cost: data.total_cost || 0,
+    extra_cost: 0,
+    deposit: data.deposit || 0,
+  };
+
+  const guest = {
+    first_name: data.first_name,
+    last_name: data.last_name,
+    number_of_guests: 1, //data.number_of_guests,
+    address: data.address,
+    phone_number: data.phone_number,
+    email: data.email,
+    is_reserved: 1,
+  };
+  const result = await insertQuery("guests", guest);
+  reservation.guests_id = result[0]?.insertId;
+  await insertQuery("reservations", reservation);
+  auditEntry(1, "add reservation with guest");
+  res.send("New Reservation is added successfully.");
 };
 
-export const editReservation = (req, res) => {
-  res.send("Reservation updated successfully.");
+export const editReservation = async (req, res) => {
+  const reservation = req.body;
+  await updateQuery("reservations", reservation, `id = ${reservation.id}`);
+  auditEntry(1, "edit reservation");
+  res.send("Updated successfully.");
 };
 
-export const getReservation = (req, res) => {
-  res.send("Required reservation is:....");
+export const getReservation = async (req, res) => {
+  let { id } = req.query;
+  const query = `SELECT * FROM reservations r INNER JOIN guests g ON r.guests_id =  g.id WHERE r.id = ${id}`;
+  let reservation = await selectCustomQuery(query);
+  res.send(reservation);
 };
 
-export const getAllReservation = (req, res) => {
-  res.send("All reservations in reservation table are.... ");
+export const getAllReservation = async (req, res) => {
+  const query =
+    "SELECT r.*, CONCAT(g.first_name, ', ', g.last_name) as guest_name, ro.room_number from reservations r INNER JOIN guests g ON r.guests_id = g.id INNER JOIN rooms ro ON r.rooms_id = ro.id";
+  let reservations = await selectCustomQuery(query);
+  res.send(reservations);
 };
 
-export const deleteReservation = (req, res) => {
-  res.send("Reservation successfully deleted.");
+export const deleteReservation = async (req, res) => {
+  let { id } = req.body;
+  await deleteQuery("reservations", `id = ${id}`);
+  auditEntry(1, "delete reservation");
+  res.send(true);
 };
