@@ -12,9 +12,10 @@ const validateInfo = (values) => {
     hasError = true;
   }
 
-  // if (!values.personal_email) {
-  //   errors.personal_email = "Email required";
-  //   hasError = true;
+  if (!values.email) {
+    errors.email = "Email required";
+    hasError = true;
+  }
   // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.personal_email)) {
   //   errors.personal_email = "Email address is invalid!";
   //   hasError = true;
@@ -29,7 +30,7 @@ const validateInfo = (values) => {
   // }
 
   if (!values.phone_number) {
-    errors.phone = "Phone number is required";
+    errors.phone_number = "Phone number is required";
     hasError = true;
   }
 

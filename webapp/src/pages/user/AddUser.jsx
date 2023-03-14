@@ -165,7 +165,7 @@ const AddUser = () => {
                 name="employee_id"
                 id="employee_id"
                 value={data.employee_id}
-                label="Room type"
+                label="Employee"
                 onChange={onEmployeeChange}
               >
                 {employees.map((item) => (

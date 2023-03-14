@@ -41,9 +41,9 @@ const Reservation = () => {
               <TableCell>Room number</TableCell>
               <TableCell>Check in date</TableCell>
               <TableCell>Check out date</TableCell>
-              <TableCell>Cost </TableCell>
-              <TableCell>extra</TableCell>
-              <TableCell>deposit</TableCell>
+              <TableCell>Total cost </TableCell>
+              {/* <TableCell>Extra cost</TableCell> */}
+              <TableCell>Deposit</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -53,10 +53,12 @@ const Reservation = () => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.guest_name}</TableCell>
                 <TableCell>{item.room_number}</TableCell>
-                <TableCell>{item.reservation_check_in_date}</TableCell>
-                <TableCell>{item.reservation_check_out_date}</TableCell>
+                <TableCell>{new Date(item.reservation_check_in_date).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  {item.reservation_check_out_date ? new Date(item.reservation_check_out_date).toLocaleDateString() : ""}
+                </TableCell>
                 <TableCell>£{item.total_cost}</TableCell>
-                <TableCell>{item.extra_cost}</TableCell>
+                {/* <TableCell>{item.extra_cost}</TableCell> */}
                 <TableCell>£{item.deposit}</TableCell>
                 <TableCell>
                   <Button variant="contained" sx={{ m: 1, display: "flex", flexDirection: "row" }}>

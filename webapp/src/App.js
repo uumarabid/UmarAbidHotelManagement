@@ -13,15 +13,16 @@ import AddEmployee from "./pages/employee/addEmployee";
 import Dashboard from "./pages/dashboard/index";
 import NavigationBar from "./components/NavigationBar";
 import Footer from "./components/Footer";
-import Checkin from "./pages/checkin/index";
+import Checkin from "./pages/booking/checkin";
 import Audit from "./pages/audit/index";
-import Checkout from "./pages/checkout/index";
+import Checkout from "./pages/booking/checkout";
 import Reservation from "./pages/reservation/index";
 import Guest from "./pages/guest/index";
 import { Container, CssBaseline } from "@mui/material";
 import Profile from "./pages/profile";
 import AddReservation from "./pages/reservation/addReservation";
 import AddGuest from "./pages/guest/addGuest";
+import Booking from "./pages/booking/index";
 
 function App() {
   const theme = createTheme();
@@ -55,7 +56,9 @@ function App() {
               <Route path="/audit" element={<Audit />} />
               <Route path="/checkin" element={<Checkin />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout/:id" element={<Checkout />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/booking" element={<Booking />} />
             </Routes>
           </Container>
         </ThemeProvider>{" "}

@@ -44,3 +44,19 @@
     transform: rotate(360deg);
   }
 }
+
+/* footer {
+  border-style: groove;
+  border-radius: 2%;
+  margin: 5%;
+  margin-top: calc(20% + 60px);
+  bottom: 0;
+} */
+
+footer {
+  margin-top: 100px;
+  /* margin-bottom: 120px; */
+  border-top: 1px solid #dddddd;
+  padding: 20px 0px;
+  /* text-align: center; */
+}
