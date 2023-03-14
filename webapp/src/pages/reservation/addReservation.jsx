@@ -98,7 +98,6 @@ const AddReservation = () => {
 
   // extract data from useForm
   const SubmitHandler = () => {
-    debugger;
     const { errors, hasError } = validateInfo(data);
     setFormErrors(errors);
 
@@ -114,6 +113,31 @@ const AddReservation = () => {
       });
 
       navigate("/reservation");
+    }
+  };
+
+  // extract data from useForm
+  const SubmitCheckinHandler = () => {
+    const { errors, hasError } = validateInfo(data);
+    const bookingData = {
+      ...data,
+      check_in_date: data.reservation_check_in_date,
+      check_out_date: data.reservation_check_out_date,
+    };
+    setFormErrors(errors);
+
+    if (!hasError) {
+      // call save funciton
+      let operation = "add";
+      if (data.id) {
+        operation = "edit";
+      }
+
+      axios.post(`http://localhost:3001/bookings/${operation}`, bookingData).then((response) => {
+        console.log(response.data);
+      });
+
+      navigate("/booking");
     }
   };
 
@@ -304,7 +328,7 @@ const AddReservation = () => {
           <Button variant="contained" sx={{ mr: 3, ml: 3 }} onClick={() => SubmitHandler()}>
             Reserve
           </Button>
-          <Button variant="contained" sx={{ mr: 3, ml: 3 }} onClick={() => SubmitHandler()}>
+          <Button variant="contained" sx={{ mr: 3, ml: 3 }} onClick={() => SubmitCheckinHandler()}>
             Checkin
           </Button>
         </Grid>

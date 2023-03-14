@@ -1,5 +1,5 @@
 import auditEntry from "../utils/audit.js";
-import { selectQuery, insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
+import { insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
 
 export const addBooking = async (req, res) => {
   const data = req.body;
@@ -69,7 +69,11 @@ export const getBooking = (req, res) => {
 };
 
 export const getAllBooking = async (req, res) => {
-  let bookings = await selectQuery("bookings");
+  const query = `SELECT b.*, g.first_name, g.last_name, r.room_number, r.room_type FROM bookings b 
+  INNER JOIN guests g on b.guests_id = g.id
+  INNER JOIN rooms r on b.rooms_id = r.id
+  `;
+  const bookings = await selectCustomQuery(query);
   res.send(bookings);
 };
 

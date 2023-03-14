@@ -53,8 +53,10 @@ const Reservation = () => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.guest_name}</TableCell>
                 <TableCell>{item.room_number}</TableCell>
-                <TableCell>{item.reservation_check_in_date}</TableCell>
-                <TableCell>{item.reservation_check_out_date}</TableCell>
+                <TableCell>{new Date(item.reservation_check_in_date).toLocaleDateString()}</TableCell>
+                <TableCell>
+                  {item.reservation_check_out_date ? new Date(item.reservation_check_out_date).toLocaleDateString() : ""}
+                </TableCell>
                 <TableCell>£{item.total_cost}</TableCell>
                 {/* <TableCell>{item.extra_cost}</TableCell> */}
                 <TableCell>£{item.deposit}</TableCell>

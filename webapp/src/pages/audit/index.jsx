@@ -14,7 +14,7 @@ const Audit = () => {
 
   useEffect(() => {
     loadAudit();
-  });
+  }, []);
 
   return (
     <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
@@ -34,7 +34,9 @@ const Audit = () => {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.user_id}</TableCell>
                 <TableCell>{item.operation}</TableCell>
-                <TableCell>{item.operation_date_time}</TableCell>
+                <TableCell>
+                  {new Date(item.operation_date_time).toLocaleDateString()} {new Date(item.operation_date_time).toTimeString()}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

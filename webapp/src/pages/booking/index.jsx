@@ -27,12 +27,6 @@ const Booking = () => {
     });
   };
 
-  const deleteBooking = (id) => {
-    axios.post("http://localhost:3001/booking/delete", { id }).then((response) => {
-      loadBookings();
-    });
-  };
-
   useEffect(() => {
     loadBookings();
   }, []);
@@ -49,9 +43,9 @@ const Booking = () => {
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
-              <TableCell>Guests id</TableCell>
-              <TableCell>Rooms id</TableCell>
-              <TableCell>Reservation id</TableCell>
+              <TableCell>Guests</TableCell>
+              <TableCell>Rooms</TableCell>
+              <TableCell>Type</TableCell>
               <TableCell>Checkin date</TableCell>
               <TableCell>Checkout date</TableCell>
               <TableCell>Total cost</TableCell>
@@ -64,11 +58,13 @@ const Booking = () => {
             {data.map((item, index) => (
               <TableRow key={index}>
                 <TableCell>{item.id}</TableCell>
-                <TableCell>{item.guests_id}</TableCell>
-                <TableCell>{item.rooms_id}</TableCell>
-                <TableCell>{item.reservation_id}</TableCell>
-                <TableCell>{item.check_in_date}</TableCell>
-                <TableCell>{item.check_in_date}</TableCell>
+                <TableCell>
+                  {item.first_name}, {item.last_name}
+                </TableCell>
+                <TableCell>{item.room_number}</TableCell>
+                <TableCell>{item.room_type}</TableCell>
+                <TableCell>{new Date(item.check_in_date).toLocaleDateString()}</TableCell>
+                <TableCell>{item.check_out_date ? new Date(item.check_out_date).toLocaleDateString() : ""}</TableCell>
                 <TableCell>{item.total_cost}</TableCell>
                 <TableCell>{item.extra_cost}</TableCell>
                 <TableCell>{item.deposit}</TableCell>
