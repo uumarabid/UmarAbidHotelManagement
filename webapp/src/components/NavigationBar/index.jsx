@@ -32,12 +32,6 @@ export default function MenuAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? "Logout" : "Login"}
-        />
-      </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
           <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
@@ -90,16 +84,6 @@ export default function MenuAppBar() {
               <Button color="inherit">
                 <Link to="/audit" className="App-navigation">
                   Audit
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link to="/checkin" className="App-navigation">
-                  Checkin
-                </Link>
-              </Button>
-              <Button color="inherit">
-                <Link to="/checkout" className="App-navigation">
-                  Checkout
                 </Link>
               </Button>
               <div>

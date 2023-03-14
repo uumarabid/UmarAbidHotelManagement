@@ -142,7 +142,7 @@ const RoomCheckout = () => {
       <Grid container rowSpacing={1}>
         <Grid item xs={6}>
           <TextField
-            disabled
+            // disabled
             type="number"
             id="room_number"
             name="room_number"
