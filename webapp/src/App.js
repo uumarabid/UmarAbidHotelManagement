@@ -23,10 +23,14 @@ import Profile from "./pages/profile";
 import AddReservation from "./pages/reservation/addReservation";
 import AddGuest from "./pages/guest/addGuest";
 import Booking from "./pages/booking/index";
+import ProtectedRoutes from "./components/Routes/ProtectedRoutes";
+import Cookies from "universal-cookie";
+import Logout from "./pages/logout";
+const cookies = new Cookies();
 
 function App() {
   const theme = createTheme();
-
+  const token = cookies.get("TOKEN");
   return (
     <div className="App">
       <BrowserRouter>
@@ -36,29 +40,31 @@ function App() {
           <Container component="main" width="auto">
             <Routes>
               <Route path="/" exact element={<Login />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/addEmployee/:id" element={<AddEmployee />} />
-              <Route path="/addEmployee/" element={<AddEmployee />} />
-              <Route path="/addRoom/:id" element={<AddRoom />} />
-              <Route path="/addRoom" element={<AddRoom />} />
-              <Route path="/addUser/:id" element={<AddUser />} />
-              <Route path="/addUser/" element={<AddUser />} />
-              <Route path="/addReservation/" element={<AddReservation />} />
-              <Route path="/room" element={<Room />} />
-              <Route path="/user" element={<User />} />
-              <Route path="/employee" element={<Employee />} />
-              <Route path="/reservation" element={<Reservation />} />
-              <Route path="/addReservation/:id" element={<AddReservation />} />
-              <Route path="/guest" element={<Guest />} />
-              <Route path="/addGuest" element={<AddGuest />} />
-              <Route path="/addGuest/:id" element={<AddGuest />} />
-              <Route path="/audit" element={<Audit />} />
-              <Route path="/checkin" element={<Checkin />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/checkout/:id" element={<Checkout />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/booking" element={<Booking />} />
+
+              {token && <Route path="/dashboard" element={<Dashboard />} />}
+              {token && <Route path="/login" element={<Login />} />}
+              {token && <Route path="/logout" element={<Logout />} />}
+              {token && <Route path="/addEmployee/:id" element={<AddEmployee />} />}
+              {token && <Route path="/addEmployee/" element={<AddEmployee />} />}
+              {token && <Route path="/addRoom/:id" element={<AddRoom />} />}
+              {token && <Route path="/addRoom" element={<AddRoom />} />}
+              {token && <Route path="/addUser/:id" element={<AddUser />} />}
+              {token && <Route path="/addUser/" element={<AddUser />} />}
+              {token && <Route path="/addReservation/" element={<AddReservation />} />}
+              {token && <Route path="/room" element={<Room />} />}
+              {token && <Route path="/user" element={<User />} />}
+              {token && <Route path="/employee" element={<Employee />} />}
+              {token && <Route path="/reservation" element={<Reservation />} />}
+              {token && <Route path="/addReservation/:id" element={<AddReservation />} />}
+              {token && <Route path="/guest" element={<Guest />} />}
+              {token && <Route path="/addGuest" element={<AddGuest />} />}
+              {token && <Route path="/addGuest/:id" element={<AddGuest />} />}
+              {token && <Route path="/audit" element={<Audit />} />}
+              {token && <Route path="/checkin" element={<Checkin />} />}
+              {token && <Route path="/checkout" element={<Checkout />} />}
+              {token && <Route path="/checkout/:id" element={<Checkout />} />}
+              {token && <Route path="/profile" element={<Profile />} />}
+              {token && <Route path="/booking" element={<Booking />} />}
             </Routes>
           </Container>
         </ThemeProvider>{" "}

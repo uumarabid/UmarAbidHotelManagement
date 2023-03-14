@@ -35,6 +35,10 @@
   color: white;
   text-decoration: none;
 }
+.App-navigationMenu {
+  color: black;
+  text-decoration: none;
+}
 
 @keyframes App-logo-spin {
   from {
