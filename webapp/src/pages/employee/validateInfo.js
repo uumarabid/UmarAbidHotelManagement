@@ -28,7 +28,7 @@ const validateInfo = (values) => {
     hasError = true;
   }
 
-  if (!values.phone_number) {
+  if (!values.phone) {
     errors.phone = "Phone number is required";
     hasError = true;
   }

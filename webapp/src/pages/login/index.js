@@ -23,8 +23,6 @@ export const Login = () => {
   // axios.defaults.withCredentials = true;
   const cookies = new Cookies();
   const theme = createTheme();
-  let navigate = useNavigate();
-  const [loginStatus, setLoginStatus] = useState("");
   const [data, setData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(defaultData);
 
@@ -119,20 +117,11 @@ export const Login = () => {
                 />
               </Grid>
 
-              {/* <Grid item xs={12}>
-                <FormControlLabel control={<Checkbox defaultChecked />} label="Keep me login" />
-              </Grid> */}
-
               <Grid item xs={12}>
                 <Button type="submit" variant="contained" onClick={() => SubmitHandler()}>
                   Sign in
                 </Button>
               </Grid>
-              {/* <Grid item xs={12} sm={12}>
-                <span>
-                  Don't have an account? Register <a href="/AddUser">here</a>
-                </span>
-              </Grid> */}
             </Grid>
           </FormGroup>
         </Paper>
