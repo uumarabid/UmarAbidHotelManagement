@@ -13,11 +13,9 @@ import Menu from "@mui/material/Menu";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Hotel } from "@mui/icons-material";
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
 
 export default function MenuAppBar() {
-  const token = cookies.get("TOKEN");
+  const token = localStorage.getItem("user");
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenu = (event) => {

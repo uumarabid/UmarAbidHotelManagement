@@ -4,11 +4,9 @@ import { Button, TextField, Container, Grid, CssBaseline, Paper, FormGroup } fro
 import { useNavigate } from "react-router-dom";
 import validateInfo from "./validateInfo";
 import axios from "axios";
-import Cookies from "universal-cookie";
 
 // this one is discarded.
 //https://medium.com/@gsandamali30/jwt-based-user-authentication-using-reactjs-node-express-and-mysql-41b5bedde11f
-//https://github.com/gsandamali/Part-2-User-registration-and-login-with-Cookies-Sessions-Hashing/blob/main/server/index.js
 
 // using following for login
 // https://www.freecodecamp.org/news/how-to-build-a-fullstack-authentication-system-with-react-express-mongodb-heroku-and-netlify/#section-2-how-to-build-the-frontend
@@ -21,7 +19,6 @@ const defaultData = {
 
 export const Login = () => {
   // axios.defaults.withCredentials = true;
-  const cookies = new Cookies();
   const theme = createTheme();
   const [data, setData] = useState(defaultData);
   const [formErrors, setFormErrors] = useState(defaultData);
@@ -46,9 +43,14 @@ export const Login = () => {
     if (!hasError) {
       axios.post(`http://localhost:3001/user/login`, data).then((response) => {
         if (response.data && response.data.username != null) {
-          cookies.set("TOKEN", response.data.token, {
-            path: "/",
-          });
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              token: response.data.token,
+              userId: response.data.userId,
+              username: response.data.username,
+            })
+          );
           window.location.href = "/dashboard";
         } else {
           setFormErrors({ user_name: "wrong username/password", password: "wrong username/password" });

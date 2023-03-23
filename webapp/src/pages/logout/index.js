@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 const Logout = () => {
   useEffect(() => {
     const cookies = new Cookies();
-    cookies.remove("TOKEN", { path: "/" });
+    localStorage.removeItem("user");
     window.location.href = "/";
   }, []);
   return <div> Logout user</div>;

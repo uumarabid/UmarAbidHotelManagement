@@ -17,7 +17,7 @@ export const loginPost = async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    res.send({ message: "login success", username: users[0].user_name, token });
+    res.send({ message: "login success", username: users[0].user_name, token, userId: users[0].id });
   } else {
     res.send({ message: "User doesn't exists", username: null });
   }
