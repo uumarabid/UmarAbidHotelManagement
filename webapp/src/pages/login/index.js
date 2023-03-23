@@ -45,30 +45,17 @@ export const Login = () => {
 
     if (!hasError) {
       axios.post(`http://localhost:3001/user/login`, data).then((response) => {
-        console.log(response.data);
-        if (response.data) {
+        if (response.data && response.data.username != null) {
           cookies.set("TOKEN", response.data.token, {
             path: "/",
           });
+          window.location.href = "/dashboard";
         } else {
           setFormErrors({ user_name: "wrong username/password", password: "wrong username/password" });
         }
       });
-      window.location.href = "/dashboard";
-      //navigate("/dashboard");
     }
   };
-
-  useEffect(() => {
-    // axios.get(`http://localhost:3001/user/login`, data).then((response) => {
-    //   console.log(response.data);
-    //   if (response.data) {
-    //     // login
-    //   } else {
-    //     setFormErrors({ user_name: "wrong username/password", password: "wrong username/password" });
-    //   }
-    // });
-  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -85,8 +72,8 @@ export const Login = () => {
               </Grid>
               <Grid item xs={8}>
                 <TextField
-                  // error={formErrors.user_name ? true : false}
-                  // helperText={formErrors.user_name}
+                  error={formErrors.user_name ? true : false}
+                  helperText={formErrors.user_name}
                   type="text"
                   id="user_name"
                   name="user_name"
@@ -104,8 +91,8 @@ export const Login = () => {
 
               <Grid item xs={8}>
                 <TextField
-                  // error={formErrors.password ? true : false}
-                  // helperText={formErrors.password}
+                  error={formErrors.password ? true : false}
+                  helperText={formErrors.password}
                   type="password"
                   id="password"
                   name="password"

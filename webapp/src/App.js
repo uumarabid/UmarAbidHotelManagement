@@ -42,7 +42,6 @@ function App() {
           <Container component="main" width="auto">
             <Routes>
               <Route path="/" exact element={<Login />} />
-
               {token && <Route path="/dashboard" element={<Dashboard />} />}
               {token && <Route path="/login" element={<Login />} />}
               {token && <Route path="/logout" element={<Logout />} />}

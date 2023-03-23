@@ -2,17 +2,13 @@
 // import { useNavigate, useParams } from "react-router-dom";
 
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Grid, Paper } from "@mui/material";
+import { Grid } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 
-const bull = <Box component="span" sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}></Box>;
 const defaultData = [{ employees: 0, reservations: 0, bookings: 0, rooms: 0, users: 0 }];
 const Dashboard = () => {
   const [data, setData] = React.useState(defaultData);

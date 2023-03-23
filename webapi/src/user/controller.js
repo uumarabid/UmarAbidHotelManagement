@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 export const loginPost = async (req, res) => {
   let { user_name, password } = req.body;
   let users = await selectQuery("users", `user_name = '${user_name}' AND password = '${password}'`);
+  console.log(users);
   if (users.length > 0) {
     const token = jwt.sign(
       {
@@ -18,7 +19,7 @@ export const loginPost = async (req, res) => {
 
     res.send({ message: "login success", username: users[0].user_name, token });
   } else {
-    res.send({ message: "User doesn't exists" });
+    res.send({ message: "User doesn't exists", username: null });
   }
 };
 
