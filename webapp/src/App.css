@@ -64,3 +64,24 @@ footer {
   padding: 20px 0px;
   /* text-align: center; */
 }
+
+/* Visually hide the skip link */
+/* .skiplink {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden !important;
+} */
+/* Reveal the skip link */
+/* .skiplink {
+  position: static;
+  width: auto;
+  height: auto;
+  color: #f9fafa;
+  background-color: #000000;
+} */
+html {
+  scroll-behavior: smooth;
+}

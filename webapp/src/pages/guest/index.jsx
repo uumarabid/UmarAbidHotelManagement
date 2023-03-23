@@ -26,7 +26,7 @@ const Guest = () => {
   }, []);
 
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+    <Paper id="maincontent" variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <Button variant="contained">
         <RLink to={"/addGuest"} className="App-navigation">
           Add Guest

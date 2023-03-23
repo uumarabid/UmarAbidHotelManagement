@@ -13,7 +13,6 @@ const defaultData = {
   company_email: "",
 };
 
-// destructing in FormSignUp function
 const AddEmployee = () => {
   // https://reactrouter.com/en/main/hooks/use-navigate
   let navigate = useNavigate();
@@ -71,7 +70,7 @@ const AddEmployee = () => {
   };
 
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+    <Paper id="maincontent" variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <legend>
         <h2>Add/Edit Employee</h2>
       </legend>

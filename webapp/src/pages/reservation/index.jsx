@@ -26,7 +26,7 @@ const Reservation = () => {
   }, []);
 
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+    <Paper id="maincontent" variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <Button type="submit" variant="contained">
         <RLink to={"/addReservation"} underline="none" color="inherit" className="App-navigation">
           Add Reservation

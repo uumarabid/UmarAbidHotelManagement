@@ -151,7 +151,7 @@ const AddUser = () => {
     }
   };
   return (
-    <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+    <Paper id="maincontent" variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
       <legend>
         <h2>Add User</h2>
       </legend>

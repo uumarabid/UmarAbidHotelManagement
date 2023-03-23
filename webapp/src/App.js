@@ -26,6 +26,7 @@ import Booking from "./pages/booking/index";
 import ProtectedRoutes from "./components/Routes/ProtectedRoutes";
 import Cookies from "universal-cookie";
 import Logout from "./pages/logout";
+import Skiplink from "./components/skiplink";
 const cookies = new Cookies();
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Skiplink />
         <NavigationBar />
         <ThemeProvider theme={theme}>
           <CssBaseline />
