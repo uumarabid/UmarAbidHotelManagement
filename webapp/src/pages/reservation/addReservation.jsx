@@ -7,6 +7,7 @@ import validateInfo from "./validateInfo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { isAuthenticated } from "../../components/userContext";
 
 const defaultData = {
   id: 0,
@@ -108,7 +109,12 @@ const AddReservation = () => {
         operation = "edit";
       }
 
-      axios.post(`http://localhost:3001/reservation/${operation}`, data).then((response) => {
+      const saveData = {
+        ...data,
+        currentUserId: isAuthenticated().userId,
+      };
+
+      axios.post(`http://localhost:3001/reservation/${operation}`, saveData).then((response) => {
         console.log(response.data);
       });
 
@@ -121,8 +127,10 @@ const AddReservation = () => {
     const { errors, hasError } = validateInfo(data);
     const bookingData = {
       ...data,
+      isReserved: 1,
       check_in_date: data.reservation_check_in_date,
       check_out_date: data.reservation_check_out_date,
+      currentUserId: isAuthenticated().userId,
     };
     setFormErrors(errors);
 
@@ -133,7 +141,10 @@ const AddReservation = () => {
         operation = "edit";
       }
 
-      axios.post(`http://localhost:3001/bookings/${operation}`, bookingData).then((response) => {
+      // need to fix this.
+      // copy entry to booking table.
+      // remove entry from reservation. if the reserveation id > 0
+      axios.post(`http://localhost:3001/booking/${operation}`, bookingData).then((response) => {
         console.log(response.data);
       });
 

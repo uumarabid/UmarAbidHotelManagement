@@ -1,6 +1,6 @@
 import mysql from "mysql2";
 
-export const selectQuery = async (table, condition, columns) => {
+export const selectQuery = async (table, condition, columns, sort) => {
   const connection = mysql.createConnection({
     host: "127.0.0.1", //process.env.DB_HOST,
     user: "admin", //process.env.DB_USER,
@@ -21,7 +21,9 @@ export const selectQuery = async (table, condition, columns) => {
     if (condition) {
       query += ` WHERE ${condition}`;
     }
-
+    if (sort) {
+      query += ` order by ${sort}`;
+    }
     // select data from table
     // https://stackoverflow.com/questions/31875621/how-to-properly-return-a-result-from-mysql-with-node
     let data = await connection.promise().query(query);

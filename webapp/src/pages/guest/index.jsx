@@ -4,6 +4,7 @@ import { Button, Paper, Table, TableHead, TableRow, TableCell, TableBody, TableC
 import { Link as RLink } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
+import { isAuthenticated } from "../../components/userContext";
 
 const Guest = () => {
   const [data, setData] = useState([]);
@@ -16,7 +17,7 @@ const Guest = () => {
   };
 
   const deleteGuest = (id) => {
-    axios.post("http://localhost:3001/guest/delete", { id }).then((response) => {
+    axios.post("http://localhost:3001/guest/delete", { id, userId: isAuthenticated().userId }).then((response) => {
       loadGuests();
     });
   };

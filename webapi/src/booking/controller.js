@@ -1,5 +1,5 @@
 import auditEntry from "../utils/audit.js";
-import { insertQuery, updateQuery, selectCustomQuery } from "../../utils/sql.js";
+import { insertQuery, updateQuery, selectCustomQuery, deleteQuery } from "../../utils/sql.js";
 
 export const addBooking = async (req, res) => {
   const data = req.body;
@@ -26,14 +26,17 @@ export const addBooking = async (req, res) => {
   booking.guests_id = result[0]?.insertId;
 
   await insertQuery("bookings", booking);
-  auditEntry(1, "add booking");
+  auditEntry(data.currentUserId, "add booking");
   res.send("New booking is added successfully.");
 };
 
 export const editBooking = async (req, res) => {
   let booking = req.body;
+  const userId = booking.currentUserId;
+  delete booking.currentUserId;
+
   await updateQuery("bookings", booking, `id = ${booking.id}`);
-  auditEntry(1, "edit booking");
+  auditEntry(userId, "edit booking");
   res.send("Updated successfully.");
 };
 
@@ -58,9 +61,9 @@ export const checkoutBooking = async (req, res) => {
   await selectCustomQuery(query);
 
   // remove entry from booking table
-  await deleteBookig("bookings", `id = ${booking.id}`);
+  await deleteQuery("bookings", `id = ${booking.id}`);
 
-  auditEntry(1, "edit booking");
+  auditEntry(data.currentUserId, "edit booking");
   res.send("Updated successfully.");
 };
 
@@ -77,7 +80,7 @@ export const getAllBooking = async (req, res) => {
   res.send(bookings);
 };
 
-export const deleteBookig = (req, res) => {
+export const deleteBooking = (req, res) => {
   auditEntry(1, "delete booking");
   res.send("Successfully deleted.");
 };

@@ -3,15 +3,21 @@ import auditEntry from "../utils/audit.js";
 
 export const addEmployee = async (req, res) => {
   let employee = req.body;
+  const userId = employee.currentUserId;
+  delete employee.currentUserId;
+
   await insertQuery("employees", employee);
-  auditEntry(1, "add employee");
+  auditEntry(userId, "add employee");
   res.send("New Employee is added successfully.");
 };
 
 export const editEmployee = async (req, res) => {
   const employee = req.body;
+  const userId = employee.currentUserId;
+  delete employee.currentUserId;
+
   await updateQuery("employees", employee, `id = ${employee.id}`);
-  auditEntry(1, "edit employee");
+  auditEntry(userId, "edit employee");
   res.send("Updated successfully.");
 };
 
@@ -27,8 +33,8 @@ export const getAllEmployee = async (req, res) => {
 };
 
 export const deleteEmployee = async (req, res) => {
-  let { id } = req.body;
+  let { id, userId } = req.body;
   await deleteQuery("employees", `id = ${id}`);
-  auditEntry(1, "delete employee");
+  auditEntry(userId, "delete employee");
   res.send(true);
 };

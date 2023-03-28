@@ -3,15 +3,19 @@ import auditEntry from "../utils/audit.js";
 
 export const addGuest = async (req, res) => {
   let guest = req.body;
+  const userId = guest.currentUserId;
+  delete guest.currentUserId;
   await insertQuery("guests", guest);
-  auditEntry(1, "add guests");
+  auditEntry(userId, "add guests");
   res.send("New Guest is added successfully.");
 };
 
 export const editGuest = async (req, res) => {
   const guest = req.body;
+  const userId = guest.currentUserId;
+  delete guest.currentUserId;
   await updateQuery("guests", guest, `id = ${guest.id}`);
-  auditEntry(1, "edit guests");
+  auditEntry(userId, "edit guests");
   res.send("Updated successfully.");
 };
 
@@ -27,8 +31,8 @@ export const getAllGuest = async (req, res) => {
 };
 
 export const deleteGuest = async (req, res) => {
-  let { id } = req.body;
+  let { id, userId } = req.body;
   await deleteQuery("guests", `id = ${id}`);
-  auditEntry(1, "delete guests");
+  auditEntry(userId, "delete guests");
   res.send(true);
 };

@@ -16,6 +16,7 @@ import {
   Link,
 } from "@mui/material";
 import axios from "axios";
+import { isAuthenticated } from "../../components/userContext";
 
 const defaultData = {
   id: 0,
@@ -141,6 +142,7 @@ const AddUser = () => {
         password: data.password,
         employee_id: data.employee_id,
         is_admin: data.is_admin ? 1 : 0,
+        currentUserId: isAuthenticated().userId,
       };
 
       axios.post(`http://localhost:3001/user/${operation}`, user).then((response) => {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addBooking, deleteBookig, editBooking, checkoutBooking, getAllBooking, getBooking } from "./controller.js";
+import { addBooking, deleteBooking, editBooking, checkoutBooking, getAllBooking, getBooking } from "./controller.js";
 
 const bookingRoute = Router()
   .post("/add", addBooking)
@@ -7,6 +7,6 @@ const bookingRoute = Router()
   .post("/checkout", checkoutBooking)
   .get("/get", getBooking)
   .get("/getAll", getAllBooking)
-  .post("/delete", deleteBookig);
+  .post("/delete", deleteBooking);
 
 export default bookingRoute;

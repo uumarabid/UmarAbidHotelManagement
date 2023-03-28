@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField, Grid, Paper } from "@mui/material";
 import validateInfo from "./validateInfo";
 import Box from "@mui/material/Box";
+import { isAuthenticated } from "../../components/userContext";
 // import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 // import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 // import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
@@ -72,7 +73,12 @@ const AddGuest = () => {
         operation = "edit";
       }
 
-      axios.post(`http://localhost:3001/guest/${operation}`, data).then((response) => {
+      const saveData = {
+        ...data,
+        is_reserved: 0,
+        currentUserId: isAuthenticated().userId,
+      };
+      axios.post(`http://localhost:3001/guest/${operation}`, saveData).then((response) => {
         console.log(response.data);
       });
 

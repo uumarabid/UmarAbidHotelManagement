@@ -25,15 +25,21 @@ export const loginPost = async (req, res) => {
 
 export const addUser = async (req, res) => {
   const user = req.body;
+  const userId = user.currentUserId;
+  delete user.currentUserId;
+
   await insertQuery("users", user);
-  auditEntry(1, "add user");
+  auditEntry(userId, "add user");
   res.send("New User is added successfully.");
 };
 
 export const editUser = async (req, res) => {
   const user = req.body;
+  const userId = user.currentUserId;
+  delete user.currentUserId;
+
   await updateQuery("users", user, `id = ${user.id}`);
-  auditEntry(1, "edit user");
+  auditEntry(userId, "edit user");
   res.send("Updated successfully.");
 };
 
@@ -52,8 +58,8 @@ export const getAllUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  let { id } = req.body;
+  let { id, userId } = req.body;
   await deleteQuery("users", `id = ${id}`);
-  auditEntry(1, "delete user");
+  auditEntry(userId, "delete user");
   res.send(true);
 };

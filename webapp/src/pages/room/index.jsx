@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
 import { Link as RLink } from "react-router-dom";
+import { isAuthenticated } from "../../components/userContext";
 
 const formatFacilities = (facilities) => {
   const list = facilities.split(",");
@@ -27,7 +28,7 @@ const Room = () => {
   };
 
   const deleteRoom = (id) => {
-    axios.post("http://localhost:3001/room/delete", { id }).then((response) => {
+    axios.post("http://localhost:3001/room/delete", { id, userId: isAuthenticated().userId }).then((response) => {
       loadRooms();
     });
   };

@@ -8,6 +8,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from "react-router-dom";
+import { isAuthenticated } from "../../components/userContext";
 
 const defaultData = {
   id: 0,
@@ -127,7 +128,12 @@ const RoomCheckout = () => {
     setFormErrors(errors);
 
     if (!hasError) {
-      axios.post(`http://localhost:3001/booking/checkout`, data).then((response) => {
+      const saveData = {
+        ...data,
+        currentUserId: isAuthenticated().userId,
+      };
+
+      axios.post(`http://localhost:3001/booking/checkout`, saveData).then((response) => {
         console.log(response.data);
       });
 

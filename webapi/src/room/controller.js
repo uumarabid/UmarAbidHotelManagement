@@ -4,15 +4,22 @@ import { selectQuery, deleteQuery, insertQuery, updateQuery } from "../../utils/
 
 export const addRoom = async (req, res) => {
   const room = req.body;
+  const userId = room.currentUserId;
+  delete room.currentUserId;
+
   await insertQuery("rooms", room);
-  auditEntry(1, "add room");
+  auditEntry(userId, "add room");
   res.send("New room is added successfully.");
 };
 
 export const editRoom = async (req, res) => {
   const room = req.body;
+  const userId = room.currentUserId;
+  delete room.currentUserId;
+
   await updateQuery("rooms", room, `id = ${room.id}`);
-  auditEntry(1, "edit room");
+  auditEntry(userId, "edit room");
+
   res.send("Updated successfully.");
 };
 
@@ -28,8 +35,8 @@ export const getAllRoom = async (req, res) => {
 };
 
 export const deleteRoom = async (req, res) => {
-  let { id } = req.body;
+  let { id, userId } = req.body;
   await deleteQuery("rooms", `id = ${id}`);
-  auditEntry(1, "delete room");
+  auditEntry(userId, "delete room");
   res.send(true);
 };

@@ -12,6 +12,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import axios from "axios";
+import { isAuthenticated } from "../../components/userContext";
 
 const facilities = ["Fridge", "Dinning table with chairs", "Locker", "TV", "Hair dryer"];
 
@@ -89,7 +90,9 @@ const AddRoom = () => {
     const saveData = {
       ...data,
       facilities: roomFacilities.join(","),
+      currentUserId: isAuthenticated().userId,
     };
+
     axios.post(`http://localhost:3001/room/${operation}`, saveData).then((response) => {
       console.log(response.data);
     });

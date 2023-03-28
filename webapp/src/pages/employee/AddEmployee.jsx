@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField, Grid, Paper } from "@mui/material";
 import validateInfo from "./validateInfo";
+import { isAuthenticated } from "../../components/userContext";
 
 const defaultData = {
   first_name: "",
@@ -61,7 +62,12 @@ const AddEmployee = () => {
         operation = "edit";
       }
 
-      axios.post(`http://localhost:3001/employee/${operation}`, data).then((response) => {
+      const saveData = {
+        ...data,
+        currentUserId: isAuthenticated().userId,
+      };
+
+      axios.post(`http://localhost:3001/employee/${operation}`, saveData).then((response) => {
         console.log(response.data);
       });
 

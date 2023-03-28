@@ -25,14 +25,17 @@ export const addReservation = async (req, res) => {
   const result = await insertQuery("guests", guest);
   reservation.guests_id = result[0]?.insertId;
   await insertQuery("reservations", reservation);
-  auditEntry(1, "add reservation with guest");
+  auditEntry(data.currentUserId, "add reservation with guest");
   res.send("New Reservation is added successfully.");
 };
 
 export const editReservation = async (req, res) => {
   const reservation = req.body;
+  const userId = reservation.currentUserId;
+  delete reservation.currentUserId;
+
   await updateQuery("reservations", reservation, `id = ${reservation.id}`);
-  auditEntry(1, "edit reservation");
+  auditEntry(userId, "edit reservation");
   res.send("Updated successfully.");
 };
 
@@ -51,8 +54,8 @@ export const getAllReservation = async (req, res) => {
 };
 
 export const deleteReservation = async (req, res) => {
-  let { id } = req.body;
+  let { id, userId } = req.body;
   await deleteQuery("reservations", `id = ${id}`);
-  auditEntry(1, "delete reservation");
+  auditEntry(userId, "delete reservation");
   res.send(true);
 };

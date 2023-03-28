@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, TextField, Grid, Paper, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import validateInfo from "./validateInfo";
+import { isAuthenticated } from "../../components/userContext";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -111,8 +112,12 @@ const Checkin = () => {
       if (data.id) {
         operation = "edit";
       }
+      const saveData = {
+        ...data,
+        currentUserId: isAuthenticated().userId,
+      };
 
-      axios.post(`http://localhost:3001/booking/${operation}`, data).then((response) => {
+      axios.post(`http://localhost:3001/booking/${operation}`, saveData).then((response) => {
         console.log(response.data);
       });
 

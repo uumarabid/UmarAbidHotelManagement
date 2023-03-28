@@ -5,6 +5,7 @@ import { Link as RLink } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import { useEffect } from "react";
+import { isAuthenticated } from "../../components/userContext";
 
 const Employee = () => {
   const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ const Employee = () => {
   };
 
   const deleteEmployee = (id) => {
-    axios.post("http://localhost:3001/employee/delete", { id }).then((response) => {
+    axios.post("http://localhost:3001/employee/delete", { id, userId: isAuthenticated().userId }).then((response) => {
       loadEmployees();
     });
   };
