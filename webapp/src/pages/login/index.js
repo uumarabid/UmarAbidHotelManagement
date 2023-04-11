@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button, TextField, Container, Grid, CssBaseline, Paper, FormGroup } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -60,62 +60,64 @@ export const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container component="main" maxWidth="xs">
-        <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-          <FormGroup>
-            <legend>
-              <h2>Welcome to login page</h2>
-            </legend>
-            <Grid container rowSpacing={1}>
-              <Grid item xs={4}>
-                <label>Username</label>
-              </Grid>
-              <Grid item xs={8}>
-                <TextField
-                  error={formErrors.user_name ? true : false}
-                  helperText={formErrors.user_name}
-                  type="text"
-                  id="user_name"
-                  name="user_name"
-                  placeholder="Enter your username"
-                  label="username"
-                  variant="outlined"
-                  value={data.user_name}
-                  onChange={handleChange}
-                />
-              </Grid>
+    <Fragment>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container component="main" maxWidth="xs">
+          <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+            <FormGroup>
+              <legend>
+                <h2>Welcome to login page</h2>
+              </legend>
+              <Grid container rowSpacing={1}>
+                <Grid item xs={4}>
+                  <label for="user_name">Username</label>
+                </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    error={formErrors.user_name ? true : false}
+                    helperText={formErrors.user_name}
+                    type="text"
+                    id="user_name"
+                    name="user_name"
+                    placeholder="Enter your username"
+                    // label="user_name"
+                    variant="outlined"
+                    value={data.user_name}
+                    onChange={handleChange}
+                  />
+                </Grid>
 
-              <Grid item xs={4}>
-                <label>Password</label>
-              </Grid>
+                <Grid item xs={4}>
+                  <label>Password</label>
+                </Grid>
 
-              <Grid item xs={8}>
-                <TextField
-                  error={formErrors.password ? true : false}
-                  helperText={formErrors.password}
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  label="Password"
-                  variant="outlined"
-                  value={data.password}
-                  onChange={handleChange}
-                />
-              </Grid>
+                <Grid item xs={8}>
+                  <TextField
+                    error={formErrors.password ? true : false}
+                    helperText={formErrors.password}
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    label="Password"
+                    variant="outlined"
+                    value={data.password}
+                    onChange={handleChange}
+                  />
+                </Grid>
 
-              <Grid item xs={12}>
-                <Button type="submit" variant="contained" onClick={() => SubmitHandler()}>
-                  Sign in
-                </Button>
+                <Grid item xs={12}>
+                  <Button type="submit" variant="contained" onClick={() => SubmitHandler()}>
+                    Sign in
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
-          </FormGroup>
-        </Paper>
-      </Container>
-    </ThemeProvider>
+            </FormGroup>
+          </Paper>
+        </Container>
+      </ThemeProvider>
+    </Fragment>
   );
 };
 

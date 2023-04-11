@@ -65,23 +65,20 @@ footer {
   /* text-align: center; */
 }
 
-/* Visually hide the skip link */
-/* .skiplink {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden !important;
-} */
-/* Reveal the skip link */
-/* .skiplink {
-  position: static;
-  width: auto;
-  height: auto;
-  color: #f9fafa;
-  background-color: #000000;
-} */
 html {
   scroll-behavior: smooth;
+}
+
+.skip-link {
+  background: #61dafb;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-170%);
+  transition: transform 0.3s;
+  z-index: 1;
+}
+
+.skip-link:focus {
+  transform: translateY(0%);
 }

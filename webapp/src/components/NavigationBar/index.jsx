@@ -37,6 +37,14 @@ export default function MenuAppBar() {
 
           {token && (
             <>
+              <a href="#mainContent" className="skip-link">
+                Skip Navigation
+              </a>
+              <Button color="inherit">
+                <Link to="#mainContent" className="skip-link">
+                  Skip Navigation
+                </Link>
+              </Button>
               <Button color="inherit">
                 <Link to="/dashboard" className="App-navigation">
                   Dashboard

@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Card id="maincontent" variant="outlined" sx={{ boxShadow: 3, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+      <Card id="mainContent" variant="outlined" sx={{ boxShadow: 3, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
         <Grid container rowSpacing={1}>
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <Card sx={{ minWidth: 350, m: 1, boxShadow: 3 }}>
